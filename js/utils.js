@@ -295,7 +295,7 @@ function deleteSave(name) {
 		hardReset();
 		return;
 	}
-	if (!confirm("Are you sure you wish to delete this save?")) return;
+	if (!confirm("您确定要删除此存档吗？")) return;
 	allSaves[name] = undefined;
 	if (name==allSaves.set) {
 		let valid = Object.keys(allSaves).filter(x => (x!="set" && (allSaves[x]!==undefined||x==name)));
@@ -307,7 +307,7 @@ function deleteSave(name) {
 }
 
 function newSave() {
-	let newName = prompt("Enter save name: ");
+	let newName = prompt("输入存档名称: ");
 	newName = newName.replace(saveRegexCode, ""); // Removes all non-alphanumeric characters
 	if (newName=="set") {
 		alert("Sorry, that name is used in the game's data, so you can't use it personally or it will cause terrible glitches!");
@@ -438,10 +438,10 @@ function exportSave() {
 }
 
 function importSave(imported=undefined, forced=false) {
-	if (imported===undefined) imported = prompt("Paste your save here")
+	if (imported===undefined) imported = prompt("在这里粘贴你的存档")
 	try {
 		let tempPlr = Object.assign(getStartPlayer(), JSON.parse(atob(imported)))
-		if(tempPlr.versionType != modInfo.id && !forced && !confirm("This save appears to be for a different mod! Are you sure you want to import?")) // Wrong save (use "Forced" to force it to accept.)
+		if(tempPlr.versionType != modInfo.id && !forced && !confirm("此存档似乎是针对其他mod！ 您确定要导入吗？")) // Wrong save (use "Forced" to force it to accept.)
 			return
 		player = tempPlr;
 		player.versionType = modInfo.id

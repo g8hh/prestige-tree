@@ -458,7 +458,7 @@ function addSpaceBuilding(x, amt) {
 
 function respecSpaceBuildings() {
 	if (!player.s.unl) return;
-	if (!confirm("Are you sure you want to reset your Space Buildings? This will force you to do a Space reset as well!")) return
+	if (!confirm("您确定要重置太空建筑物吗？ 这也将迫使您进行空间重置！")) return
 	player.s.buildings = {}
 	player.s.spent = new Decimal(0)
 	doReset("s", true)
@@ -955,7 +955,7 @@ let HYPERSPACE = {
 		player.hs.superUpgrades[x] = tmp.hs.su[x]
 	},
 	respec(x) {
-		if (!player.hs.unl || !confirm("Are you sure?")) return
+		if (!player.hs.unl || !confirm("你确定吗?")) return
 		player.hs.spent = new Decimal(0)
 		player.hs.superUpgrades = {}
 		doReset("hs", true)
@@ -1023,7 +1023,7 @@ let IMPERIUM = {
 	build() {
 		if (!this.canBuild()) return
 		if (player.i.building) {
-			if (!confirm("Are you sure?")) return
+			if (!confirm("你确定吗?")) return
 			delete player.i.building
 		} else {
 			let cost = this.cost()

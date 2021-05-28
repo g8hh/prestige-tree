@@ -12,14 +12,14 @@ var cnItems = {
     _OTHER_: [],
 
     //未分类：
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
-    '': '',
+    'Save': '保存',
+    'Export': '导出',
+    'Import': '导入',
+    'Settings': '设置',
+    'Achievements': '成就',
+    'Statistics': '统计',
+    'Changelog': '更新日志',
+    'Hotkeys': '快捷键',
     '': '',
     '': '',
     '': '',
@@ -39,7 +39,26 @@ var cnItems = {
     '': '',
     '': '',
 
-    //原样
+    //树游戏
+    'Loading...': '加载中...',
+    'ALWAYS': '一直',
+    'HARD RESET': '硬重置',
+    'Export to clipboard': '导出到剪切板',
+    'INCOMPLETE': '不完整',
+    'HIDDEN': '隐藏',
+    'AUTOMATION': '自动',
+    'NEVER': '从不',
+    'ON': '打开',
+    'OFF': '关闭',
+    'SHOWN': '显示',
+    'Play Again': '再次游戏',
+    'Keep Going': '继续',
+    'The Modding Tree Discord': '模型树Discord',
+    'You have': '你有',
+    'It took you {{formatTime(player.timePlayed)}} to beat the game.': '花费了 {{formatTime(player.timePlayed)}} 时间去通关游戏.',
+    'Congratulations! You have reached the end and beaten this game, but for now...': '恭喜你！ 您已经结束并通关了本游戏，但就目前而言...',
+    'Main Prestige Tree server': '主声望树服务器',
+    'Reach {{formatWhole(ENDGAME)}} to beat the game!': '达到 {{formatWhole(ENDGAME)}} 去通关游戏!',
     '': '',
     '': '',
 
@@ -75,6 +94,20 @@ var cnPrefix = {
     "   ": "",
     "  ": "",
     " ": "",
+    //树游戏
+    "Show Milestones: ": "显示里程碑：",
+    "Autosave: ": "自动保存: ",
+    "Offline Prod: ": "离线生产: ",
+    "Completed Challenges: ": "完成的挑战: ",
+    "High-Quality Tree: ": "高质量树贴图: ",
+    "Offline Time: ": "离线时间: ",
+    "Theme: ": "主题: ",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
 }
 
 //需处理的后缀
@@ -83,7 +116,6 @@ var cnPostfix = {
     "：": "：",
     ": ": "： ",
     "： ": "： ",
-    " ": "",
     "/s)": "/s)",
     "/s": "/s",
     ")": ")",
@@ -106,23 +138,27 @@ var cnPostfix = {
     "    ": "",
     "   ": "",
     "  ": "",
-    " ": "",
+    " ": " ",
     "\n": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
 }
 
 //需排除的，正则匹配
 var cnExcludeWhole = [
-    /^x?\d+(\.\d+)?[A-Za-z%]{0,2}(\s.C)?\s*$/, //12.34K,23.4 °C
-    /^x?\d+(\.\d+)?(e[+\-]?\d+)?\s*$/, //12.34e+4
-    /^\s*$/, //纯空格
-    /^\d+(\.\d+)?[A-Za-z]{0,2}.?\(?([+\-]?(\d+(\.\d+)?[A-Za-z]{0,2})?)?$/, //12.34M (+34.34K
-    /^(\d+(\.\d+)?[A-Za-z]{0,2}\/s)?.?\(?([+\-]?\d+(\.\d+)?[A-Za-z]{0,2})?\/s\stot$/, //2.74M/s (112.4K/s tot
-    /^\d+(\.\d+)?(e[+\-]?\d+)?.?\(?([+\-]?(\d+(\.\d+)?(e[+\-]?\d+)?)?)?$/, //2.177e+6 (+4.01+4
-    /^(\d+(\.\d+)?(e[+\-]?\d+)?\/s)?.?\(?([+\-]?(\d+(\.\d+)?(e[+\-]?\d+)?)?)?\/s\stot$/, //2.177e+6/s (+4.01+4/s tot
+    /^(\d+)$/,
+    /^([\d\.]+)e(\d+)$/,
+    /^([\d\.]+)$/,
 ];
 var cnExcludePostfix = [
-    /:?\s*x?\d+(\.\d+)?(e[+\-]?\d+)?\s*$/, //12.34e+4
-    /:?\s*x?\d+(\.\d+)?[A-Za-z]{0,2}$/, //: 12.34K, x1.5
 ]
 
 //正则替换，带数字的固定格式句子
@@ -130,7 +166,9 @@ var cnExcludePostfix = [
 //逗号：([\d\.,]+)
 //小数点：([\d\.]+)
 //原样输出的字段：(.+)
+//换行加空格：\n(.+)
 var cnRegReplace = new Map([
+	[/^([\d\.]+)\/sec$/, '$1\/秒'],
     [/^requires ([\d\.]+) more research points$/, '需要$1个研究点'],
     [/^(\d+) Royal points$/, '$1 皇家点数'],
     [/^Cost: (\d+) RP$/, '成本：$1 皇家点数'],
