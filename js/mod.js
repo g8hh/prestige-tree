@@ -2,7 +2,7 @@ let modInfo = {
 	name: "Prestige Tree Rewritten",
 	id: "ptr",
 	author: "Jacorb",
-	pointsName: "points",
+	pointsName: "点数",
 	discordName: "PT Rewritten Server",
 	discordLink: "https://discord.gg/TFCHJJT",
 	changelogLink: "https://github.com/Jacorb90/Prestige-Tree/blob/master/changelog.md",
@@ -16,7 +16,7 @@ let modInfo = {
 let VERSION = {
 	num: "1.3",
 	patch: 1,
-	name: "The Expansion Update",
+	name: "扩展更新",
 }
 
 // If you add new functions anywhere inside of a layer, and those functions have an effect when called, add them here.
@@ -99,19 +99,19 @@ var notificationID = 0;
 function addNotification(type="none",text="This is a test notification.",title="",timer=3) {
 	switch(type) {
 		case "achievement":
-			notificationTitle = "Achievement Unlocked!";
+			notificationTitle = "成就解锁！";
 			notificationType = "achievement-notification"
 			break;
 		case "milestone":
-			notificationTitle = "Milestone Gotten!";
+			notificationTitle = "里程碑解锁！";
 			notificationType = "milestone-notification"
 			break;
 		case "challenge":
-			notificationTitle = "Challenge Complete";
+			notificationTitle = "挑战完成！";
 			notificationType = "challenge-notification"
 			break;
 		default:
-			notificationTitle = "Something Happened?";
+			notificationTitle = "发生了啥？";
 			notificationType = "default-notification"
 			break;
 	}

@@ -133,8 +133,8 @@ function loadVue() {
 			<span v-html="tmp[layer].challenges[data].challengeDescription"></span><br>
 			<span v-if="tmp[layer].challenges[data].currencyDisplayName!=''">Goal: {{format(tmp[layer].challenges[data].goal)}} {{tmp[layer].challenges[data].currencyDisplayName ? tmp[layer].challenges[data].currencyDisplayName : "points"}}<br></span>
 			Reward: <span v-html="tmp[layer].challenges[data].rewardDescription"></span><br>
-			<span v-if="tmp[layer].challenges[data].rewardEffect"><span v-if="tmp.nerdMode" v-html="'Formula: '+(tmp[layer].challenges[data].formula?tmp[layer].challenges[data].formula:'???')"></span>
-			<span v-if="!tmp.nerdMode" v-html="'Currently: '+((tmp[layer].challenges[data].rewardDisplay) ? (tmp[layer].challenges[data].rewardDisplay) : format(tmp[layer].challenges[data].rewardEffect))"></span></span>
+			<span v-if="tmp[layer].challenges[data].rewardEffect"><span v-if="tmp.nerdMode" v-html="'公式: '+(tmp[layer].challenges[data].formula?tmp[layer].challenges[data].formula:'???')"></span>
+			<span v-if="!tmp.nerdMode" v-html="'当前: '+((tmp[layer].challenges[data].rewardDisplay) ? (tmp[layer].challenges[data].rewardDisplay) : format(tmp[layer].challenges[data].rewardEffect))"></span></span>
 		</div>
 		`
 	})
@@ -165,8 +165,8 @@ function loadVue() {
 				v-bind:style="[((!hasUpgrade(layer, data) && canAffordUpgrade(layer, data)) ? {'background-color': tmp[layer].color} : {}), tmp[layer].upgrades[data].style]">
 				<span v-if= "tmp[layer].upgrades[data].title"><h3 v-html="tmp[layer].upgrades[data].title"></h3><br></span>
 				<span v-html="tmp[layer].upgrades[data].description"></span>
-				<span v-if="tmp[layer].upgrades[data].effect"><br>{{(tmp.nerdMode&&!tmp[layer].upgrades[data].noFormula)?'Formula: ':'Currently: '}}<span v-if="tmp.nerdMode&&!tmp[layer].upgrades[data].noFormula" v-html="tmp[layer].upgrades[data].formula?tmp[layer].upgrades[data].formula:'???'"></span><span v-if="(!tmp.nerdMode)||tmp[layer].upgrades[data].noFormula" v-html="(tmp[layer].upgrades[data].effectDisplay) ? (tmp[layer].upgrades[data].effectDisplay) : format(tmp[layer].upgrades[data].effect)"></span></span>
-				<br><span v-if="tmp.nerdMode&&tmp[layer].upgrades[data].costFormula">Cost Formula: {{tmp[layer].upgrades[data].costFormula}}</span><span v-if="!tmp.nerdMode||!tmp[layer].upgrades[data].costFormula"><br>Cost: <span v-if="tmp[layer].upgrades[data].multiRes"><span v-for="num in tmp[layer].upgrades[data].multiRes.length">{{formatWhole(tmp[layer].upgrades[data].multiRes[num-1].cost)+' '+(tmp[layer].upgrades[data].multiRes[num-1].currencyDisplayName ? tmp[layer].upgrades[data].multiRes[num-1].currencyDisplayName : tmp[layer].resource)}}<br></span></span><span v-if="!tmp[layer].upgrades[data].multiRes">{{formatWhole(tmp[layer].upgrades[data].cost)+' '+(tmp[layer].upgrades[data].currencyDisplayName ? tmp[layer].upgrades[data].currencyDisplayName : tmp[layer].resource)}}</span></span>
+				<span v-if="tmp[layer].upgrades[data].effect"><br>{{(tmp.nerdMode&&!tmp[layer].upgrades[data].noFormula)?'公式: ':'当前: '}}<span v-if="tmp.nerdMode&&!tmp[layer].upgrades[data].noFormula" v-html="tmp[layer].upgrades[data].formula?tmp[layer].upgrades[data].formula:'???'"></span><span v-if="(!tmp.nerdMode)||tmp[layer].upgrades[data].noFormula" v-html="(tmp[layer].upgrades[data].effectDisplay) ? (tmp[layer].upgrades[data].effectDisplay) : format(tmp[layer].upgrades[data].effect)"></span></span>
+				<br><span v-if="tmp.nerdMode&&tmp[layer].upgrades[data].costFormula">价格公式: {{tmp[layer].upgrades[data].costFormula}}</span><span v-if="!tmp.nerdMode||!tmp[layer].upgrades[data].costFormula"><br>价格: <span v-if="tmp[layer].upgrades[data].multiRes"><span v-for="num in tmp[layer].upgrades[data].multiRes.length">{{formatWhole(tmp[layer].upgrades[data].multiRes[num-1].cost)+' '+(tmp[layer].upgrades[data].multiRes[num-1].currencyDisplayName ? tmp[layer].upgrades[data].multiRes[num-1].currencyDisplayName : tmp[layer].resource)}}<br></span></span><span v-if="!tmp[layer].upgrades[data].multiRes">{{formatWhole(tmp[layer].upgrades[data].cost)+' '+(tmp[layer].upgrades[data].currencyDisplayName ? tmp[layer].upgrades[data].currencyDisplayName : tmp[layer].resource)}}</span></span>
 			</button>
 		</div>
 		`
@@ -195,7 +195,7 @@ function loadVue() {
 			<span v-if= "tmp[layer].impr[data].title"><h3 v-html="tmp[layer].impr[data].title"></h3><br></span>
 			<span v-html="tmp[layer].impr[data].description"></span>
 			Amount: <span v-html="formatWhole(getImprovements(layer, data))+(tmp[layer].impr.free?(tmp[layer].impr.free.gt(0)?(' + '+formatWhole(tmp[layer].impr.free)):''):'')"></span> (next at <span v-html="format(getNextImpr(layer, data))"></span> <span v-html="tmp[layer].impr.resName"></span>)
-			<br><span v-if="tmp[layer].impr[data].effect"><br>{{(tmp.nerdMode&&!tmp[layer].impr[data].noFormula)?'Formula: ':'Currently: '}}<span v-if="tmp.nerdMode&&!tmp[layer].impr[data].noFormula" v-html="tmp[layer].impr[data].formula?tmp[layer].impr[data].formula:'???'"></span><span v-if="(!tmp.nerdMode)||tmp[layer].impr[data].noFormula" v-html="(tmp[layer].impr[data].effectDisplay) ? (tmp[layer].impr[data].effectDisplay) : format(tmp[layer].impr[data].effect)"></span></span>
+			<br><span v-if="tmp[layer].impr[data].effect"><br>{{(tmp.nerdMode&&!tmp[layer].impr[data].noFormula)?'公式: ':'当前: '}}<span v-if="tmp.nerdMode&&!tmp[layer].impr[data].noFormula" v-html="tmp[layer].impr[data].formula?tmp[layer].impr[data].formula:'???'"></span><span v-if="(!tmp.nerdMode)||tmp[layer].impr[data].noFormula" v-html="(tmp[layer].impr[data].effectDisplay) ? (tmp[layer].impr[data].effectDisplay) : format(tmp[layer].impr[data].effect)"></span></span>
 		</button>
 		`
 	})
@@ -228,7 +228,7 @@ function loadVue() {
 	Vue.component('toggle', {
 		props: ['data', 'type'],
 		template: `
-		<button class="smallUpg can" v-bind:style="{'background-color': (player[(type=='multi')?data.layer:data[0]][(type=='multi')?data.varName:data[1]]?tmp[((type=='multi')?(data.layer):(data[0]))].color:'#666666')}" v-on:click="toggleAuto(data)">{{(type=='multi')?(player[data.layer][data.varName]):(player[data[0]][data[1]]?"ON":"OFF")}}</button>
+		<button class="smallUpg can" v-bind:style="{'background-color': (player[(type=='multi')?data.layer:data[0]][(type=='multi')?data.varName:data[1]]?tmp[((type=='multi')?(data.layer):(data[0]))].color:'#666666')}" v-on:click="toggleAuto(data)">{{(type=='multi')?(player[data.layer][data.varName]):(player[data[0]][data[1]]?"开":"关")}}</button>
 		`
 	})
 
@@ -253,7 +253,7 @@ function loadVue() {
 	Vue.component('main-display', {
 		props: ['layer'],
 		template: `
-		<div v-if="!!player[layer].points"><span v-if="player[layer].points.lt('1e1000')">You have </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': ('0px 0px 10px' + tmp[layer].color)}">{{formatWhole(player[layer].points)}}</h2><span v-if="tmp[layer].extraAmtDisplay"><span v-html="tmp[layer].extraAmtDisplay"></span></span> <h3 v-if="tmp.ma.mastered.includes(layer)" v-bind:style="{'color': tmp.ma.color, 'text-shadow': '0px 0px 10px', 'font-weight': 'bold'}">mastered</h3> {{tmp[layer].resource}}<span v-if="tmp[layer].effectDescription" v-html="', '+tmp[layer].effectDescription"></span><br><br></div>
+		<div v-if="!!player[layer].points"><span v-if="player[layer].points.lt('1e1000')">你有 </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': ('0px 0px 10px' + tmp[layer].color)}">{{formatWhole(player[layer].points)}}</h2><span v-if="tmp[layer].extraAmtDisplay"><span v-html="tmp[layer].extraAmtDisplay"></span></span> <h3 v-if="tmp.ma.mastered.includes(layer)" v-bind:style="{'color': tmp.ma.color, 'text-shadow': '0px 0px 10px', 'font-weight': 'bold'}">mastered</h3> {{tmp[layer].resource}}<span v-if="tmp[layer].effectDescription" v-html="', '+tmp[layer].effectDescription"></span><br><br></div>
 		`
 	})
 
@@ -262,10 +262,10 @@ function loadVue() {
 		props: ['layer'],
 		template: `
 		<div style="margin-top: -13px">
-			<span v-if="tmp[layer].type=='normal'"><br><span v-if="tmp[layer].resetGain.lt(100) && player[layer].points.lt(1e3)">You have </span>{{formatWhole(tmp[layer].baseAmount)}} {{tmp[layer].baseResource}}</span>
+			<span v-if="tmp[layer].type=='normal'"><br><span v-if="tmp[layer].resetGain.lt(100) && player[layer].points.lt(1e3)">你有 </span>{{formatWhole(tmp[layer].baseAmount)}} {{tmp[layer].baseResource}}</span>
 			<br><br>
-			<span v-if="tmp[layer].showBest">Your best {{tmp[layer].resource}} is {{formatWhole(player[layer].best)}}<br></span>
-			<span v-if="tmp[layer].showTotal">You have made a total of {{formatWhole(player[layer].total)}} {{tmp[layer].resource}}<br></span>
+			<span v-if="tmp[layer].showBest">你最多拥有 {{formatWhole(player[layer].best)}} {{tmp[layer].resource}} <br></span>
+			<span v-if="tmp[layer].showTotal">你总共拥有 {{formatWhole(player[layer].total)}} {{tmp[layer].resource}}<br></span>
 		</div>
 		`
 	})

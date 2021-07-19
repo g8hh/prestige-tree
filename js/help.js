@@ -3,20 +3,20 @@
 let help_data = {
 	r1: {
 		id: "r1",
-		title: "Row 1",
-		text: "Do resets, buy Prestige Upgrades, and let your Points grow. There really isn't much to this phase of the game.",
+		title: "第一行",
+		text: "重置、购买升级、增长点数，除此以外这个阶段并没有什么可以做的事情。",
 		unlocked() { return player.a.achievements.length>0 },
 	},
 	r2: {
 		id: "r2",
-		title: "Row 2",
-		text: "At this point, you have a choice between Boosters and Generators, but since you can eventually get both, there is no wrong decision here. Generators involve generating a resource whereas Boosters involve just a flat boost, so if you want to play more actively without waiting, Boosters are probably the choice for you.<br><br>Continue to purchase Booster & Generator Upgrades (stockpile Points beforehand to make buying them back easier), and try to strive for the milestones as much as you can, as they will make the runs more automated and faster. <br><br>Once you unlock both Boosters and Generators, it's smooth sailing to complete this phase of the game, just keep buying upgrades, getting milestones, and getting Boosters & Generators.",
+		title: "第二行",
+		text: "这个时候，你会需要在增幅器和生成器之间做出一个选择，不过因为你最后会同时得到这两个层，所以这里不存在错误的选择。生成器会生成一种资源（GP）而增幅器直接提供增益，所以如果你更喜欢主动的进行游戏，那么增幅器会更适合你。<br><br>接下来持续购买增幅器和生成器的升级（在购买之前多获得一些点数，这可以使资源恢复变容易），并尽量尝试获得里程碑，它们会使你的游戏变得自动化并且更快。<br><br>当你同时解锁了两者之后，这个阶段的剩余部分就比较平顺了，只需要转生、升级、获得里程碑即可。",
 		unlocked() { return player.b.unlocked || player.g.unlocked },
 	},
 	r3: {
 		id: "r3",
-		title: "Row 3",
-		text: "You have a choice between Time, Enhance, and Space here, and you will be able to unlock them in any order you choose. All combinations are viable, but some are faster than others. Enhance will tend to be the fastest to get milestones, since it is more Point-based, and its milestones involve both Boosters & Generators, so it may be beneficial to go there first.<br><br>Time & Space on the other hand fully automate  Boosters & Generators respectively, so if you're finding Generators more tedious to purchase on every reset than Boosters, maybe go with Space before Time. When it comes to Space specifically, Space Buildings should be purchased where the later buildings are given more priority (prioritize Tertiary Buildings over Secondary Buildings, and those over Primary Buildings).<br><br>Once all three layers are unlocked, just continue to manage all three of them, purchase Upgrades, and strive to unlock Super-Boosters and eventually Super-Generators, which power up Boosters & Generators respectively. From here it's just a push to complete this phase of the game.",
+		title: "第三行",
+		text: "这里，你需要做出时间、增强和空间的选择，你可以以任何方式解锁它们。所有的排列方式都是可行的，但有些会更快。由于其大多基于点数，增强是其中能够最快地获得里程碑的，并且它的里程碑同时增强增幅器和生成器，所以优先选择增强可能是更好的选择。<br><br>另一方面，时间和空间可以完全自动化增幅器和生成器，所以如果你觉得重置的时候买生成器很麻烦的话，可以考虑先选择空间再选择时间。对于空间而言，你最好购买靠后的建筑（第三>第二>第一）。<br><br>当这三个层都解锁后，尝试解锁超级增幅器和超级生成器，然后等待这一阶段结束即可。",
 		unlocked() { return player.t.unlocked || player.e.unlocked || player.s.unlocked || player.sb.unlocked || player.sg.unlocked },
 	},
 	qh: {

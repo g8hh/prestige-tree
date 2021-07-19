@@ -269,16 +269,16 @@ function loadSave(name) {
 }
 
 function renameSave(name) {
-	let newName = prompt("Enter save name: ")
+	let newName = prompt("输入存档名: ")
 	newName = newName.replace(saveRegexCode, ""); // Removes all non-alphanumeric characters
 	if (newName=="set") {
-		alert("Sorry, that name is used in the game's data, so you can't use it personally or it will cause terrible glitches!");
+		alert("此存档名被用于游戏数据，因此你不可以使用。");
 		return;
 	} else if (allSaves[newName] !== undefined) {
-		alert("That name is taken already, sorry!");
+		alert("此存档名已被使用。");
 		return;
 	} else if (newName.length>20) {
-		alert("This name is too long!");
+		alert("此存档名过长。");
 		return;
 	} else {
 		if (name==allSaves.set) save();
@@ -310,13 +310,13 @@ function newSave() {
 	let newName = prompt("输入存档名称: ");
 	newName = newName.replace(saveRegexCode, ""); // Removes all non-alphanumeric characters
 	if (newName=="set") {
-		alert("Sorry, that name is used in the game's data, so you can't use it personally or it will cause terrible glitches!");
+		alert("此存档名被用于游戏数据，因此你不可以使用。");
 		return;
 	} else if (allSaves[newName] !== undefined) {
-		alert("That name is taken already, sorry!");
+		alert("此存档名已被使用。");
 		return;
 	} else if (newName.length>20) {
-		alert("This name is too long!");
+		alert("此存档名过长。");
 		return;
 	} else {
 		allSaves[newName] = getStartPlayer();
@@ -406,7 +406,7 @@ function NaNcheck(data) {
 		}
 		else if (data[item] !== data[item] || data[item] === decimalNaN){
 			console.log("DATA: "+JSON.stringify(data));
-			if (NaNalert === true || confirm ("Invalid value found in player, named '" + item + "'. Please let the creator of this mod know! Would you like to try to auto-fix the save and keep going?")){
+			if (NaNalert === true || confirm ("值 '" + item + "' 异常。请确保开发者知晓此事。是否愿意使用自动修复并继续游戏？")){
 				NaNalert = true
 				data[item] = (data[item] !== data[item] ? 0 : decimalZero)
 			}
@@ -610,7 +610,7 @@ function milestoneShown(layer, id) {
 function respecBuyables(layer) {
 	if (!layers[layer].buyables) return
 	if (!layers[layer].buyables.respec) return
-	if (!confirm("Are you sure you want to respec? This will force you to do a \"" + (tmp[layer].name ? tmp[layer].name : layer) + "\" reset as well!")) return
+	if (!confirm("你确定要重置吗？这会强制进行一次 \"" + (tmp[layer].name ? tmp[layer].name : layer) + "\" 重置。")) return
 	layers[layer].buyables.respec()
 	updateBuyableTemp(layer)
 }
@@ -943,7 +943,7 @@ function updateMilestones(layer){
 		let done = layers[layer].milestones[id].done();
 		if (!player[layer].primeMiles.includes(id) && done) {
 			player[layer].primeMiles.push(id);
-			if (player.milNotify && !player[layer].milestones.includes(id)) addNotification("milestone", tmp[layer].milestones[id].requirementDescription, "Milestone Gotten!");
+			if (player.milNotify && !player[layer].milestones.includes(id)) addNotification("milestone", tmp[layer].milestones[id].requirementDescription, "达成里程碑!");
 		}
 		if (!(player[layer].milestones.includes(id)) && done) {
 			player[layer].milestones.push(id)
@@ -956,7 +956,7 @@ function updateAchievements(layer){
 		if (!isNaN(id) && !(player[layer].achievements.includes(id)) && layers[layer].achievements[id].done()) {
 			player[layer].achievements.push(id)
 			if (layers[layer].achievements[id].onComplete) layers[layer].achievements[id].onComplete()
-			addNotification("achievement", layers[layer].achievements[id].name, "Achievement Gotten!");
+			addNotification("achievement", layers[layer].achievements[id].name, "达成成就!");
 		}
 	}
 }
@@ -972,10 +972,10 @@ function addTime(diff, layer) {
 
 	//I am not that good to perfectly fix that leak. ~ DB Aarex
 	if (time + 0 !== time) {
-		console.log("Memory leak detected. Trying to fix...")
+		console.log("检测到内存泄漏，正在尝试修复。")
 		time = toNumber(time)
 		if (isNaN(time) || time == 0) {
-			console.log("Couldn't fix! Resetting...")
+			console.log("无法修复，重置。")
 			time = layer ? player.timePlayed : 0
 			if (!layer) player.timePlayedReset = true
 		}
@@ -1055,10 +1055,10 @@ function prestigeButtonText(layer)
 {
 	if(tmp[layer].type == "normal") {
 		if (tmp.nerdMode) return "Gain Formula: "+gainFormulaNormal(layer);
-		else return `${ player[layer].points.lt(1e3) ? (tmp[layer].resetDescription !== undefined ? tmp[layer].resetDescription : "Reset for ") : ""}+<b>${formatWhole(tmp[layer].resetGain)}</b> ${tmp[layer].resource} ${tmp[layer].resetGain.lt(100) && player[layer].points.lt(1e3) ? `<br><br>Next at ${ (tmp[layer].roundUpCost ? formatWhole(tmp[layer].nextAt) : format(tmp[layer].nextAt))} ${ tmp[layer].baseResource }` : ""}`
+		else return `${ player[layer].points.lt(1e3) ? (tmp[layer].resetDescription !== undefined ? tmp[layer].resetDescription : "重置获得 ") : ""}+<b>${formatWhole(tmp[layer].resetGain)}</b> ${tmp[layer].resource} ${tmp[layer].resetGain.lt(100) && player[layer].points.lt(1e3) ? `<br><br>下一个需要 ${ (tmp[layer].roundUpCost ? formatWhole(tmp[layer].nextAt) : format(tmp[layer].nextAt))} ${ tmp[layer].baseResource }` : ""}`
 	} else if(tmp[layer].type== "static") {
 		if (tmp.nerdMode) return "Cost Formula: "+costFormulaStatic(layer);
-		else return `${tmp[layer].resetDescription !== undefined ? tmp[layer].resetDescription : "Reset for "}+<b>${formatWhole(tmp[layer].resetGain)}</b> ${tmp[layer].resource}<br><br>${player[layer].points.lt(30) ? (tmp[layer].baseAmount.gte(tmp[layer].nextAt)&&(tmp[layer].canBuyMax !== undefined) && tmp[layer].canBuyMax?"Next:":"Req:") : ""} ${formatWhole(tmp[layer].baseAmount)} / ${(tmp[layer].roundUpCost ? formatWhole(tmp[layer].nextAtDisp) : format(tmp[layer].nextAtDisp))} ${ tmp[layer].baseResource }		
+		else return `${tmp[layer].resetDescription !== undefined ? tmp[layer].resetDescription : "重置获得 "}+<b>${formatWhole(tmp[layer].resetGain)}</b> ${tmp[layer].resource}<br><br>${player[layer].points.lt(30) ? (tmp[layer].baseAmount.gte(tmp[layer].nextAt)&&(tmp[layer].canBuyMax !== undefined) && tmp[layer].canBuyMax?"下一个:":"需要:") : ""} ${formatWhole(tmp[layer].baseAmount)} / ${(tmp[layer].roundUpCost ? formatWhole(tmp[layer].nextAtDisp) : format(tmp[layer].nextAtDisp))} ${ tmp[layer].baseResource }		
 		`
 	} else if(tmp[layer].type == "none")
 		return ""
