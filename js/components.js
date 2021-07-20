@@ -131,8 +131,8 @@ function loadVue() {
 			<br><h3 v-html="tmp[layer].challenges[data].name"></h3><br><br>
 			<button v-bind:class="{ longUpg: true, can: true, [layer]: true, anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }" v-bind:style="{'background-color': tmp[layer].color}" v-on:click="startChallenge(layer, data)" v-html="tmp[layer].challenges[data].buttonText"></button><br><br>
 			<span v-html="tmp[layer].challenges[data].challengeDescription"></span><br>
-			<span v-if="tmp[layer].challenges[data].currencyDisplayName!=''">Goal: {{format(tmp[layer].challenges[data].goal)}} {{tmp[layer].challenges[data].currencyDisplayName ? tmp[layer].challenges[data].currencyDisplayName : "points"}}<br></span>
-			Reward: <span v-html="tmp[layer].challenges[data].rewardDescription"></span><br>
+			<span v-if="tmp[layer].challenges[data].currencyDisplayName!=''">目标: {{format(tmp[layer].challenges[data].goal)}} {{tmp[layer].challenges[data].currencyDisplayName ? tmp[layer].challenges[data].currencyDisplayName : "points"}}<br></span>
+			奖励: <span v-html="tmp[layer].challenges[data].rewardDescription"></span><br>
 			<span v-if="tmp[layer].challenges[data].rewardEffect"><span v-if="tmp.nerdMode" v-html="'公式: '+(tmp[layer].challenges[data].formula?tmp[layer].challenges[data].formula:'???')"></span>
 			<span v-if="!tmp.nerdMode" v-html="'当前: '+((tmp[layer].challenges[data].rewardDisplay) ? (tmp[layer].challenges[data].rewardDisplay) : format(tmp[layer].challenges[data].rewardEffect))"></span></span>
 		</div>
@@ -159,7 +159,7 @@ function loadVue() {
 		template: `
 		<div v-if="tmp[layer].upgrades && tmp[layer].upgrades[data]!==undefined">
 			<button v-if="pseudoUnl(layer, data) && !(tmp[layer].upgrades[data].unlocked)" v-bind:class="{ [layer]: true, upg: true, pseudo: true, plocked: pcl=='locked', can: pcl=='can', anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }" v-on:click="unlockUpg(layer, data)">
-				<h3>Explore A New Upgrade</h3><br><span v-html="tmp[layer].upgrades[data].pseudoReq"></span>
+				<h3>解锁一个新升级</h3><br><span v-html="tmp[layer].upgrades[data].pseudoReq"></span>
 			</button>
 			<button v-if="tmp[layer].upgrades[data].unlocked" v-on:click="buyUpg(layer, data)" v-bind:class="{ [layer]: true, upg: true, bought: cl?(cl=='bought'):hasUpgrade(layer, data), locked: cl?(cl=='locked'):(!hasUpgrade(layer, data)&&!canAffordUpgrade(layer, data)), can: cl?(cl=='can'):(!hasUpgrade(layer, data)&&canAffordUpgrade(layer, data)), anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle)}"
 				v-bind:style="[((!hasUpgrade(layer, data) && canAffordUpgrade(layer, data)) ? {'background-color': tmp[layer].color} : {}), tmp[layer].upgrades[data].style]">
@@ -194,7 +194,7 @@ function loadVue() {
 			v-bind:style="[tmp[layer].impr[data].style]">
 			<span v-if= "tmp[layer].impr[data].title"><h3 v-html="tmp[layer].impr[data].title"></h3><br></span>
 			<span v-html="tmp[layer].impr[data].description"></span>
-			Amount: <span v-html="formatWhole(getImprovements(layer, data))+(tmp[layer].impr.free?(tmp[layer].impr.free.gt(0)?(' + '+formatWhole(tmp[layer].impr.free)):''):'')"></span> (next at <span v-html="format(getNextImpr(layer, data))"></span> <span v-html="tmp[layer].impr.resName"></span>)
+			数量: <span v-html="formatWhole(getImprovements(layer, data))+(tmp[layer].impr.free?(tmp[layer].impr.free.gt(0)?(' + '+formatWhole(tmp[layer].impr.free)):''):'')"></span> (下一个需要 <span v-html="format(getNextImpr(layer, data))"></span> <span v-html="tmp[layer].impr.resName"></span>)
 			<br><span v-if="tmp[layer].impr[data].effect"><br>{{(tmp.nerdMode&&!tmp[layer].impr[data].noFormula)?'公式: ':'当前: '}}<span v-if="tmp.nerdMode&&!tmp[layer].impr[data].noFormula" v-html="tmp[layer].impr[data].formula?tmp[layer].impr[data].formula:'???'"></span><span v-if="(!tmp.nerdMode)||tmp[layer].impr[data].noFormula" v-html="(tmp[layer].impr[data].effectDisplay) ? (tmp[layer].impr[data].effectDisplay) : format(tmp[layer].impr[data].effect)"></span></span>
 		</button>
 		`
