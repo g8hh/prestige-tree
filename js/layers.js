@@ -237,7 +237,7 @@ addLayer("p", {
 			},
 			33: {
 				title: "列长",
-				description: "总共声望加成上面两个升级的效果",
+				description: "总声望加成上面两个升级的效果",
 				cost() { return tmp.h.costMult11.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e436":1e60).pow(tmp.h.costExp11) },
 				effect() { return player.p.total.plus(1).log10().plus(1).log10().div(5).plus(1).times(hasUpgrade("hn", 33) ? upgradeEffect("hn", 33) : 1) },
 				unlocked() { return hasAchievement("a", 23)&&hasUpgrade("p", 23) },
@@ -503,11 +503,11 @@ addLayer("b", {
 				},
 			},
 			14: {
-				title: "Meta-Combo",
-				description: "The first 3 Booster Upgrades are stronger based on your Super Boosters, and <b>BP Combo</b> directly multiplies Point gain.",
+				title: "元连击",
+				description: "超级增幅器加成前三个增幅器升级，<b>BP 连击</b> 直接加成点数获取。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2088:2250) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 13) },
-				pseudoReq: "Req: 30 Super Boosters.",
+				pseudoReq: "需要: 30 超级增幅器。",
 				pseudoCan() { return player.sb.points.gte(30) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.sb.points.plus(1) },
@@ -542,11 +542,11 @@ addLayer("b", {
 				formula() { return "(log(x+1)+1)^"+(player.s.unlocked?format(buyableEffect("s", 14).times(3.2).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.5:1)):"3.2") },
 			},
 			24: {
-				title: "Boost Recursion",
-				description: "Boosters multiply their own base.",
+				title: "增幅递归",
+				description: "增幅器加成增幅器基础。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:2225) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 23) },
-				pseudoReq: "Req: 2,150 Boosters without any Hexes.",
+				pseudoReq: "需要: 无妖术下获得 2,150 增幅器",
 				pseudoCan() { return player.b.points.gte(2150) && player.m.hexes.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.b.points.plus(1).pow(500) },
@@ -590,7 +590,7 @@ addLayer("b", {
 			},
 			34: {
 				title: "不可度量",
-				description: "夸张地加成 <b>Prestige Boost</b> 至指数（不受软上限影响）。",
+				description: "夸张地加成 <b>声望增益</b> 至指数（不受软上限影响）。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?2021:2275) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 33) },
 				pseudoReq: "需要: 1e15,000,000 声望在 <b>减产</b> 障碍中.",
@@ -905,14 +905,14 @@ addLayer("g", {
 				},
 			},
 			31: {
-				title: "Absurd Generation",
-				description: "Generator Power multiplies the Super Generator base.",
+				title: "荒诞生成器",
+				description: "GP 加成超级生成器基础。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e47545":"e4.4e7") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "Req: e73,600,000 Prestige Points without any Generator Power (after doing an Enhance reset).",
+				pseudoReq: "需要: 无 GP 达到 e73,600,000 声望（使用增强重置）。",
 				pseudoCan() { return player.p.points.gte("e7.35e7") && player.g.power.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.g.power.plus(1).log10().plus(1).pow(2) },
@@ -920,11 +920,11 @@ addLayer("g", {
 				formula: "(log(x+1)+1)^2",
 			},
 			32: {
-				title: "Primal Instincts",
-				description: "The <b>Quaternary Space Building</b> also affects <b>Discount Two</b> at a reduced rate.",
+				title: "原始本能",
+				description: "<b>第四建筑</b> 加成 <b>二折</b>。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1260:2200) },
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "Req: e47,500,000 Generator Power without any Boosters (after doing an Enhance reset).",
+				pseudoReq: "需要: 无增幅器达到 e47,500,000 GP（使用增强重置)",
 				pseudoCan() { return player.g.power.gte("e4.75e7") && player.b.best.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return buyableEffect("s", 14).pow(0.8) },
@@ -933,14 +933,14 @@ addLayer("g", {
 				style: {"font-size": "9px"},
 			},
 			33: {
-				title: "Dust Production",
-				description: "Generators boost Dust gain.",
+				title: "星尘生产",
+				description: "生成器加成星尘获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e48000":"e5.6e7") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "Req: 1e14 Nebula Energy",
+				pseudoReq: "需要: 1e14 星云",
 				pseudoCan() { return player.n.points.gte(1e14) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return Decimal.pow(1.15, player.g.points.sqrt()) },
@@ -948,23 +948,23 @@ addLayer("g", {
 				formula: "1.15^sqrt(x)",
 			},
 			34: {
-				title: "Boost the Boost Again^2",
-				description: "<b>Prestige Boost</b> is raised to the power of 1.433.",
+				title: "增益增益^2",
+				description: "<b>声望增益</b> 的效果提升至 1.433 次幂",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1257:2200) },
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "Req: 36 Achievements.",
+				pseudoReq: "需要: 36 成就。",
 				pseudoCan() { return player.a.achievements.length>=36 },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			35: {
-				title: "Into The Future",
-				description: "Nebula Energy, Honour, and Hyperspace Energy gains are boosted by Generator Power.",
+				title: "进入未来",
+				description: "GP 加成星云、荣耀、超空间能量获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e47540":"e4.4e7") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
                 currencyInternalName: "power",
                 currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(2)&&player.g.upgrades.length>=10 },
-				pseudoReq: "Req: 5e18 Honour & 5e17 Hyperspace Energy.",
+				pseudoReq: "需要: 5e18 荣耀 & 5e17 超空间能量。",
 				pseudoCan() { return player.hn.points.gte(5e18) && player.hs.points.gte(5e17) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.g.power.plus(1).log10().plus(1).sqrt() },
@@ -1250,35 +1250,35 @@ addLayer("t", {
 				formula() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"(log(x+1)/1.2)^3":"log(x+1)/1.2" },
 			},
 			31: {
-				title: "Cheap Time",
-				description: "Extra Time Capsule cost scaling is removed, and their cost exponent is decreased by 0.2.",
+				title: "廉价时间",
+				description: "扩展时间胶囊价格不再缩放，价格指数降低 0.2。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e16400":"e3600000") },
-				currencyDisplayName: "time energy",
+				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "Req: 1e42 Honour",
+				pseudoReq: "需要: 1e42 荣耀",
 				pseudoCan() { return player.hn.points.gte(1e42) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			32: {
-				title: "The Hypertime Continuum",
-				description: "Hyperspace cost scales 33.33% slower.",
+				title: "超时间连续体",
+				description: "超空间价格缩放减缓 33.33%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
-				currencyDisplayName: "time energy",
+				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "Req: 1e31 Hyperspace Energy",
+				pseudoReq: "需要: 1e31 超空间能量",
 				pseudoCan() { return player.hs.points.gte(1e31) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			33: {
-				title: "Virtually Limitless",
-				description: "Time Energy boosts the Time Energy limit base.",
+				title: "近似无限",
+				description: "TE 加成 TE 上限基础。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:750) },
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "Req: 30 Phantom Souls",
+				pseudoReq: "需要: 30 幽魂",
 				pseudoCan() { return player.ps.points.gte(30) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.t.energy.plus(1).log10().plus(1).pow(3.5) },
@@ -1286,35 +1286,35 @@ addLayer("t", {
 				formula: "(log(x+1)+1)^3.5",
 			},
 			34: {
-				title: "Scalings Galore",
-				description: "Post-1,225 Booster & Generator cost scalings start at 1,400 instead.",
+				title: "缩放盛宴",
+				description: "1225 之后的增幅器和生成器缩放改为从 1400 开始。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e39000":"e4240000") },
-				currencyDisplayName: "time energy",
+				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: 'Req: Reach e124,000,000 Prestige Points while in the "Productionless" Hindrance and without any Hyper Buildings.',
+				pseudoReq: '需要: 在 "减产" 障碍中以无超空间建筑达到 e124,000,000 声望。',
 				pseudoCan() { return player.p.points.gte("e1.24e8") && inChallenge("h", 42) && player.hs.spentHS.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			35: {
-				title: "Don't Kill Time",
-				description: "Time Energy's second effect exponent is increased (0.556 -> 0.565)",
+				title: "珍惜时间",
+				description: "TE 的第二个效果的指数提高（0.556 -> 0.565)。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e38000":"e3600000") },
-				currencyDisplayName: "time energy",
+				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
 				currencyLayer: "t",
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "Req: 1e13 Purple Dust",
+				pseudoReq: "需要: 1e13 紫尘",
 				pseudoCan() { return player.n.purpleDust.gte(1e13) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			41: {
-				title: "Subtemporal Power",
-				description: "Raise the Subspace base to the power of 1.5, and gain 2,500x more Hyperspace Energy.",
+				title: "亚时态之幂",
+				description: "将子空间基础提高至 1.5 次幂，同时增加超空间能量获取 2,500x。",
 				cost: new Decimal(1050),
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
-				pseudoReq: "Req: 1e60 Honour & 1e575 Phantom Power",
+				pseudoReq: "需要: 1e60 荣耀 & 1e575 魂力",
 				pseudoCan() { return player.hn.points.gte(1e60) && player.ps.power.gte("1e575") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -1519,7 +1519,7 @@ addLayer("e", {
 			},
 			13: {
 				title: "增强 Plus",
-				description: "获得一个免费的增强。",
+				description: "获得一个免费的增强子。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1e5":2.5e3) },
 				unlocked() { return hasUpgrade("e", 11) },
 			},
@@ -1538,7 +1538,7 @@ addLayer("e", {
 			},
 			21: {
 				title: "增强 Plus Plus",
-				description: "获得两个免费的增强",
+				description: "获得两个免费的增强子。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":(player.e.unlockOrder>0?1e4:1e9)) },
 				unlocked() { return hasUpgrade("e", 13) && ((!player.s.unlocked||(player.s.unlocked&&player.t.unlocked))&&player.t.unlocked) },
 			},
@@ -1551,7 +1551,7 @@ addLayer("e", {
 			},
 			23: {
 				title: "进入 E-空间",
-				description: "空间能量提供免费增强。",
+				description: "空间能量提供免费增强子。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":2e20) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() {
@@ -1572,20 +1572,20 @@ addLayer("e", {
 				formula() { return (((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e2,000":"1.1")+"^((boosters+generators)^0.9)" },
 			},
 			31: {
-				title: "Amplification",
-				description: "The second effect of Enhancers also adds to the Super-Booster, Super-Generator, and Subspace bases.",
+				title: "放大",
+				description: "增强子的第二个效果同样生效于超级增幅器、超级生成器和子空间基础。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3450000":"e4125000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "Req: e2,464,000 Enhance Points without any Super-Boosters or Super-Generators (after a Row 4 reset).",
+				pseudoReq: "需要: 无超级增幅器和超级生成器达到e2,464,000 增强（使用第四行重置）。",
 				pseudoCan() { return player.sb.best.eq(0) && player.sg.best.eq(0) && player.e.points.gte("e2.464e6") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			32: {
-				title: "Supplementation",
-				description: "Best Honour provides free Enhancers.",
+				title: "增援",
+				description: "最多荣耀提供免费增强子。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3460000":"e4500000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "Req: 30,300 Free Enhancers.",
+				pseudoReq: "需要: 30,300 免费增强子。",
 				pseudoCan() { return tmp.e.freeEnh.gte(30300) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return softcap("e32", player.hn.best.plus(1).log10().pow(3.25)).floor() },
@@ -1593,29 +1593,29 @@ addLayer("e", {
 				formula: "log(x+1)^3.25",
 			},
 			33: {
-				title: "Augmentation",
-				description: "Both Enhancer effect exponents are 20% higher.",
+				title: "扩增",
+				description: "增强子的两个效果指数提高 20%。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3460000":"e4500000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "Req: 60,600 Bought Enhancers.",
+				pseudoReq: "需要: 60,600 购买的增强子。",
 				pseudoCan() { return player.e.buyables[11].gte(60600) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			34: {
-				title: "Intensification",
-				description: "Enhancer cost scaling is disabled.",
+				title: "强化",
+				description: "增强子价格不再缩放。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3450000":"e4125000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "Req: e3,050,000 Enhance Points without any purchased Quirk Layers (After a Row 5 reset).",
+				pseudoReq: "需要: 无诡异层达到 e3,050,000 增强（使用第五行升级）。",
 				pseudoCan() { return player.e.points.gte("e3.05e6") && player.q.buyables[11].eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			41: {
-				title: "To the Next Level",
-				description: "Enhance Points boost Hyperspace Energy gain.",
+				title: "进阶",
+				description: "增强加成超空间能量获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3460000":"e5750000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
-				pseudoReq: "Req: 44,900 Bought Enhancers without any Hyper Buildings.",
+				pseudoReq: "需要: 无超空间建筑达到 44,900 购买增强子。",
 				pseudoCan() { return player.e.buyables[11].gte(44900) && player.hs.spentHS.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.e.points.plus(1).log10().plus(1).pow(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?.45:.15) },
@@ -1968,36 +1968,36 @@ addLayer("s", {
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			31: {
-				title: "Useful Dimensionality",
-				description: "The first four Space Buildings' cost exponents are decreased by 0.04*(5-n), where n is the Space Building number.",
+				title: "有用维度",
+				description: "前四个建筑的价格指数降低 0.04*(5-n)，n 是这个建筑的编号。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?815:1225) },
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "Req: 1,200% Space Building Power",
+				pseudoReq: "需要: 1,200% 建筑增益",
 				pseudoCan() { return tmp.s.buildingPower.gte(12) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				style: {"font-size": "9px"},
 			},
 			32: {
-				title: "Poincaré Recurrence",
-				description: "Each Space Building's bought Level adds to the previous building's Extra Level.",
+				title: "庞加莱循环",
+				description: "每个建筑的购买等级加成至前一个建筑的额外等级。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e9e5":"e2.25e8") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "Req: e1e9 Points",
+				pseudoReq: "需要: e1e9 点数",
 				pseudoCan() { return player.points.gte("e1e9") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
 			33: {
-				title: "Noncontinuous Spectrum",
-				description: "<b>Contiguous Dimension</b> multiplies Nebula Energy & Hyperspace Energy gain at a reduced rate.",
+				title: "非连续谱",
+				description: "<b>连续维度</b> 增幅星云和超空间能量获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1e6":"e2.75e8") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "Req: Have at least 13 Space Upgrades, 39 Achievements, and the upgrade <b>Contiguous Dimension</b>.",
+				pseudoReq: "需要: 至少 13 个空间升级，39 个成就，获得升级 <b>连续维度</b>。",
 				pseudoCan() { return player.a.achievements.length>=39 && player.s.upgrades.length>=13 && hasUpgrade("s", 35) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return upgradeEffect("s", 35).sqrt() },
@@ -2006,27 +2006,27 @@ addLayer("s", {
 				style: {"font-size": "8px"},
 			},
 			34: {
-				title: "Energetic Reduction",
-				description: "The first five Space Buildings' cost bases are reduced based on your Space Energy.",
+				title: "能量还原",
+				description: "空间能量降低前五个建筑的价格基础。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e9.01e5":"e1.95e8") },
-				currencyDisplayName: "generator power",
+				currencyDisplayName: "GP",
 				currencyInternalName: "power",
 				currencyLayer: "g",
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "Req: e160,000,000 Generator Power without any bought Space Buildings (Hint: respec Space Buildings).",
+				pseudoReq: "需要: 无购买建筑达到 e160,000,000 GP（使用建筑重置）。",
 				pseudoCan() { return player.g.power.gte("e1.6e8") && tmp.s.manualBuildingLevels.eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.s.points.plus(1).log10().plus(1).log10().plus(1) },
-				effectDisplay() { return "brought to the "+format(tmp.s.upgrades[this.id].effect)+"th root" },
+				effectDisplay() { return "开 "+format(tmp.s.upgrades[this.id].effect)+" 次根" },
 				formula: "log(log(x+1)+1)+1",
 				style: {"font-size": "9px"},
 			},
 			35: {
-				title: "Contiguous Dimension",
-				description: "Unspent Space multiplies Honour gain.",
+				title: "连续维度",
+				description: "未使用的空间增幅荣耀获取。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?825:1255) },
 				pseudoUnl() { return player.i.buyables[12].gte(5)&&player.s.upgrades.length>=9 },
-				pseudoReq: "Req: 9e16 Space",
+				pseudoReq: "需要: 9e16 空间",
 				pseudoCan() { return tmp.s.space.gte(9e16) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return tmp.s.space.plus(1) },
@@ -2327,7 +2327,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			16: {
-				title: "Senary Space Building",
+				title: "第六建筑",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2346,9 +2346,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("Cost: " + formatWhole(data.cost) + " Generator Power"))+"\n\
-                    Level: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("Formula: sqrt(level+1)"):("Multiply Damned Soul gain by " + format(data.effect)+"."))
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    等级: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
+					"+(tmp.nerdMode?("公式: sqrt(level+1)"):("增幅恶魂获取 " + format(data.effect)+"x。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&player.i.buyables[11].gte(1) }, 
                 canAfford() {
@@ -2377,7 +2377,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			17: {
-				title: "Septenary Space Building",
+				title: "第七建筑",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2396,9 +2396,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("Cost: " + formatWhole(data.cost) + " Generator Power"))+"\n\
-                    Level: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("Formula: 1e20,000^(level^1.2)"):("Divide the requirement of Phantom Souls by " + format(data.effect)+"."))
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    等级: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
+					"+(tmp.nerdMode?("公式: 1e20,000^(level^1.2)"):("将幽魂的价格除以 " + format(data.effect)+"。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&player.i.buyables[11].gte(2) }, 
                 canAfford() {
@@ -2427,7 +2427,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			18: {
-				title: "Octonary Space Building",
+				title: "第八建筑",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2446,9 +2446,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("Cost: " + formatWhole(data.cost) + " Generator Power"))+"\n\
-                    Level: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("Formula: level/1.5"):("Get " + format(data.effect)+" more Free Quirk Layers."))
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    等级: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
+					"+(tmp.nerdMode?("公式: level/1.5"):("获得 " + format(data.effect)+" 个免费诡异层。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&player.i.buyables[11].gte(3) }, 
                 canAfford() {
@@ -2477,7 +2477,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			19: {
-				title: "Nonary Space Building",
+				title: "第九建筑",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2496,9 +2496,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("Cost: " + formatWhole(data.cost) + " Generator Power"))+"\n\
-                    Level: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("Formula: level/1,000+1"):("The Hyperspace Energy gain exponent is multiplied by " + format(data.effect)+"."))
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    等级: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
+					"+(tmp.nerdMode?("格式: level/1,000+1"):("超空间能量获得指数增幅 " + format(data.effect)+"x。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&player.i.buyables[11].gte(4) }, 
                 canAfford() {
@@ -2527,7 +2527,7 @@ addLayer("s", {
 				autoed() { return player.s.autoBld && hasMilestone("q", 7) },
 			},
 			20: {
-				title: "Decary Space Building",
+				title: "第十建筑",
 				costExp() { return 1.35+(this.id-15)*0.3 },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
 					let base = tmp.s.buildingBaseCosts[this.id];
@@ -2545,9 +2545,9 @@ addLayer("s", {
                 },
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("Cost: " + formatWhole(data.cost) + " Generator Power"))+"\n\
-                    Level: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-					"+(tmp.nerdMode?("Formula: (level/2.5)%"):("Hyper Building Power is increased by " + format(data.effect.times(100))+"%."))
+                    return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(data.costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
+                    等级: " + formatWhole(player[this.layer].buyables[this.id]) + (data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
+					"+(tmp.nerdMode?("公式: (level/2.5)%"):("超建筑增益加成 " + format(data.effect.times(100))+"%。"))
                 },
                 unlocked() { return player[this.layer].unlocked&&player.i.buyables[11].gte(5) }, 
                 canAfford() {
@@ -2696,7 +2696,7 @@ addLayer("sb", {
 		tabFormat: ["main-display",
 			"prestige-button",
 			"blank",
-			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sb"):false)?("Your Super Boosters are providing you with <h3 style='color: #8882ba; text-shadow: #7f78c4 0px 0px 10px;'>"+formatWhole(tmp.sb.spectralTotal)+"</h3> Spectral Boosters"+(tmp.nerdMode?(" ("+formatWhole(tmp.sb.spectralEach)+" per SB)"):"")+", which contribute to the Booster effect but not to any Booster-related upgrade effects."):"" }],
+			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sb"):false)?("你的超级增幅器为你提供了 <h3 style='color: #8882ba; text-shadow: #7f78c4 0px 0px 10px;'>"+formatWhole(tmp.sb.spectralTotal)+"</h3> 虚增幅器"+(tmp.nerdMode?(" (每个 "+formatWhole(tmp.sb.spectralEach)+")"):"")+"，计算入增幅器效果，但不计入增幅器相关的升级效果。"):"" }],
 		],
 		startData() { return {
 			unlocked: false,
@@ -2808,7 +2808,7 @@ addLayer("sg", {
 				function() {return '你有 ' + format(player.sg.power) + ' 超级 GP，增幅生成器基础 '+format(tmp.sg.enEff)+'x'+(tmp.nerdMode?(" (sqrt(x+1))"):"")},
 					{}],
 			"blank",
-			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sg"):false)?("Your Super Generators are providing you with <h3 style='color: #84b88a; text-shadow: #78c48f 0px 0px 10px;'>"+formatWhole(tmp.sg.spectralTotal)+"</h3> Spectral Generators"+(tmp.nerdMode?(" (((log(timeSinceRow4Reset+1)*(SG^2))^0.95)*1.2)"):"")+", which contribute to the Generator effect but not to any Generator-related upgrade effects."):"" }],
+			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sg"):false)?("你的超级生成器为你提供了 <h3 style='color: #84b88a; text-shadow: #78c48f 0px 0px 10px;'>"+formatWhole(tmp.sg.spectralTotal)+"</h3> 虚生成器"+(tmp.nerdMode?(" (((log(timeSinceRow4Reset+1)*(SG^2))^0.95)*1.2)"):"")+"，计算入生成器效果，但不计入生成器相关的升级效果。"):"" }],
 		],
 		startData() { return {
 			unlocked: false,
@@ -3448,19 +3448,19 @@ addLayer("q", {
 				formula() { return "H: "+(player.q.points.gte("1e1100")?"log(cbrt(Q+1))^366.67":"cbrt(Q+1)")+", Q: "+(player.h.points.gte("1e1000")?"log(H+1)^83.33":"(H+1)^0.25") },
 			},
 			15: {
-				title: "Quirk Extension",
-				description: "Quirks make the Quirk Energy effect softcap start later.",
+				title: "诡异拓展",
+				description: "诡异延缓 QE 效果软上限。",
 				cost() { return Decimal.pow("e1e6", player.q.time.times(10).plus(1).log10().pow(2)).times("e1.5e7") },
 				costFormula: "(e1,000,000^(log(time*10+1)^2))*e15,000,000",
-				currencyDisplayName: "quirk energy",
+				currencyDisplayName: "QE",
 				currencyInternalName: "energy",
 				currencyLayer: "q",
 				pseudoUnl() { return player.i.buyables[12].gte(6) },
-				pseudoReq: "Req: 40 Achievements",
+				pseudoReq: "需要: 40 成就",
 				pseudoCan() { return player.a.achievements.length>=40 },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.q.points.plus(1) },
-				effectDisplay() { return format(tmp.q.upgrades[this.id].effect)+"x later" },
+				effectDisplay() { return "延缓 " + format(tmp.q.upgrades[this.id].effect)+"x" },
 				formula: "x+1",
 			},
 			21: {
@@ -3510,19 +3510,19 @@ addLayer("q", {
 				unlocked() { return hasUpgrade("q", 14)&&hasUpgrade("q", 22) },
 			},
 			25: {
-				title: "Advanced Onion",
-				description: "Nebulaic Bricks reduce the Quirk Layer cost base.",
+				title: "高级洋葱",
+				description: "星云砖降低诡异层价格基础。",
 				cost() { return Decimal.pow("e3e6", player.q.time.times(4).plus(1).log10().pow(2)).times("e2e7") },
 				costFormula: "(e3,000,000^(log(time*4+1)^2))*e20,000,000",
-				currencyDisplayName: "quirk energy",
+				currencyDisplayName: "QE",
 				currencyInternalName: "energy",
 				currencyLayer: "q",
 				pseudoUnl() { return player.i.buyables[12].gte(6) },
-				pseudoReq: "Req: 1e200 Honour.",
+				pseudoReq: "需要: 1e200 荣耀",
 				pseudoCan() { return player.hn.points.gte(1e200) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.i.nb.plus(1).log10().plus(1).pow(3) },
-				effectDisplay() { return "brought to the "+format(upgradeEffect("q", 25))+"th root" },
+				effectDisplay() { return "开 "+format(upgradeEffect("q", 25))+" 次根" },
 				formula: "(log(x+1)+1)^3",
 			},
 			31: {
@@ -3572,19 +3572,19 @@ addLayer("q", {
 				formula: "(x+1)^0.4",
 			},
 			35: {
-				title: "Millennial Abilities",
-				description: "Hyperspatial Bricks make Quirk Improvements scale slower.",
+				title: "千种能力",
+				description: "超空间砖减缓诡异改良价格比例。",
 				cost() { return Decimal.pow("e2e6", player.q.time.times(4).plus(1).log10().pow(3)).times("e3.5e7") },
 				costFormula: "(e2,000,000^(log(time*4+1)^3))*e35,000,000",
-				currencyDisplayName: "quirk energy",
+				currencyDisplayName: "QE",
 				currencyInternalName: "energy",
 				currencyLayer: "q",
 				pseudoUnl() { return player.i.buyables[12].gte(6) },
-				pseudoReq: "Req: e5,000,000 Quirk Energy without any bought Quirk Layers (After a Row 5 reset).",
+				pseudoReq: "需要: 无诡异层达到 e5,000,000 QE（使用第五行重置）。",
 				pseudoCan() { return player.q.energy.gte("e5e6") && player.q.buyables[11].eq(0) },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 				effect() { return player.i.hb.sqrt().div(25).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.5:1).plus(1) },
-				effectDisplay() { return format(upgradeEffect("q", 35).sub(1).times(100))+"% slower" },
+				effectDisplay() { return "延缓 " + format(upgradeEffect("q", 35).sub(1).times(100))+"%" },
 				formula: "sqrt(x)*4%",
 			},
 			41: {
@@ -3624,14 +3624,14 @@ addLayer("q", {
 				unlocked() { return hasUpgrade("q", 43) },
 			},
 			45: {
-				title: "Anti-Hindrance",
-				description: "The Hindrance Spirit effect is raised to the power of 100 (after softcaps), and gain 200x more Nebula Energy.",
+				title: "反障碍",
+				description: "障碍灵魂效果提升至 100 次幂（在软上限后），星云获取增幅 200 倍。",
 				cost: new Decimal("e55555555"),
-				currencyDisplayName: "quirk energy",
+				currencyDisplayName: "QE",
 				currencyInternalName: "energy",
 				currencyLayer: "q",
 				pseudoUnl() { return player.i.buyables[12].gte(6) },
-				pseudoReq: "Req: e1.7e10 Prestige Points.",
+				pseudoReq: "需要: e1.7e10 声望",
 				pseudoCan() { return player.p.points.gte("e1.7e10") },
 				unlocked() { return player[this.layer].pseudoUpgs.includes(Number(this.id)) },
 			},
@@ -4149,17 +4149,17 @@ addLayer("o", {
 				autoed() { return hasMilestone("m", 0) },
 			},
 			33: {
-				title: "Thermonuclear Reactants",
+				title: "聚变原料",
 				gain() { return player.o.points.div("1e500").pow(10).pow(tmp.o.buyableGainExp).floor() },
 				effect() {
 					return player[this.layer].buyables[this.id].times(tmp.o.multiplyBuyables).plus(1).pow(tmp.o.solPow).log10().plus(1).log10().plus(1).log10().div(3).times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1.9:1);
 				},
 				display() {
 					let data = tmp[this.layer].buyables[this.id]
-					return ("Sacrifice all of your Solarity for "+formatWhole(data.gain)+" Thermonuclear Reactants\n"+
-					"Req: 1e750 Solarity\n"+
-					"Amount: "+formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables)))+"\n"+
-					(tmp.nerdMode?("Formula: log(log(log(x+1)+1)+1)/3"):("Effect: Add "+format(data.effect.times(100))+"% to Solar Power, Space Building Power, & Hyper Building Power.")))
+					return ("献祭所有阳光，获得 "+formatWhole(data.gain)+" 聚变原料\n"+
+					"需要: 1e750 阳光\n"+
+					"数量: "+formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables)))+"\n"+
+					(tmp.nerdMode?("公式: log(log(log(x+1)+1)+1)/3"):("效果: 太阳能、建筑增益、超建筑增益 +"+format(data.effect.times(100))+"%。")))
 				},
 				unlocked() { return player.n.buyables[11].gte(5) },
 				canAfford() { return player.o.points.gte("1e750") },
@@ -5375,7 +5375,7 @@ addLayer("ps", {
 						}
 						if (next.quirkImpr) {
 							display += "\n"
-							if (curr.quirkImpr) display += curr.quirkImpr+" 新诡异改良"+(curr.quirkImpr==1?"":"s")+(curr.quirkImpr>=3?" (已满)":"")
+							if (curr.quirkImpr) display += curr.quirkImpr+" 新诡异改良"+(curr.quirkImpr>=3?" (已满)":"")
 							else if (next.quirkImpr>(curr.quirkImpr||0)) display += "<b>下一个: 解锁一个新的诡异改良</b>"
 						}
 					} else display += "None"
@@ -5703,10 +5703,10 @@ addLayer("hn", {
 				effectDescription: "你可以同时激活 3 个二级星尘。",
 			},
 			9: {
-				requirementDescription: "1e300 Total Honour",
+				requirementDescription: "1e300 总荣耀",
 				unlocked() { return hasMilestone("hn", 8) },
 				done() { return player.hn.total.gte(1e300) },
-				effectDescription: "You can buy max Phantom Souls.",
+				effectDescription: "允许最大购买幽魂。",
 			},
 		},
 		upgrades: {
@@ -6271,7 +6271,7 @@ addLayer("n", {
 				
 				"blank",
 				
-				["display-text", (player.ma.unlocked?("Product of all Dusts: "+format(tmp.n.dustProduct)):"") ],
+				["display-text", (player.ma.unlocked?("尘积: "+format(tmp.n.dustProduct)):"") ],
 				
 				"blank",
 			
@@ -6515,7 +6515,7 @@ addLayer("hs", {
 			"blank", "blank",
 			"respec-button",
 			"blank",
-			["display-text", function() { return tmp.hs.buildingPower.eq(1)?"":("超建筑能量: "+format(tmp.hs.buildingPower.times(100))+"%")}], "blank",
+			["display-text", function() { return tmp.hs.buildingPower.eq(1)?"":("超建筑增益: "+format(tmp.hs.buildingPower.times(100))+"%")}], "blank",
 			["row", [["buyable", 21], ["buyable", 22], ["buyable", 23], ["buyable", 24], ["buyable", 25], ["buyable", 26], ["buyable", 27], ["buyable", 28], ["buyable", 29], ["buyable", 30]]],
 			"blank",
 			["display-text", function() { return "超建筑限制: "+formatWhole(player.hs.buildLim)+", 下一个: "+formatWhole(player.sg.points)+" / "+formatWhole(tmp.hs.nextBuildLimit)+" 超级生成器" }], "blank",
@@ -6744,7 +6744,7 @@ addLayer("hs", {
 				autoed() { return false },
 			},
 			26: {
-				title: "Senary Hyper Building",
+				title: "第六超建筑",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return new Decimal(1);
                 },
@@ -6752,7 +6752,7 @@ addLayer("hs", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ("价格: 1 超空间\n\
 					数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(player.hs.buildLim)+"\n\n\
-					Senary Space Building Effect: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (Formula: (level^1.1)/1.2+1)":""))
+					第六建筑效果: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (公式: (level^1.1)/1.2+1)":""))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked && player.i.buyables[11].gte(1) }, 
@@ -6773,7 +6773,7 @@ addLayer("hs", {
 				autoed() { return false },
 			},
 			27: {
-				title: "Septenary Hyper Building",
+				title: "第七超建筑",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return new Decimal(1);
                 },
@@ -6781,7 +6781,7 @@ addLayer("hs", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ("价格: 1 超空间\n\
 					数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(player.hs.buildLim)+"\n\n\
-					Septenary Space Building Effect: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (Formula: level/5+1)":""))
+					第七建筑效果: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (公式: level/5+1)":""))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked && player.i.buyables[11].gte(2) }, 
@@ -6802,7 +6802,7 @@ addLayer("hs", {
 				autoed() { return false },
 			},
 			28: {
-				title: "Octonary Hyper Building",
+				title: "第八超建筑",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return new Decimal(1);
                 },
@@ -6810,7 +6810,7 @@ addLayer("hs", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ("价格: 1 超空间\n\
 					数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(player.hs.buildLim)+"\n\n\
-					Octonary Space Building Effect: x"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (Formula: level/1.15+1)":""))
+					第八建筑效果: x"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (公式: level/1.15+1)":""))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked && player.i.buyables[11].gte(3) }, 
@@ -6831,7 +6831,7 @@ addLayer("hs", {
 				autoed() { return false },
 			},
 			29: {
-				title: "Nonary Hyper Building",
+				title: "第九超建筑",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return new Decimal(1);
                 },
@@ -6839,7 +6839,7 @@ addLayer("hs", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ("价格: 1 超空间\n\
 					数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(player.hs.buildLim)+"\n\n\
-					Nonary Space Building Effect: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (Formula: level/5+1)":""))
+					第九建筑效果: ^"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (公式): level/5+1)":""))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked && player.i.buyables[11].gte(4) && player.ma.current!="hs" }, 
@@ -6860,7 +6860,7 @@ addLayer("hs", {
 				autoed() { return false },
 			},
 			30: {
-				title: "Decary Hyper Building",
+				title: "第十超建筑",
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                    return new Decimal(1);
                 },
@@ -6868,7 +6868,7 @@ addLayer("hs", {
                     let data = tmp[this.layer].buyables[this.id]
                     let display = ("价格: 1 超空间\n\
 					数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(player.hs.buildLim)+"\n\n\
-					Decary Space Building Effect: x"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (Formula: sqrt(level)/1.5+1)":""))
+					第十建筑效果: x"+format(tmp[this.layer].buyables[this.id].effect)+(tmp.nerdMode?" (公式: sqrt(level)/1.5+1)":""))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked && player.i.buyables[11].gte(5) }, 
@@ -6891,29 +6891,31 @@ addLayer("hs", {
 		},
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        
+        
+  iiii  
+ i::::i 
+  iiii  
+        
+iiiiiii 
+i:::::i 
+ i::::i 
+ i::::i 
+ i::::i 
+ i::::i 
+ i::::i 
+ i::::i 
+i::::::i
+i::::::i
+i::::::i
+iiiiiiii
+        
+        
+        
+        
+        
+        
+        
 */
 addLayer("i", {
 		name: "imperium", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -6930,8 +6932,8 @@ addLayer("i", {
         }},
         color: "#e5dab7",
         requires() { return new Decimal("1e11750") }, // Can be a function that takes requirement increases into account
-        resource: "imperium bricks", // Name of prestige currency
-        baseResource: "subspace", // Name of resource prestige is based on
+        resource: "砖石", // Name of prestige currency
+        baseResource: "子空间", // Name of resource prestige is based on
         baseAmount() {return player.ss.subspace}, // Get the current amount of baseResource
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(1.8), // Prestige currency exponent
@@ -6946,7 +6948,7 @@ addLayer("i", {
 		canBuyMax() { return hasMilestone("ma", 1) },
         row: 5, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "i", description: "Press I to Imperium Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "i", description: "按 I 进行帝国重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return hasMilestone("ma", 1) },
         doReset(resettingLayer){ 
@@ -6983,10 +6985,10 @@ addLayer("i", {
 		tabFormat: ["main-display",
 			"prestige-button",
 			"resource-display",
-			["display-text", function() { return player.i.unlocked?("You have "+formatWhole(player.i.nb)+" Nebulaic Bricks "+(tmp.nerdMode?"(Formula: log(N/2e3+1)^0.8)":("(next at "+format(tmp.i.nextNB)+" Nebula Energy)"))):"" }],
-			["display-text", function() { return player.i.unlocked?("You have "+formatWhole(player.i.hb)+" Hyperspatial Bricks "+(tmp.nerdMode?"(Formula: log(HS/1e6+1)^0.74)":("(next at "+format(tmp.i.nextHB)+" Hyperspace Energy)"))):"" }],
+			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.nb)+" 星云砖 "+(tmp.nerdMode?"(公式: log(N/2e3+1)^0.8)":("(下一个在 "+format(tmp.i.nextNB)+" 星云)"))):"" }],
+			["display-text", function() { return player.i.unlocked?("你有 "+formatWhole(player.i.hb)+" 超空间砖 "+(tmp.nerdMode?"(公式: log(HS/1e6+1)^0.74)":("(下一个在 "+format(tmp.i.nextHB)+" 超空间能量)"))):"" }],
 			"blank",
-			["display-text", function() { return (player.ma.current=="i"&&player.i.unlocked)?"NOTICE: While Mastering Imperium, Imperium Buildings make each other more expensive!":"" }],
+			["display-text", function() { return (player.ma.current=="i"&&player.i.unlocked)?"注意: 在掌控帝国的时候，帝国建筑会使对方更贵！":"" }],
 			"blank",
 			"buyables",
 		],
@@ -6994,7 +6996,7 @@ addLayer("i", {
 			rows: 1,
 			cols: 4,
 			11: {
-				title: "Imperium Building I",
+				title: "帝国建筑 I",
 				cap() { return new Decimal(5) },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                     let cost = { ib: x.times(1.4).pow(1.2).plus(1).pow(player.ma.current=="i"?player.i.buyables[12].div(4).plus(1):1).floor(), nb: x.pow(1.4).times(2).plus(4).pow(player.ma.current=="i"?player.i.buyables[12].div(6).plus(1):1).floor() }
@@ -7008,9 +7010,9 @@ addLayer("i", {
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
-                    let display = ((player[this.layer].buyables[this.id].gte(data.cap)?"MAXED":((cost.ib?("Cost: "+formatWhole(cost.ib)+" Imperium Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("Cost: "+formatWhole(cost.nb)+" Nebulaic Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("Cost: "+formatWhole(cost.hb)+" Hyperspatial Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
+                    let display = ((player[this.layer].buyables[this.id].gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 砖石"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 星云砖"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间砖"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+" / "+formatWhole(data.cap)+"\n\
-					Unlocked "+formatWhole(player[this.layer].buyables[this.id])+" new Space Building"+(player[this.layer].buyables[this.id].eq(1)?"":"s")+" (which are not impacted by extra Space Buildings)")
+					解锁 "+formatWhole(player[this.layer].buyables[this.id])+" 新建筑 （不受额外建筑影响）")
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -7031,7 +7033,7 @@ addLayer("i", {
 				autoed() { return false },
 			},
 			12: {
-				title: "Imperium Building II",
+				title: "帝国建筑 II",
 				cap() { return new Decimal(6) },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                     let cost = { ib: x.pow(1.2).plus(1).pow(player.ma.current=="i"?player.i.buyables[11].div(2).plus(1):1).floor(), hb: x.pow(1.6).plus(5).pow(player.ma.current=="i"?player.i.buyables[11].div(5).plus(1):1).floor() }
@@ -7045,22 +7047,22 @@ addLayer("i", {
 				displayData() {
 					let amt = player[this.layer].buyables[this.id];
 					let disp = ""
-					if (amt.gte(1)) disp += "3 new Booster Upgrades\n";
-					if (amt.gte(2)) disp += "5 new Generator Upgrades\n";
-					if (amt.gte(3)) disp += "5 new Enhance Upgrades\n";
-					if (amt.gte(4)) disp += "6 new Time Upgrades\n";
-					if (amt.gte(5)) disp += "5 new Space Upgrades\n";
-					if (amt.gte(6)) disp += "4 new Quirk Upgrades\n";
-					if (disp=="") disp = "Nothing yet"
+					if (amt.gte(1)) disp += "3 个增幅器升级\n";
+					if (amt.gte(2)) disp += "5 个生成器升级\n";
+					if (amt.gte(3)) disp += "5 个增强升级\n";
+					if (amt.gte(4)) disp += "6 个时间升级\n";
+					if (amt.gte(5)) disp += "5 个空间升级\n";
+					if (amt.gte(6)) disp += "4 个诡异升级\n";
+					if (disp=="") disp = "啥都没"
 					return disp;
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = ((amt.gte(data.cap)?"MAXED":((cost.ib?("Cost: "+formatWhole(cost.ib)+" Imperium Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("Cost: "+formatWhole(cost.nb)+" Nebulaic Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("Cost: "+formatWhole(cost.hb)+" Hyperspatial Bricks"+(tmp.nerdMode?(" (Formula: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
+                    let display = ((amt.gte(data.cap)?"已满":((cost.ib?("价格: "+formatWhole(cost.ib)+" 砖石"+(tmp.nerdMode?(" (公式: "+data.formulas.ib+")"):"")+"\n"):"") + (cost.nb?("价格: "+formatWhole(cost.nb)+" 星云砖"+(tmp.nerdMode?(" (公式: "+data.formulas.nb+")"):"")+"\n"):"") + (cost.hb?("价格: "+formatWhole(cost.hb)+" 超空间砖"+(tmp.nerdMode?(" (公式: "+data.formulas.hb+")"):"")+"\n"):"")))+"\n\
                     数量: " + formatWhole(amt)+" / "+formatWhole(data.cap)+"\n\
-					Unlocked: \n"
+					解锁: \n"
 					+data.displayData)
 					return display;
                 },
@@ -7172,29 +7174,31 @@ addLayer("i", {
 		},
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+   mmmmmmm    mmmmmmm     aaaaaaaaaaaaa   
+ mm:::::::m  m:::::::mm   a::::::::::::a  
+m::::::::::mm::::::::::m  aaaaaaaaa:::::a 
+m::::::::::::::::::::::m           a::::a 
+m:::::mmm::::::mmm:::::m    aaaaaaa:::::a 
+m::::m   m::::m   m::::m  aa::::::::::::a 
+m::::m   m::::m   m::::m a::::aaaa::::::a 
+m::::m   m::::m   m::::ma::::a    a:::::a 
+m::::m   m::::m   m::::ma::::a    a:::::a 
+m::::m   m::::m   m::::ma:::::aaaa::::::a 
+m::::m   m::::m   m::::m a::::::::::aa:::a
+mmmmmm   mmmmmm   mmmmmm  aaaaaaaaaa  aaaa
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
+                                          
 */
 addLayer("ma", {
 		name: "mastery", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -7211,8 +7215,8 @@ addLayer("ma", {
         }},
         color: "#ff9f7f",
         requires() { return new Decimal(100) }, // Can be a function that takes requirement increases into account
-        resource: "mastery", // Name of prestige currency
-        baseResource: "phantom souls", // Name of resource prestige is based on
+        resource: "支配", // Name of prestige currency
+        baseResource: "幽魂", // Name of resource prestige is based on
         baseAmount() {return player.ps.points}, // Get the current amount of baseResource
 		roundUpCost: true,
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -7225,7 +7229,7 @@ addLayer("ma", {
 			return Decimal.pow(tmp.ma.effectBase, player.ma.points);
 		},
 		effectDescription() {
-			return "which multiplies Honour & Hyperspace Energy gain by "+format(tmp.ma.effect)+(tmp.nerdMode?(" ("+format(tmp.ma.effectBase)+"x each)"):"")+", and adds "+format(tmp.ma.effect.max(1).log10().times(2.5))+"% to Hyper Building Power"+(tmp.nerdMode?(" (+"+format(tmp.ma.effectBase.max(1).log10().times(2.5))+"% each)"):"")
+			return "增幅荣耀和超空间能量获取 "+format(tmp.ma.effect)+(tmp.nerdMode?("x (每个 "+format(tmp.ma.effectBase)+"x)"):"x")+"，并使超建筑增益 +"+format(tmp.ma.effect.max(1).log10().times(2.5))+"%"+(tmp.nerdMode?(" (每个 +"+format(tmp.ma.effectBase.max(1).log10().times(2.5))+"%)"):"")
 		},
         gainMult() { // Calculate the multiplier for main currency from bonuses
             mult = new Decimal(1)
@@ -7241,7 +7245,7 @@ addLayer("ma", {
 		canBuyMax() { return false },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "A", description: "Press Shift+A to Mastery Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "A", description: "按 Shift+A 进行支配重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return false },
         doReset(resettingLayer){ 
@@ -7268,60 +7272,60 @@ addLayer("ma", {
 		},
 		rewardDesc() {
 			let desc = "";
-			if (player.ma.mastered.includes("p")) desc += "<h2>Prestige</h2><br><br><ul><li>Base Prestige gain exponent is better (0.5 -> 0.75)</li><li><b>Prestige Boost</b> is raised ^1.1 (after softcaps)</li><li><b>Self Synergy</b> is raised ^75</li><li><b>More Prestige</b> is much stronger (+80% -> +1e52%)</li><li><b>Upgrade Power</b> is raised ^40</li><li><b>Reverse Prestige Boost</b> is raised ^1.5</li></ul><br><br>";
-			if (player.ma.mastered.includes("b")) desc += "<h2>Boosters</h2><br><br><ul><li>Booster cost base is reduced (5 -> 1.5)</li><li>Base Booster cost exponent is reduced (1.25 -> 0.75)</li><li><b>BP Combo</b> & <b>Discount One</b> are raised ^1.5</li><li><b>Cross Contamination</b> & <b>PB Reversal</b> also multiply the SB base</li><li><b>Worse BP Combo</b> is raised ^20,000</li><li><b>Even More Additions</b> is cubed</li></ul><br><br>";
-			if (player.ma.mastered.includes("g")) desc += "<h2>Generators</h2><br><br><ul><li>Generator cost base is reduced (5 -> 2.5)</li><li>Base Generator cost exponent is reduced (1.25 -> 1.1)</li><li>Generator Power effect is raised ^1.05</li><li><b>GP Combo</b> is raised ^500,000</li><li><b>I Need More III</b> is raised ^10,000</li></ul><br><br>";
-			if (player.ma.mastered.includes("t")) desc += "<h2>Time</h2><br><br><ul><li>Time cost base is reduced (1e15 -> 10)</li><li>Base Time cost exponent is reduced (1.85 -> 1.4)</li><li>Time Capsules have a new effect</li><li>Anything that multiplies the Time Energy limit base now multiplies the Booster & Generator bases</li><li>The first Time Energy effect softcaps later (e3.1e9)</li><li>The Extra Time Capsule cost is raised ^0.9</li><li><b>Pseudo-Boost</b> & <b>Basic</b> also multiply the Time Energy gain base, and are both cubed</li><li><b>Enhanced Time</b> is raised to the power of 1.1</li></ul><br><br>";
-			if (player.ma.mastered.includes("e")) desc += "<h2>Enhance</h2><br><br><ul><li>Enhance gain exponent is increased (0.02 -> 0.025)</li><li>The second Enhancer effect is raised to the power of 100</li><li><b>Enhanced Prestige</b> also affects Point gain, and it is raised ^1.5</li><li><b>Enter the E-Space</b> is 250% stronger</li><li><b>Monstrous Growth</b>'s base is much better (1.1 -> 1e2,000)</li><li><b>To the Next Level</b> is cubed</li></ul><br><br>";
-			if (player.ma.mastered.includes("s")) desc += "<h2>Space</h2><br><br><ul><li>Space cost base is reduced (1e10 -> 10)</li><li>Base Space cost exponent is reduced (1.85 -> 1.4)</li><li>Space Building Power is divided by 3.85, but Space Buildings cost scale 5x slower</li></ul><br><br>";
-			if (player.ma.mastered.includes("sb")) desc += "<h2>Super Boosters</h2><br><br><ul><li>Super Booster cost base is reduced (1.05 -> 1.025)</li><li>Base Super Booster cost exponent is reduced (1.25 -> 1.075)</li><li>The Super Booster cost is divided by 1.333</li><li>Super Boosters provide Spectral Boosters</li></ul><br><br>";
-			if (player.ma.mastered.includes("sg")) desc += "<h2>Super Generators</h2><br><br><ul><li>Super Generator cost base is reduced (1.05 -> 1.04)</li><li>Base Super Generator cost exponent is reduced (1.25 -> 1.225)</li><li>The Super Generator cost is divided by 1.1</li><li>The Super Generator Power effect is squared</li><li>Super Generators give Spectral Generators over time</li></ul><br><br>";
-			if (player.ma.mastered.includes("q")) desc += "<h2>Quirks</h2><br><br><ul><li>Quirk gain exponent is increased (7.5e-3 -> 8e-3)</li><li>The Quirk Energy effect softcap start is raised ^1.5</li><li>The Quirk Layer cost base is raised ^0.75</li><li><b>Millennial Abilities</b> is 50% stronger</li><li>Bought Decary Space Building Levels add free Quirk Improvements (equal to the Level/4)</li></ul><br><br>";
-			if (player.ma.mastered.includes("h")) desc += "<h2>Hindrances</h2><br><br><ul><li>Hindrance Spirit gain exponent is increased (0.125 -> 0.2)</li><li>The Hindrance Spirit effect softcap is much weaker (exponent to the 4th root -> exponent to the 2.5th root)</li><li>Unlock a Hindrance milestone</li><li><b>Speed Demon</b> has a secondary effect</li><li><b>Out of Room</b>'s effect is 40% stronger</li><li><b>Timeless</b> & <b>Option D</b> no longer have a completion limit</li><li><b>Timeless</b>'s effect is raised ^5</li><li><b>Productionless</b>'s reduction to the Quirk Layer cost base is stronger (0.15 -> 0.2)</li></ul><br><br>";
-			if (player.ma.mastered.includes("o")) desc += "<h2>Solarity</h2><br><br><ul><li>The Solarity gain exponent is increased by 0.5% for every Super Booster you have (additive)</li><li>The Solar Energy gain exponent limit is increased to 0.15, but beyond 0.1 it grows much slower</li><li>Solar Energy's second effect is 10% stronger</li><li>Solar Power is increased by 20% for every OoM of Solarity you have</li><li>Solarity buyable gain is raised ^2.6</li><li>All effects of the first row of Solarity buyables are raised ^1.1</li><li><b>Convectional Energy</b>'s effect is raised ^25</li><li>All effects of the second row of Solarity buyables are multiplied by 1.4</li><li>All effects of the third row of Solarity buyables are multiplied by 1.9</li></ul><br><br>";
-			if (player.ma.mastered.includes("ss")) desc += "<h2>Subspace</h2><br><br><ul><li>The Subspace cost base is reduced (1.15 -> 1.1)</li><li>The base Subspace cost exponent is reduced (1.1 -> 1.07)</li><li>The Subspace base is multiplied by 1e10 for each Subspace Energy you have</li><li>The third Subspace effect is raised ^3</li><li>If <b>Subspatial Awakening</b>'s effect is above 100%, it is cubed but divided by 10,000</li><li><b>Emissary of Smash</b>'s effect is raised ^400</li><li><b>No More Progress</b>'s effect is doubled</li><li><b>Challenging Speedup</b>'s endpoint is much higher (e1,000,000 -> e1e11)</li></ul><br><br>";
-			if (player.ma.mastered.includes("m")) desc += "<h2>Magic</h2><br><br><ul><li>The Magic gain exponent is increased (7e-3 -> 8.5e-3)</li><li>Add 50% to Spell Power</li><li>The Hex effect softcap does not apply to the boost to Hindrance Spirit, Quirk, and Solar Energy gain, but this effect is square rooted</li><li>The Hex effect softcap starts 1e-3% later for every OoM of Magic you have</li><li>The Hex effect softcap exponent is increased (10 -> 2e3)</li></ul><br><br>";
-			if (player.ma.mastered.includes("ba")) desc += "<h2>Balance</h2><br><br><ul><li>The Balance Energy gain exponent is increased (5e-3 -> 0.0125)</li><li>There are no Positivity/Negativity nerfs</li><li>Both <b>Net Neutrality</b> effects have their exponents raised ^2.5</li><li><b>Visible Regeneration</b> is raised ^10</li></ul><br><br>";
-			if (player.ma.mastered.includes("ps")) desc += "<h2>Phantom Souls</h2><br><br><ul><li>The Phantom Soul cost base is square rooted</li><li>The base Damned Soul gain formula is improved (PS^1.5 -> 1.2^PS)</li><li>The Damned Soul effect is raised ^100</li><li>Wraiths cost scale 50% slower</li><li>Ghost Spirit cost scales 20% slower</li><li>Phantom Boosters are 10% stronger</li></ul><br><br>";
-			if (player.ma.mastered.includes("hn")) desc += "<h2>Honour</h2><br><br><ul><li>The Honour gain exponent for its Balance Energy requirement is improved (0.02 -> 0.05)</li><li>Remove the softcap to the second Honour Upgrade</li><li><b>Self-Self-Synergy</b>'s effect is multiplied by 5</li><li><b>Point Efficiency</b> is maxed at 92% instead of 90%</li><li><b>Superpowered Upgrades</b>'s effect is tripled</li><li><b>Reversal Sensational</b> is 10% stronger</li><li><b>Column Leader Leader</b> is 10% stronger</li><li><b>Again and Again</b>'s effect is doubled</li><li><b>Quir-cursion</b>'s effect is raised ^50</li></ul><br><br>";
-			if (player.ma.mastered.includes("n")) desc += "<h2>Nebula</h2><br><br><ul><li>The Nebula gain exponent is improved (0.03 -> 0.05)</li><li>All primary dust effects are raised ^1.6</li><li>All secondary dust effects are raised ^1.4</li><li>Gain 1e30x more Dust</li></ul><br><br>";
-			if (player.ma.mastered.includes("hs")) desc += "<h2>Hyperspace</h2><br><br><ul><li>The Hyper Building Limit requirement scales 20% slower</li><li>Add 0.1% to Hyper Building Power for every Hyperspace bought</li><li>The Hyper Building softcap starts 0.1 Levels later</li></ul><br><br>";
+			if (player.ma.mastered.includes("p")) desc += "<h2>声望</h2><br><br><ul><li>基础声望获取指数提高 (0.5 -> 0.75)</li><li><b>声望增益</b> 提高 ^1.1 (软上限之后)</li><li><b>自协同</b> 提高 ^75</li><li><b>更多声望</b> 提高 (+80% -> +1e52%)</li><li><b>力量升级</b> 提高 ^40</li><li><b>翻转声望增益</b> 提高 ^1.5</li></ul><br><br>";
+			if (player.ma.mastered.includes("b")) desc += "<h2>增幅器</h2><br><br><ul><li>降低增幅器价格基础 (5 -> 1.5)</li><li>降低增幅器价格指数 (1.25 -> 0.75)</li><li><b>BP 连击</b> & <b>一折</b> 提高 ^1.5</li><li><b>交叉污染</b> & <b>PB 反转</b> 增幅超级增幅器基础</li><li><b>差的 BP 连击</b> 提高 ^20,000</li><li><b>更更多添加物</b> 提高至立方</li></ul><br><br>";
+			if (player.ma.mastered.includes("g")) desc += "<h2>生成器</h2><br><br><ul><li>生成器价格基础降低 (5 -> 2.5)</li><li>生成器价格指数降低 (1.25 -> 1.1)</li><li>GP 效果提高 ^1.05</li><li><b>GP 连击</b> 提高 ^500,000</li><li><b>给我更多 III</b> 提高 ^10,000</li></ul><br><br>";
+			if (player.ma.mastered.includes("t")) desc += "<h2>时间</h2><br><br><ul><li>时间价格基础降低 (1e15 -> 10)</li><li>时间价格指数降低 (1.85 -> 1.4)</li><li>时间胶囊获得新效果</li><li>任何加成 TE 上限基础的效果增益增幅器和生成器基础（乘）</li><li>TE 第一效果软上限延迟 (e3.1e9)</li><li>扩展时空胶囊价格降低至 ^0.9</li><li><b>伪增益</b> & <b>基础</b> 加成 TE 获取（乘），且效果提升至立方</li><li><b>增强时间</b> 提升至 1.1 次幂</li></ul><br><br>";
+			if (player.ma.mastered.includes("e")) desc += "<h2>增强</h2><br><br><ul><li>增强获取指数提高 (0.02 -> 0.025)</li><li>增强子第二效果提升至 100 次方</li><li><b>增强声望</b> 影响点数获取，且效果提高 ^1.5</li><li><b>进入 E-空间</b> 加强 250%</li><li><b>野兽般增长</b> 基础提高 (1.1 -> 1e2,000)</li><li><b>进阶</b> 提高至立方</li></ul><br><br>";
+			if (player.ma.mastered.includes("s")) desc += "<h2>空间</h2><br><br><ul><li>空间价格基础降低 (1e10 -> 10)</li><li>空间价格指数降低 (1.85 -> 1.4)</li><li>建筑增益除以 3.85，但建筑价格缩放被 5 倍减缓</li></ul><br><br>";
+			if (player.ma.mastered.includes("sb")) desc += "<h2>超级增幅器</h2><br><br><ul><li>超级增幅器价格基础降低 (1.05 -> 1.025)</li><li>超级增幅器价格指数降低 (1.25 -> 1.075)</li><li>超级增幅器价格除以 1.333</li><li>超级增幅器提供虚增幅器</li></ul><br><br>";
+			if (player.ma.mastered.includes("sg")) desc += "<h2>超级生成器</h2><br><br><ul><li>超级生成器价格基础降低 (1.05 -> 1.04)</li><li>超级生成器价格指数降低 (1.25 -> 1.225)</li><li>超级生成器价格除以 1.1</li><li>超级 GP 效果平方</li><li>超级生成器随时间提供虚生成器</li></ul><br><br>";
+			if (player.ma.mastered.includes("q")) desc += "<h2>诡异</h2><br><br><ul><li>诡异获取指数提高 (7.5e-3 -> 8e-3)</li><li>QE 效果软上限开始提高 ^1.5</li><li>诡异层价格基础降低至 ^0.75</li><li><b>千种能力</b> 提高 50%</li><li>第十建筑等级提供免费的诡异改良（等于其等级除以 4）</li></ul><br><br>";
+			if (player.ma.mastered.includes("h")) desc += "<h2>障碍</h2><br><br><ul><li>障碍灵魂获取指数提高 (0.125 -> 0.2)</li><li>障碍灵魂软上限效果变弱 (指数 4 次根 -> 指数 2.5 次根)</li><li>解锁一个新障碍里程碑</li><li><b>速度之魔</b> 有第二效果</li><li><b>空间紧缺</b> 提高 40%</li><li><b>永恒</b> & <b>D 选项</b> 不再有完成次数限制</li><li><b>永恒</b> 效果提升 ^5</li><li><b>减产</b>对诡异层价格基础的削弱更强 (0.15 -> 0.2)</li></ul><br><br>";
+			if (player.ma.mastered.includes("o")) desc += "<h2>阳光</h2><br><br><ul><li>每个超级增幅器为阳光获取指数提高 0.5%（叠加）</li><li>SE 获取指数限制提高到 0.15，但 0.1 之后它增长大幅度减缓</li><li>SE 第二效果提高 10%</li><li>每 OoM 阳光为太阳能 +20%</li><li>阳光可购买项获取提高 ^2.6</li><li>一行阳光可购买项的所有效果提升 ^1.1</li><li><b>对流能</b> 效果提高 ^25</li><li>第二行所有阳光可购买项的所有效果乘以 1.4</li><li>第三行阳光可购买项的效果乘以 1.9</li></ul><br><br>";
+			if (player.ma.mastered.includes("ss")) desc += "<h2>子空间</h2><br><br><ul><li>子空间价格基础降低 (1.15 -> 1.1)</li><li>子空间价格指数降低 (1.1 -> 1.07)</li><li>每个子空间能量将子空间基础乘 1e10</li><li>第三建筑效果提高 ^3</li><li>当 <b>子空间觉醒</b> 效果超过 100%，其被立方但除以 10,000</li><li><b>粉碎使徒</b> 效果提升 ^400</li><li><b>止步</b> 效果翻倍</li><li><b>挑战加速</b> 的临界点大幅度提高 (e1,000,000 -> e1e11)</li></ul><br><br>";
+			if (player.ma.mastered.includes("m")) desc += "<h2>魔法</h2><br><br><ul><li>魔法获取指数提高 (7e-3 -> 8.5e-3)</li><li>魔法强度 +50%</li><li>妖术效果软上限不再作用于对障碍灵魂、诡异和 SE 的获取增幅，但这个效果被开方</li><li>每 OoM 魔法延迟妖术效果软上限 1e-3%</li><li>妖术效果软上限指数提高 (10 -> 2e3)</li></ul><br><br>";
+			if (player.ma.mastered.includes("ba")) desc += "<h2>平衡</h2><br><br><ul><li>平衡获取指数提高 (5e-3 -> 0.0125)</li><li>消极和积极不再有惩罚</li><li><b>净中立</b> 的两个效果指数提高 ^2.5</li><li><b>实体重生</b> 提高 ^10</li></ul><br><br>";
+			if (player.ma.mastered.includes("ps")) desc += "<h2>幽魂</h2><br><br><ul><li>幽魂价格基础开方</li><li>幽魂获取公式提高 (PS^1.5 -> 1.2^PS)</li><li>恶魂效果提高 ^100</li><li>幽魂价格缩放减缓 50% </li><li>灵魂价格缩放减缓 20%</li><li>幽魂增幅器增强 10%</li></ul><br><br>";
+			if (player.ma.mastered.includes("hn")) desc += "<h2>荣耀</h2><br><br><ul><li>对于平衡的荣耀获取指数提高 (0.02 -> 0.05)</li><li>第二个荣耀升级不再有软上限</li><li><b>自自协同</b> 效果乘 5</li><li><b>点数效率</b> 上限由 90% 提高至 92%%</li><li><b>超级升级</b> 效果乘 3</li><li><b>翻转强化</b> 提高 10%</li><li><b>列长长</b> 提高 10%</li><li><b>一次又一次</b> 效果翻倍</li><li><b>诅咒</b> 效果提高到 ^50</li></ul><br><br>";
+			if (player.ma.mastered.includes("n")) desc += "<h2>星云</h2><br><br><ul><li>星云获取指数提高 (0.03 -> 0.05)</li><li>一级星尘效果提升 ^1.6</li><li>二级星尘效果提升 ^1.4</li><li>星尘获取提升 1e30x</li></ul><br><br>";
+			if (player.ma.mastered.includes("hs")) desc += "<h2>超空间</h2><br><br><ul><li>超建筑上限需求缩放减缓 20%</li><li>每个购买的超空间提供 0.1% 超建筑增益</li><li>超建筑软上限延迟 0.1 等级开始</li></ul><br><br>";
 			if (player.ma.mastered.includes("i")) desc += "<h2>Imperium</h2><br><br><ul><li>The Imperium Building cost base is reduced (1e250 -> 1e100)</li><li>Each Nebulaic Brick multiplies Nebula Energy gain by 10</li><li>Each Hyperspatial Brick multiplies Hyperspace Energy gain by 10</li><li>There are 2 new Imperium Buildings</li></ul><br><br>";
 			return desc;
 		},
 		milestones: {
 			0: {
-				requirementDescription: "1 Mastery",
+				requirementDescription: "1 支配",
 				done() { return player.ma.best.gte(1) },
-				effectDescription: "Keep Hyperspace & Stellar Clusters on all Row 7 resets, and unlock Auto-Ghost Spirit.",
+				effectDescription: "对于所有第七行重置保留超空间和星团，解锁自动幽灵。",
 				toggles: [["ps", "autoGhost"]],
 			},
 			1: {
-				requirementDescription: "2 Mastery",
+				requirementDescription: "2 支配",
 				done() { return player.ma.best.gte(2) },
-				effectDescription: "You can buy max Imperium Bricks (which now reset nothing), gain 100% of Honour gain every second, and keep all Honour milestones & upgrades on all resets.",
+				effectDescription: "你可以最大购买砖石（同时不重置任何东西），每秒获得 100% 的荣耀，对于任何重置保留荣耀里程碑和荣耀升级。",
 			},
 			2: {
-				requirementDescription: "3 Mastery",
+				requirementDescription: "3 支配",
 				done() { return player.ma.best.gte(3) },
-				effectDescription: "Keep Imperium Building I & Hyper Buildings on reset, and gain 100% of Hyperspace Energy gain every second.",
+				effectDescription: "重置时保留帝国建筑 I 和超建筑，每秒获取 100% 超空间能量。",
 			},
 			3: {
-				requirementDescription: "4 Mastery",
+				requirementDescription: "4 支配",
 				done() { return player.ma.best.gte(4) },
-				effectDescription: "Gain 100% of Nebula Energy every second.",
+				effectDescription: "每秒获得 100% 星云。",
 			},
 			4: {
-				requirementDescription: "5 Mastery",
+				requirementDescription: "5 支配",
 				done() { return player.ma.best.gte(5) },
-				effectDescription: "Unlock Auto-Imperium Bricks.",
+				effectDescription: "解锁自动砖石。",
 				toggles: [["i", "auto"]],
 			},
 			5: {
 				unlocked() { return hasMilestone("ma", 4) },
-				requirementDescription: "16 Mastery",
+				requirementDescription: "16 支配",
 				done() { return player.ma.best.gte(16) },
-				effectDescription: "Unlock Auto-Hyperspace.",
+				effectDescription: "解锁自动超空间",
 				toggles: [["hs", "auto"]],
 			},
 		},
@@ -7329,18 +7333,18 @@ addLayer("ma", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "Mastery",
+				title: "镀金",
 				cap: 19,
 				display() {
-					if (player.ma.current!==null) return "Currently Mastering: "+tmp[player.ma.current].name+". Click to exit the run.";
-					else return player.ma.selectionActive?"You are in a Mastery Search. Click the node of the layer you wish to attempt to Master. Click to exit this search.":("Begin a Mastery Search.<br><br>"+((tmp.ma.amtMastered>=this.cap)?"MAXED":("Req: "+formatWhole(tmp[this.layer].clickables[this.id].req)+" Mastery.")));
+					if (player.ma.current!==null) return "正在镀金: "+tmp[player.ma.current].name+"。点此结束此运行。";
+					else return player.ma.selectionActive?"你在镀金模式中。点击你想要镀金的层，点此退出镀金。":("开始一次镀金。<br><br>"+((tmp.ma.amtMastered>=this.cap)?"已满":("需要: "+formatWhole(tmp[this.layer].clickables[this.id].req)+" 支配")));
 				},
 				unlocked() { return player.ma.unlocked },
 				req() { return [2,5,7,8,9,9,10,10,11,12,14,14,15,16,18,20,21,22,23,(1e300)][tmp.ma.amtMastered||0] },
 				canClick() { return player.ma.unlocked && (player.ma.selectionActive?true:(tmp.ma.amtMastered<this.cap&&player.ma.points.gte(tmp[this.layer].clickables[this.id].req))) },
 				onClick() { 
 					if (player.ma.current !== null) {
-						if (!confirm("Are you sure you want to exit this Mastery run?")) return;
+						if (!confirm("你确定要退出此次镀金运行吗？")) return;
 						player.ma.selectionActive = false;
 						player.ma.current = null;
 						doReset("ma", true);
@@ -7370,7 +7374,7 @@ addLayer("ma", {
 			return m;
 		},
 		startMastery(layer) {
-			if (!confirm("Are you sure you want to start Mastering "+tmp[layer].name+"? This will force a Row 7 reset and put you in a run where only Mastered Layers & this layer will be active!")) return;
+			if (!confirm("你确定要开始镀金 "+tmp[layer].name+" 吗？这会进行一次第七行重置，并使你处于仅镀金层以及正在镀金层活跃的运行。")) return;
 			player.ma.current = layer;
 			
 			if (player[layer].upgrades) player[layer].upgrades = [];
@@ -7431,29 +7435,31 @@ addLayer("ma", {
 		rowLimit: 6,
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                        
+                                        
+                                        
+                                        
+                                        
+                                        
+   ggggggggg   ggggg    eeeeeeeeeeee    
+  g:::::::::ggg::::g  ee::::::::::::ee  
+ g:::::::::::::::::g e::::::eeeee:::::ee
+g::::::ggggg::::::gge::::::e     e:::::e
+g:::::g     g:::::g e:::::::eeeee::::::e
+g:::::g     g:::::g e:::::::::::::::::e 
+g:::::g     g:::::g e::::::eeeeeeeeeee  
+g::::::g    g:::::g e:::::::e           
+g:::::::ggggg:::::g e::::::::e          
+ g::::::::::::::::g  e::::::::eeeeeeee  
+  gg::::::::::::::g   ee:::::::::::::e  
+    gggggggg::::::g     eeeeeeeeeeeeee  
+            g:::::g                     
+gggggg      g:::::g                     
+g:::::gg   gg:::::g                     
+ g::::::ggg:::::::g                     
+  gg:::::::::::::g                      
+    ggg::::::ggg                        
+       gggggg                           
 */
 addLayer("ge", {
 		name: "gears", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -7482,8 +7488,8 @@ addLayer("ge", {
 			background() { return (player.ge.unlocked||canReset("ge"))?((player.grad&&!player.oldStyle)?"radial-gradient(circle, #bfbfbf 0%, #838586 100%)":"#bfbfbf"):"#bf8f8f" },
 		},
         requires: new Decimal(1e256), // Can be a function that takes requirement increases into account
-        resource: "gears", // Name of prestige currency 
-        baseResource: "dust product", // Name of resource prestige is based on
+        resource: "齿轮", // Name of prestige currency 
+        baseResource: "尘积", // Name of resource prestige is based on
         baseAmount() {return tmp.n.dustProduct}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(0.01), // Prestige currency exponent
@@ -7505,7 +7511,7 @@ addLayer("ge", {
         },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "E", description: "Press Shift+E to Gear Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "E", description: "按 Shift+E 进行齿轮重置", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		passiveGeneration() { return hasMilestone("ge", 2)?0.01:0 },
         doReset(resettingLayer){ 
@@ -7525,14 +7531,14 @@ addLayer("ge", {
 			"resource-display", "blank",
 			"milestones",
 			"blank", "blank", 
-			["display-text", function() { return "<h3>Gear Speed: "+format(tmp.ge.gearSpeed)+"x</h3>"+(tmp.nerdMode?" (cbrt(gears))":"") }],
+			["display-text", function() { return "<h3>齿轮速度: "+format(tmp.ge.gearSpeed)+"x</h3>"+(tmp.nerdMode?" (cbrt(gears))":"") }],
 			"blank",
-			["display-text", function() { return "<b>Gear Radius: "+format(tmp.ge.radius)+"m</b>"+(tmp.nerdMode?" (teeth*toothSize/6.28)":"") }], "blank",
-			["row", [["display-text", function() { return "<h3>Rotations: "+formatWhole(player.ge.rotations, true)+" ("+tmp.ge.rotDesc+")</h3><br>Rotation Effect: Multiply Nebula Energy & Dust gain by "+format(tmp.ge.rotEff)+(tmp.nerdMode?" ((x+1)^5)":"") }]]],
+			["display-text", function() { return "<b>齿轮半径: "+format(tmp.ge.radius)+"m</b>"+(tmp.nerdMode?" (teeth*toothSize/6.28)":"") }], "blank",
+			["row", [["display-text", function() { return "<h3>转速: "+formatWhole(player.ge.rotations, true)+" ("+tmp.ge.rotDesc+")</h3><br>转速效果: 加成星云和星尘获取 "+format(tmp.ge.rotEff)+(tmp.nerdMode?" ((x+1)^5)":"") }]]],
 			"blank", "blank",
 			["clickable", 21],
 			"blank", "blank",
-			["row", [["column", [["raw-html", function() { return "<h3>Teeth: "+(hasMilestone("ge", 3)?format(tmp.ge.teeth):formatWhole(tmp.ge.teeth, true))+"</h3>" }], "blank", ["clickable", 11]], {"background-color": "#b0babf", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}], ["column", [["raw-html", function() { return "<h3>Kinetic Energy: "+format(player.ge.energy)+" J</h3><br><br>Velocity: "+format(tmp.ge.speed)+"m/s"+(tmp.nerdMode?" (sqrt(x))":"") }], "blank", ["clickable", 12]], {"background-color": "#dec895", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}], ["column", [["raw-html", function() { return "<h3>Tooth Size: "+format(tmp.ge.toothSize)+"m</h3><br><br>" }], "blank", ["clickable", 13]], {"background-color": "#bfa1b8", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}]]], "blank",
+			["row", [["column", [["raw-html", function() { return "<h3>齿: "+(hasMilestone("ge", 3)?format(tmp.ge.teeth):formatWhole(tmp.ge.teeth, true))+"</h3>" }], "blank", ["clickable", 11]], {"background-color": "#b0babf", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}], ["column", [["raw-html", function() { return "<h3>动能: "+format(player.ge.energy)+" J</h3><br><br>速度: "+format(tmp.ge.speed)+"m/s"+(tmp.nerdMode?" (sqrt(x))":"") }], "blank", ["clickable", 12]], {"background-color": "#dec895", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}], ["column", [["raw-html", function() { return "<h3>齿大小: "+format(tmp.ge.toothSize)+"m</h3><br><br>" }], "blank", ["clickable", 13]], {"background-color": "#bfa1b8", color: "black", width: "12vw", padding: "10px", margin: "0 auto", "height": "250px"}]]], "blank",
 			["buyable", 11], "blank",
 		],
 		update(diff) {
@@ -7593,7 +7599,7 @@ addLayer("ge", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "Gear Evolution",
+				title: "齿轮进化",
 				costDiv() {
 					let div = new Decimal(1);
 					if (hasAchievement("a", 124)) div = div.times(3);
@@ -7620,7 +7626,7 @@ addLayer("ge", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = "Reset all Gear Upgrades and force a Row 7 reset to add "+format(data.effectPer)+" to each of their effect bases and reduce their costs by "+format(data.effectPer.times(4))+" purchases.<br><br>Req: "+formatWhole(cost)+" Rotations"+(tmp.nerdMode?" (价格公式: 125^(x^1.425)*1e3)":"")+".<br>Currently: +"+format(data.effect)+" to bases, costs reduced by "+format(data.effect.times(4))+" purchases";
+                    let display = "重置所有齿轮升级，并进行一次第七行重置，对每个效果基础加成 "+format(data.effectPer)+"，并降低它们的价格 "+format(data.effectPer.times(4))+" 次购买。<br><br>需要: "+formatWhole(cost)+" 转速"+(tmp.nerdMode?" (价格公式: 125^(x^1.425)*1e3)":"")+".<br>当前: 基础+"+format(data.effect)+"，价格降低 "+format(data.effect.times(4))+" 购买";
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -7645,9 +7651,9 @@ addLayer("ge", {
 			rows: 2,
 			cols: 3,
 			11: {
-				title() { return "Divide Teeth by "+format(tmp.ge.clickables[this.id].effectPer) },
+				title() { return "齿数量除以 "+format(tmp.ge.clickables[this.id].effectPer) },
 				display() { 
-					return "Req: "+format(tmp.ge.clickables[this.id].req)+" dust product"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>Currently: /"+format(tmp.ge.clickables[this.id].effect);
+					return "需要: "+format(tmp.ge.clickables[this.id].req)+" 尘积"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>当前: /"+format(tmp.ge.clickables[this.id].effect);
 				},
 				req() {
 					if (hasMilestone("ge", 1)) {
@@ -7679,9 +7685,9 @@ addLayer("ge", {
 				style: {"height": "150px", "width": "150px"},
 			},
 			12: {
-				title() { return "Multiply Kinetic Energy gain by "+format(tmp.ge.clickables[this.id].effectPer) },
+				title() { return "增幅动能 "+format(tmp.ge.clickables[this.id].effectPer)+"x" },
 				display() { 
-					return "Req: "+format(tmp.ge.clickables[this.id].req)+" dust product"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>Currently: "+format(tmp.ge.clickables[this.id].effect)+"x";
+					return "需要: "+format(tmp.ge.clickables[this.id].req)+" 尘积"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>当前: "+format(tmp.ge.clickables[this.id].effect)+"x";
 				},
 				req() {
 					if (hasMilestone("ge", 1)) {
@@ -7713,9 +7719,9 @@ addLayer("ge", {
 				style: {"height": "150px", "width": "150px"},
 			},
 			13: {
-				title() { return "Divide Tooth Size by "+format(tmp.ge.clickables[this.id].effectPer) },
+				title() { return "齿大小除以 "+format(tmp.ge.clickables[this.id].effectPer) },
 				display() { 
-					return "Req: "+format(tmp.ge.clickables[this.id].req)+" dust product"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>Currently: /"+format(tmp.ge.clickables[this.id].effect);
+					return "需要: "+format(tmp.ge.clickables[this.id].req)+" 尘积"+(tmp.nerdMode?" ("+tmp.ge.boostReqFormula+")":"")+"<br><br>当前: /"+format(tmp.ge.clickables[this.id].effect);
 				},
 				req() {
 					if (hasMilestone("ge", 1)) {
@@ -7747,11 +7753,11 @@ addLayer("ge", {
 				style: {"height": "150px", "width": "150px"},
 			},
 			21: {
-				title: "Reset Gear Upgrades",
+				title: "重置齿轮升级",
 				unlocked() { return player.ge.unlocked },
 				canClick() { return player.ge.unlocked && player.ge.boosted.gt(0) },
 				onClick() { 
-					if (!confirm("Are you sure you want to reset your Gear Upgrades? This will force a Gear reset!")) return;
+					if (!confirm("你确定要重置齿轮升级吗？这会导致一次齿轮重置。")) return;
 					player.ge.boosted = new Decimal(0);
 					for (let i=11;i<=13;i++) player.ge.clickables[i] = "";
 					doReset("ge", true);
@@ -7761,9 +7767,9 @@ addLayer("ge", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "1,000,000 Gears",
+				requirementDescription: "1,000,000 齿轮",
 				done() { return player.ge.best.gte(1e6) },
-				effectDescription: "You can buy max Gear Upgrades.",
+				effectDescription: "你可以最大购买齿轮升级。",
 				toggles: [["ge", "maxToggle"]],
 			},
 			1: {
@@ -7788,29 +7794,31 @@ addLayer("ge", {
 		},
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+   mmmmmmm    mmmmmmm       cccccccccccccccc
+ mm:::::::m  m:::::::mm   cc:::::::::::::::c
+m::::::::::mm::::::::::m c:::::::::::::::::c
+m::::::::::::::::::::::mc:::::::cccccc:::::c
+m:::::mmm::::::mmm:::::mc::::::c     ccccccc
+m::::m   m::::m   m::::mc:::::c             
+m::::m   m::::m   m::::mc:::::c             
+m::::m   m::::m   m::::mc::::::c     ccccccc
+m::::m   m::::m   m::::mc:::::::cccccc:::::c
+m::::m   m::::m   m::::m c:::::::::::::::::c
+m::::m   m::::m   m::::m  cc:::::::::::::::c
+mmmmmm   mmmmmm   mmmmmm    cccccccccccccccc
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
+                                            
 */
 addLayer("mc", {
 		name: "machines", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -7836,8 +7844,8 @@ addLayer("mc", {
 			},
 		},
         requires: new Decimal(128000), // Can be a function that takes requirement increases into account
-        resource: "machine parts", // Name of prestige currency 
-        baseResource: "hyperspatial bricks", // Name of resource prestige is based on
+        resource: "组件", // Name of prestige currency 
+        baseResource: "星云砖", // Name of resource prestige is based on
         baseAmount() {return player.i.hb}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(4), // Prestige currency exponent
@@ -7853,7 +7861,7 @@ addLayer("mc", {
         },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "c", description: "Press C to Machine Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "c", description: "按 C 进行机械重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		passiveGeneration() { return hasMilestone("mc", 0)?0.01:0 },
         doReset(resettingLayer){ 
@@ -7894,9 +7902,9 @@ addLayer("mc", {
 			]},
 			"The Motherboard": {
 				buttonStyle() { return {'background-color': '#c99a6b', color: "black"} },
-				content: ["blank", ["display-text", function() { return "Each Gear Rotation provides "+format(tmp.mc.mechPer)+" Mech-Energy, which adds to <h3>"+format(player.mc.mechEn.times(tmp.mc.mechEnMult))+" Mech-Energy</h3>" }],
-				"blank", ["display-text", function() { return tmp.mc.decayPower.eq(1)?"":("Due to inadequate storage, Mech-Energy is being lost by "+format(tmp.mc.decayPower.pow(-1).log10())+" OoMs per second.") }],
-				"blank", ["display-text", function() { return "Your Mech-Energy is multiplying Gear Speed by "+format(tmp.mc.mechEff)+(tmp.nerdMode?" (Formula: 10^((log(x+1)^0.25)/2))":"") }],
+				content: ["blank", ["display-text", function() { return "每齿轮转速提供 "+format(tmp.mc.mechPer)+" 机械能量，总计 <h3>"+format(player.mc.mechEn.times(tmp.mc.mechEnMult))+" 机械能量</h3>" }],
+				"blank", ["display-text", function() { return tmp.mc.decayPower.eq(1)?"":("由于储存力差，每秒丢失 "+format(tmp.mc.decayPower.pow(-1).log10())+" OoMs。") }],
+				"blank", ["display-text", function() { return "其增幅齿轮速度 "+format(tmp.mc.mechEff)+(tmp.nerdMode?"x (公式: 10^((log(x+1)^0.25)/2))":"x") }],
 				"blank", ["upgrade", 11], "blank",
 				"clickables",
 			]},
@@ -7928,7 +7936,7 @@ addLayer("mc", {
 			11: {
 				title: "CPU",
 				display() { 
-					return "Active Mech-Energy: "+format(player.mc.clickables[this.id])+"<br><br>Currently: Kinetic Energy multiplies Mech-Energy gain by "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?" (Formula: (kineticEnergy+1)^(1-1/sqrt(log(activeMechEnergy+1)+1)))":"");
+					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 动能增幅机械能量获取 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (kineticEnergy+1)^(1-1/sqrt(log(activeMechEnergy+1)+1)))":"x");
 				},
 				effect() { 
 					let eff = Decimal.pow(player.ge.energy.plus(1), Decimal.sub(1, Decimal.div(1, Decimal.add(player.mc.clickables[this.id], 1).log10().plus(1).sqrt())));
@@ -7952,9 +7960,9 @@ addLayer("mc", {
 				style: {id: "11", "height": "200px", "width": "200px", "background-color": function() { return new Decimal(player.mc.clickables[this.id]).eq(0)?"#c99a6b":"#6ccc81" }},
 			},
 			12: {
-				title: "The Port",
+				title: "接口",
 				display() { 
-					return "Active Mech-Energy: "+format(player.mc.clickables[this.id])+"<br><br>Currently: Phantom Souls multiply Gear gain by "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?" (Formula: (phantomSouls+1)^(1-1/sqrt(log(activeMechEnergy+1)+1)))":"");
+					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 幽魂增幅齿轮获取 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (phantomSouls+1)^(1-1/sqrt(log(activeMechEnergy+1)+1)))":"x");
 				},
 				effect() { return Decimal.pow(player.ps.points.plus(1), Decimal.sub(1, Decimal.div(1, Decimal.add(player.mc.clickables[this.id], 1).log10().plus(1).sqrt()))) },
 				unlocked() { return player.mc.unlocked },
@@ -7973,9 +7981,9 @@ addLayer("mc", {
 				style: {id: "12", "height": "200px", "width": "200px", "background-color": function() { return new Decimal(player.mc.clickables[this.id]).eq(0)?"#c99a6b":"#6ccc81" }},
 			},
 			21: {
-				title: "Northbridge",
+				title: "北桥",
 				display() { 
-					return "Active Mech-Energy: "+format(player.mc.clickables[this.id])+"<br><br>Currently: Solarity multiplies the Super Generator base by "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?" (Formula: (solarity+1)^("+formatWhole(tmp.mc.clickables[this.id].effExp)+"-"+formatWhole(tmp.mc.clickables[this.id].effExp)+"/((log(activeMechEnergy+1)+1)^0.125)))":"");
+					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 阳光增幅超级生成器基础 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (solarity+1)^("+formatWhole(tmp.mc.clickables[this.id].effExp)+"-"+formatWhole(tmp.mc.clickables[this.id].effExp)+"/((log(activeMechEnergy+1)+1)^0.125)))":"x");
 				},
 				effExp() { return hasAchievement("a", 133)?3:1 },
 				effect() { return Decimal.pow(player.o.points.plus(1), Decimal.sub(tmp.mc.clickables[this.id].effExp, Decimal.div(tmp.mc.clickables[this.id].effExp, Decimal.add(player.mc.clickables[this.id], 1).log10().plus(1).root(8)))) },
@@ -7995,9 +8003,9 @@ addLayer("mc", {
 				style: {id: "21", "height": "200px", "width": "200px", "background-color": function() { return new Decimal(player.mc.clickables[this.id]).eq(0)?"#c99a6b":"#6ccc81" }},
 			},
 			22: {
-				title: "Southbridge",
+				title: "南桥",
 				display() { 
-					return "Active Mech-Energy: "+format(player.mc.clickables[this.id])+"<br><br>Currently: Hyperspace Energy multiplies Balance Energy gain by "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?" (Formula: (hyperspaceEnergy+1)^(1-1/cbrt(log(activeMechEnergy+1)+1)))":"");
+					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 超空间能量加成平衡获取 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (hyperspaceEnergy+1)^(1-1/cbrt(log(activeMechEnergy+1)+1)))":"x");
 				},
 				effect() { return Decimal.pow(player.hs.points.plus(1), Decimal.sub(1, Decimal.div(1, Decimal.add(player.mc.clickables[this.id], 1).log10().plus(1).cbrt()))) },
 				unlocked() { return player.mc.unlocked },
@@ -8025,7 +8033,7 @@ addLayer("mc", {
 			rows: 1,
 			cols: 2,
 			11: {
-				title: "Shell Expansion",
+				title: "命令行扩展",
 				costDiv() { return new Decimal(hasAchievement("a", 132)?7:1) },
 				cost(x=player[this.layer].buyables[this.id]) { // cost for buying xth buyable, can be an object if there are multiple currencies
                     return x.div(10).plus(0.5).div(tmp[this.layer].buyables[this.id].costDiv).ceil();
@@ -8040,7 +8048,7 @@ addLayer("mc", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = "Req: "+formatWhole(cost)+" Machine Parts"+(tmp.nerdMode?" (价格公式: floor((x/10+0.5)^1.1)":"")+".<br><br><h3>Current Shell Size: "+formatWhole(amt)+"m</h3>, which multiplies Mech-Energy gain by "+format(data.effect.pow(data.buffExp))+(tmp.nerdMode?" (Formula: (x+1)^2.5)":"")+" "+(hasAchievement("a", 125)?"and also divides":"but also multiplies")+" Tooth Size of Gears by "+format(data.effect)+(tmp.nerdMode?" (Formula: sqrt(x+1))":"");
+                    let display = "需要: "+formatWhole(cost)+" 组件"+(tmp.nerdMode?" (价格公式: floor((x/10+0.5)^1.1)":"")+".<br><br><h3>当前命令行大小: "+formatWhole(amt)+"m</h3>，加成机械能量获取 "+format(data.effect.pow(data.buffExp))+(tmp.nerdMode?" (公式: (x+1)^2.5)":"")+" "+(hasAchievement("a", 125)?"并除以":"但乘以")+"齿轮的齿大小 "+format(data.effect)+(tmp.nerdMode?" (公式: sqrt(x+1))":"");
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -8065,7 +8073,7 @@ addLayer("mc", {
 				autoed() { return hasMilestone("id", 3) && player.mc.autoSE },
 			},
 			12: {
-				title: "The Core",
+				title: "核心",
 				cost(x=player[this.layer].buyables[this.id]) {
 					if (x.gte(4)) x = x.pow(4).div(64);
 					return Decimal.pow(10, Decimal.pow(1.5, x.plus(1).cbrt()).times(3e14))
@@ -8075,7 +8083,7 @@ addLayer("mc", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = "Cost: "+format(cost)+" Points"+(tmp.nerdMode?" (价格公式: 10^((1.5^cbrt("+(amt.gte(4)?"(x^4)/64":"x")+"+1))*3e14)":"")+".<br><br>Level: "+formatWhole(amt)+"<br><br>Effect: The Generator Power effect is raised ^"+format(data.effect)+" and Gear gain, Machine Part gain, & Gear Speed are multiplied by "+format(data.effect)+(tmp.nerdMode?" (Formula: (10,000*level+1)^0.56)":"");
+                    let display = "价格: "+format(cost)+" 点数"+(tmp.nerdMode?" (价格公式: 10^((1.5^cbrt("+(amt.gte(4)?"(x^4)/64":"x")+"+1))*3e14)":"")+".<br><br>等级: "+formatWhole(amt)+"<br><br>效果: GP 效果提升 ^"+format(data.effect)+"，齿轮获取、组件获取以及齿轮速度乘以 "+format(data.effect)+(tmp.nerdMode?" (公式: (10,000*level+1)^0.56)":"");
 					return display;
                 },
                 unlocked() { return unl(this.layer) && player.mc.upgrades.includes(11) }, 
@@ -8096,14 +8104,14 @@ addLayer("mc", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "Unlock The Core",
+				title: "解锁核心",
 				unlocked() { return !player.mc.upgrades.includes(11) },
 				multiRes: [
 					{
 						cost: new Decimal(5e3),
 					},
 					{
-						currencyDisplayName: "mech-energy",
+						currencyDisplayName: "机械能量",
 						currencyInternalName: "mechEn",
 						currencyLayer: "mc",
 						cost: new Decimal("1e420"),
@@ -9906,10 +9914,10 @@ addLayer("a", {
 				image: "images/achs/14.png",
 			},
 			15: {
-				name: "Primary Termination",
+				name: "第一终端",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("p") },
-				tooltip: "Master Prestige.",
+				tooltip: "镀金声望。",
 				image: "images/achs/15.png",
 			},
 			21: {
@@ -9937,10 +9945,10 @@ addLayer("a", {
 				image: "images/achs/24.png",
 			},
 			25: {
-				name: "Secondary Increment",
+				name: "第二终端",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("b")&&player.ma.mastered.includes("g") },
-				tooltip: "Master Boosters & Generators.",
+				tooltip: "镀金增幅器和生成器。",
 				image: "images/achs/25.png",
 			},
 			31: {
@@ -9968,10 +9976,10 @@ addLayer("a", {
 				image: "images/achs/34.png",
 			},
 			35: {
-				name: "Tool Enhanced Speedrun",
+				name: "工具增强速度",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("t")&&player.ma.mastered.includes("e")&&player.ma.mastered.includes("s") },
-				tooltip: "Master Time, Enhance, & Space.",
+				tooltip: "镀金时间、增强和空间。",
 				image: "images/achs/35.png",
 			},
 			41: {
@@ -9999,10 +10007,10 @@ addLayer("a", {
 				image: "images/achs/44.png",
 			},
 			45: {
-				name: "Super Precision",
+				name: "超精密",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("sb")&&player.ma.mastered.includes("sg") },
-				tooltip: "Master Super Boosters & Super Generators.",
+				tooltip: "镀金超级增幅器和超级生成器。",
 				image: "images/achs/45.png",
 			},
 			51: {
@@ -10030,10 +10038,10 @@ addLayer("a", {
 				image: "images/achs/54.png",
 			},
 			55: {
-				name: "Evil HQ",
+				name: "邪恶的 HQ",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("q")&&player.ma.mastered.includes("h") },
-				tooltip: "Master Quirks & Hindrances.",
+				tooltip: "镀金诡异和障碍。",
 				image: "images/achs/55.png",
 			},
 			61: {
@@ -10061,10 +10069,10 @@ addLayer("a", {
 				image: "images/achs/64.png",
 			},
 			65: {
-				name: "The Blood Moon",
+				name: "血月",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("o")&&player.ma.mastered.includes("ss") },
-				tooltip: "Master Solarity & Subspace.",
+				tooltip: "镀金阳光和子空间。",
 				image: "images/achs/65.png",
 			},
 			71: {
@@ -10092,10 +10100,10 @@ addLayer("a", {
 				image: "images/achs/74.png",
 			},
 			75: {
-				name: "Practices in Perfection",
+				name: "完美练习",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("m")&&player.ma.mastered.includes("ba")&&player.ma.mastered.includes("ps") },
-				tooltip: "Master Magic, Balance, & Phantom Souls.",
+				tooltip: "镀金魔法、平衡和幽魂。",
 				image: "images/achs/75.png",
 			},
 			81: {
@@ -10117,16 +10125,16 @@ addLayer("a", {
 				image: "images/achs/83.png",
 			},
 			84: {
-				name: "Beyond the Basics",
+				name: "超越基础",
 				done() { return player.points.gte("e9250000") && player.b.best.eq(0) && player.g.best.eq(0) },
-				tooltip: "Reah e9,250,000 Points without any Boosters or Generators.",
+				tooltip: "无增幅器和生成器达到 e9,250,000 点数。",
 				image: "images/achs/84.png",
 			},
 			85: {
-				name: "I Understand Your Pain",
+				name: "我理解你的痛苦",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("hn") },
-				tooltip: "Master Honour.",
+				tooltip: "镀金荣耀。",
 				image: "images/achs/85.png",
 			},
 			91: {
@@ -10142,46 +10150,46 @@ addLayer("a", {
 				image: "images/achs/92.png",
 			},
 			93: {
-				name: "No More Meters!",
+				name: "单位取消",
 				done() { return player.i.unlocked },
-				tooltip: "Unlock Imperium.",
+				tooltip: "解锁帝国。",
 				image: "images/achs/93.png",
 			},
 			94: {
-				name: "Finally Done Being Hindered",
+				name: "终于打完障碍了",
 				done() { return player.h.challenges[31]>=30 && player.h.challenges[32]>=10 },
-				tooltip: 'Complete "Timeless" 30 times and "Option D" 10 times.',
+				tooltip: '完成 30 次 "永恒" 和 10 次 "D 选项"。',
 				image: "images/achs/94.png",
 			},
 			95: {
-				name: "I Hate This Mechanic",
+				name: "我讨厌这个机修",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("n")||player.ma.mastered.includes("hs") },
-				tooltip: "Master either Nebula or Hyperspace. Mastery is 15% cheaper.",
+				tooltip: "镀金星云或超空间。\n奖励: 支配价格下降 15%。",
 				image: "images/achs/95.png",
 			},
 			101: {
-				name: "Realm of The Impossible",
+				name: "不可能领域",
 				done() { return player.q.points.gte("e1e6") },
-				tooltip: "Reach e1,000,000 Quirks. Reward: The Quirk Layer cost base is reduced by 0.2.",
+				tooltip: "达到 e1,000,000 诡异。\n奖励: 诡异层价格基础降低 0.2。",
 				image: "images/achs/101.png",
 			},
 			102: {
-				name: "We're Not Beyond This?",
+				name: "我们不是在这之后吗？",
 				done() { return inChallenge("h", 31) && player.h.challenges[31]>=30 && player.points.gte("e2e7") },
-				tooltip: 'Reach e20,000,000 Points while in the "Timeless" hindrance (which must be completed at least 30 times).',
+				tooltip: '在 "永恒" 障碍中达到 e20,000,000 点数（障碍需要至少被完成 30 次）。',
 				image: "images/achs/102.png",
 			},
 			103: {
-				name: "One Billion Zeros",
+				name: "十亿个 0",
 				done() { return player.points.gte("e1e9") },
-				tooltip: "Reach e1e9 Points. Reward: Add 10% to Space Building Power.",
+				tooltip: "达到 e1e9 点数。\n奖励：建筑增益 +10%。",
 				image: "images/achs/103.png",
 			},
 			104: {
-				name: "Clustered Systems",
+				name: "集群",
 				done() { return player.n.buyables[11].gte(5) },
-				tooltip: "Purchase 5 Stellar Clusters.",
+				tooltip: "购买 5 星团。",
 				image: "images/achs/104.png",
 			},
 			105: {
@@ -10192,27 +10200,27 @@ addLayer("a", {
 				image: "images/achs/105.png",
 			},
 			111: {
-				name: "Realm of Creation",
+				name: "造物之地",
 				done() { return player.ma.unlocked },
-				tooltip: 'Perform a Row 7 reset. Reward: Keep Imperium Building II on all resets, you can complete "Timeless" and "Option D" in bulk,  those challenges do not get more lethal with more completions, and there is a new column of achievements.',
+				tooltip: '进行一次支配重置。\n奖励: 对任何重置保留帝国建筑 II，你可以大批量完成 "永恒" 和 "D 选项"，这些障碍不会随完成次数提高而变难，解锁一列新成就。',
 				image: "images/achs/111.png",
 			},
 			112: {
-				name: "True Mastery",
+				name: "真实支配",
 				done() { return player.ma.points.gte(10) },
-				tooltip: "Reach 10 Mastery.",
+				tooltip: "达到 10 支配。",
 				image: "images/achs/112.png",
 			},
 			113: {
-				name: "One Trillion Zeros",
+				name: "一万亿个 0",
 				done() { return player.points.gte("ee12") },
-				tooltip: "Reach e1e12 Points. Reward: Add 10% to Hyper Building Power.",
+				tooltip: "达到 e1e12 点数。\n奖励: 超建筑增益 +10%。",
 				image: "images/achs/113.png",
 			},
 			114: {
-				name: "Option E?",
+				name: "E 选项？",
 				done() { return player.h.challenges[32]>=900 },
-				tooltip: "Complete Option D at least 900 times.",
+				tooltip: '完成 "D 选项" 至少 900 次。',
 				image: "images/achs/114.png",
 			},
 			115: {
@@ -10223,27 +10231,27 @@ addLayer("a", {
 				image: "images/achs/115.png",
 			},
 			121: {
-				name: "Geared for More",
+				name: "准备好了吗",
 				done() { return player.ge.unlocked },
-				tooltip() { return "Unlock Gears. Reward: Total Hyperspace makes the Hyper Building softcap start later"+(tmp.nerdMode?" (Formula: (x^0.2)/100)":" (Currently: +"+format(player.hs.buyables[11].root(5).times(.1))+")") },
+				tooltip() { return "解锁齿轮。\n奖励: 总超空间延缓超建筑软上限"+(tmp.nerdMode?" (公式: (x^0.2)/100)":" (当前: +"+format(player.hs.buyables[11].root(5).times(.1))+")") },
 				image: "images/achs/121.png",
 			},
 			122: {
-				name: "So Many Teeth!",
+				name: "过多齿！",
 				done() { return tmp.ge.teeth.gte(1e4) },
-				tooltip: "Make your Gears have at least 10,000 Teeth.",
+				tooltip: "使你的齿轮有至少 10,000 齿。",
 				image: "images/achs/122.png",
 			},
 			123: {
-				name: "Yearly Solar Output",
+				name: "年太阳能发电量",
 				done() { return player.ge.energy.gte(1.2e34) },
-				tooltip: "Reach 1.2e34 J of Kinetic Energy. Reward: The Kinetic Energy Gear Upgrade's base is quadrupled.",
+				tooltip: "达到 1.2e34 J 动能。\n奖励: 动能升级效果翻四倍。",
 				image: "images/achs/123.png",
 			},
 			124: {
-				name: "The Perfect Being",
+				name: "完美之人",
 				done() { return player.hn.points.gte("ee6") },
-				tooltip: "Reach e1,000,000 Honour. Reward: Gear Evolution requires 3x less Rotations, and is 20% stronger.",
+				tooltip: "达到 e1,000,000 荣耀。\n奖励: 齿轮进化价格需要 3 倍少的转速，同时增强 20%。",
 				image: "images/achs/124.png",
 			},
 			125: {
@@ -10254,9 +10262,9 @@ addLayer("a", {
 				image: "images/achs/125.png",
 			},
 			131: {
-				name: "Artificially Mindless",
+				name: "人工无意识",
 				done() { return player.mc.unlocked },
-				tooltip: "Unlock Machines. Reward: Mastery is 10% cheaper.",
+				tooltip: "解锁机械。\n奖励: 支配价格降低 10%。",
 				image: "images/achs/131.png",
 			},
 			132: {
@@ -10614,9 +10622,9 @@ addLayer("ab", {
 			style: {"background-color"() { return player.ps.autoW?"#b38fbf":"#666666" }},
 		},
 		43: {
-			title: "Ghost Spirit",
+			title: "灵魂",
 			display(){
-				return hasMilestone("ma", 0)?(player.ps.autoGhost?"On":"Off"):"Locked"
+				return hasMilestone("ma", 0)?(player.ps.autoGhost?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 0) },
@@ -10624,9 +10632,9 @@ addLayer("ab", {
 			style: {"background-color"() { return player.ps.autoGhost?"#b38fbf":"#666666" }},
 		},
 		44: {
-			title: "Imperium Bricks",
+			title: "砖石",
 			display(){
-				return hasMilestone("ma", 4)?(player.i.auto?"On":"Off"):"Locked"
+				return hasMilestone("ma", 4)?(player.i.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 4) },
@@ -10634,9 +10642,9 @@ addLayer("ab", {
 			style: {"background-color"() { return player.i.auto?"#e5dab7":"#666666" }},
 		},
 		51: {
-			title: "Hyperspace",
+			title: "超空间",
 			display(){
-				return hasMilestone("ma", 5)?(player.hs.auto?"On":"Off"):"Locked"
+				return hasMilestone("ma", 5)?(player.hs.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ma.unlocked },
 			canClick() { return hasMilestone("ma", 5) },
@@ -10645,7 +10653,7 @@ addLayer("ab", {
 		},
 		52: {
 			title: "Gear Upgrades",
-			display() { return hasMilestone("ge", 3)?(player.ge.auto?"On":"Off"):"Locked" },
+			display() { return hasMilestone("ge", 3)?(player.ge.auto?"开":"关"):"禁用" },
 			unlocked() { return player.ai.unlocked && player.ge.unlocked },
 			canClick() { return hasMilestone("ge", 3) },
 			onClick() { player.ge.auto = !player.ge.auto },
@@ -10654,7 +10662,7 @@ addLayer("ab", {
 		53: {
 			title: "Shell Expansion",
 			display() {
-				return hasMilestone("id", 3)?(player.mc.autoSE?"On":"Off"):"Locked"
+				return hasMilestone("id", 3)?(player.mc.autoSE?"开":"关"):"禁用"
 			},
 			unlocked() { return player.id.unlocked && player.mc.unlocked },
 			canClick() { return hasMilestone("id", 3) },
@@ -10663,7 +10671,7 @@ addLayer("ab", {
 		},
 		54: {
 			title: "Motherboard",
-			display() { return hasMilestone("mc", 1)?(player.mc.auto?"On":"Off"):"Locked" },
+			display() { return hasMilestone("mc", 1)?(player.mc.auto?"开":"关"):"禁用" },
 			unlocked() { return player.ai.unlocked && player.mc.unlocked },
 			canClick() { return hasMilestone("mc", 1) },
 			onClick() { player.mc.auto = !player.mc.auto },
@@ -10672,7 +10680,7 @@ addLayer("ab", {
 		61: {
 			title: "Neurons",
 			display() {
-				return hasMilestone("ne", 5)?(player.ne.auto?"On":"Off"):"Locked"
+				return hasMilestone("ne", 5)?(player.ne.auto?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ne.unlocked && player.en.unlocked },
 			canClick() { return hasMilestone("ne", 5) },
@@ -10682,7 +10690,7 @@ addLayer("ab", {
 		62: {
 			title: "Neural Networks",
 			display() {
-				return hasMilestone("ne", 7)?(player.ne.autoNN?"On":"Off"):"Locked"
+				return hasMilestone("ne", 7)?(player.ne.autoNN?"开":"关"):"禁用"
 			},
 			unlocked() { return player.ne.unlocked && player.ai.unlocked },
 			canClick() { return hasMilestone("ne", 7) },
@@ -10691,7 +10699,7 @@ addLayer("ab", {
 		},
 		63: {
 			title: "Ideas",
-			display() { return hasMilestone("id", 4)?(player.id.auto?"On":"Off"):"Locked" },
+			display() { return hasMilestone("id", 4)?(player.id.auto?"开":"关"):"禁用" },
 			unlocked() { return player.id.unlocked && player.ai.unlocked },
 			canClick() { return hasMilestone("id", 4) },
 			onClick() { player.id.auto = !player.id.auto },

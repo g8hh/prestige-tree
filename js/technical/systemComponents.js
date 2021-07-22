@@ -49,7 +49,7 @@ var systemComponents = {
 				showTab(layer)
 			}"
 			v-bind:tooltip="
-				(player.ma.selectionActive&&tmp[layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(layer))?'Cannot be mastered yet.':((player.ma.selectionActive&&tmp[layer].row<tmp.ma.rowLimit&&player.ma.current===null)?'Click to attempt Mastery.':(player[layer].unlocked ? (tmp[layer].tooltip ? tmp[layer].tooltip : formatWhole(player[layer].points) + ' ' + tmp[layer].resource)
+				(player.ma.selectionActive&&tmp[layer].row<tmp.ma.rowLimit&&!tmp.ma.canBeMastered.includes(layer))?'目前不能镀金。':((player.ma.selectionActive&&tmp[layer].row<tmp.ma.rowLimit&&player.ma.current===null)?'点击以实行镀金。':(player[layer].unlocked ? (tmp[layer].tooltip ? tmp[layer].tooltip : formatWhole(player[layer].points) + ' ' + tmp[layer].resource)
 				: (tmp[layer].tooltipLocked ? tmp[layer].tooltipLocked : '达到 ' + formatWhole(tmp[layer].requires) + ' ' + tmp[layer].baseResource + ' 解锁 (你有 ' + formatWhole(tmp[layer].baseAmount) + ' ' + tmp[layer].baseResource + ')')))
 			"
 			v-bind:class="{

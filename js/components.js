@@ -242,7 +242,7 @@ function loadVue() {
 		</button>
 		<button v-if="player.ma.selectionActive&&tmp[layer].row<tmp.ma.rowLimit&&tmp.ma.canBeMastered.includes(layer)&&player.ma.current==layer" v-bind:class="{ ma: true, reset: true, locked: player[layer].points.lt(tmp.ma.masteryGoal[layer]), can: player[layer].points.gte(tmp.ma.masteryGoal[layer]), anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }"
 			v-bind:style="(player[layer].points.gte(tmp.ma.masteryGoal[layer]))?{'background-color': tmp.ma.color}:{}"
-			v-html="(player[layer].points.gte(tmp.ma.masteryGoal[layer]))?('Master this layer!'):('Reach '+format(tmp.ma.masteryGoal[layer])+' '+tmp[layer].resource+' to fully Master this layer.')"
+			v-html="(player[layer].points.gte(tmp.ma.masteryGoal[layer]))?('镀金此层！'):('达到 '+format(tmp.ma.masteryGoal[layer])+' '+tmp[layer].resource+' 以镀金此层。')"
 			v-on:click="layers.ma.completeMastery(layer)">
 		</button></div>
 		`
@@ -253,7 +253,7 @@ function loadVue() {
 	Vue.component('main-display', {
 		props: ['layer'],
 		template: `
-		<div v-if="!!player[layer].points"><span v-if="player[layer].points.lt('1e1000')">你有 </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': ('0px 0px 10px' + tmp[layer].color)}">{{formatWhole(player[layer].points)}}</h2><span v-if="tmp[layer].extraAmtDisplay"><span v-html="tmp[layer].extraAmtDisplay"></span></span> <h3 v-if="tmp.ma.mastered.includes(layer)" v-bind:style="{'color': tmp.ma.color, 'text-shadow': '0px 0px 10px', 'font-weight': 'bold'}">mastered</h3> {{tmp[layer].resource}}<span v-if="tmp[layer].effectDescription" v-html="', '+tmp[layer].effectDescription"></span><br><br></div>
+		<div v-if="!!player[layer].points"><span v-if="player[layer].points.lt('1e1000')">你有 </span><h2 v-bind:style="{'color': tmp[layer].color, 'text-shadow': ('0px 0px 10px' + tmp[layer].color)}">{{formatWhole(player[layer].points)}}</h2><span v-if="tmp[layer].extraAmtDisplay"><span v-html="tmp[layer].extraAmtDisplay"></span></span> <h3 v-if="tmp.ma.mastered.includes(layer)" v-bind:style="{'color': tmp.ma.color, 'text-shadow': '0px 0px 10px', 'font-weight': 'bold'}">镀金</h3> {{tmp[layer].resource}}<span v-if="tmp[layer].effectDescription" v-html="', '+tmp[layer].effectDescription"></span><br><br></div>
 		`
 	})
 
@@ -307,7 +307,7 @@ function loadVue() {
 	Vue.component('respec-button', {
 		props: ['layer', 'data'],
 		template: `
-			<button v-if="tmp[layer].buyables && tmp[layer].buyables.respec && !(tmp[layer].buyables.showRespec !== undefined && tmp[layer].buyables.showRespec == false)" v-on:click="respecBuyables(layer)" v-bind:class="{ longUpg: true, can: player[layer].unlocked, locked: !player[layer].unlocked, anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }">{{tmp[layer].buyables.respecText ? tmp[layer].buyables.respecText : "Respec"}}</button>
+			<button v-if="tmp[layer].buyables && tmp[layer].buyables.respec && !(tmp[layer].buyables.showRespec !== undefined && tmp[layer].buyables.showRespec == false)" v-on:click="respecBuyables(layer)" v-bind:class="{ longUpg: true, can: player[layer].unlocked, locked: !player[layer].unlocked, anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }">{{tmp[layer].buyables.respecText ? tmp[layer].buyables.respecText : "重置"}}</button>
 	`
 	})
 
@@ -443,7 +443,7 @@ function loadVue() {
 	Vue.component('sell-one', {
 		props: ['layer', 'data'],
 		template: `
-			<button v-if="tmp[layer].buyables && tmp[layer].buyables[data].sellOne && !(tmp[layer].buyables[data].canSellOne !== undefined && tmp[layer].buyables[data].canSellOne == false)" v-on:click="tmp[layer].buyables[data].sellOne()" v-bind:class="{ longUpg: true, can: player[layer].unlocked, locked: !player[layer].unlocked, anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }">{{tmp[layer].buyables.sellOneText ? tmp[layer].buyables.sellOneText : "Sell One"}}</button>
+			<button v-if="tmp[layer].buyables && tmp[layer].buyables[data].sellOne && !(tmp[layer].buyables[data].canSellOne !== undefined && tmp[layer].buyables[data].canSellOne == false)" v-on:click="tmp[layer].buyables[data].sellOne()" v-bind:class="{ longUpg: true, can: player[layer].unlocked, locked: !player[layer].unlocked, anim: (player.anim&&!player.oldStyle), grad: (player.grad&&!player.oldStyle) }">{{tmp[layer].buyables.sellOneText ? tmp[layer].buyables.sellOneText : "卖一个"}}</button>
 	`
 	})
 	Vue.component('sell-all', {
