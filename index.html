@@ -20,30 +20,32 @@
 	<script type="text/javascript" src="js/technical/canvas.js"></script>
 </head>
 <body onload="load()">
-<script src="chs.js?202106041511"></script>
-<script src="//g8hh.com/zh/core.js"></script>
+<!--
+	<script src="chs.js?202106041511"></script>
+	<script src="//g8hh.com/zh/core.js"></script> 
+-->
 	<div id="app">
 		<canvas id="treeCanvas" class="canvas" v-if ="!(gameEnded && !player.keepGoing)"></canvas>
 
 		<div v-if="false" id="loadingSection" class="fullWidth">
-			<h1>Loading...<br></h1><br>If this takes too long, please let me know in <a style="font-size: 30px" href="https://discord.gg/ww5NQutTRK">my discord</a>.
+			<h1>加载中...<br></h1><br>如果用时过长，请联系作者的 <a style="font-size: 30px" href="https://discord.gg/ww5NQutTRK">discord</a>。
 		</div>
 		<div v-bind:style="{display: 'block'}" style="display: none;">
 			<div class="vl" v-if="player.navTab!= 'none' &&player.tab!='none'&&!(gameEnded && !player.keepGoing)"></div>
 			<div v-if="(gameEnded && !player.keepGoing)" class="fullWidth">
 				<br>
 				<h2>{{modInfo.name}} {{VERSION.withoutName}}</h2><br><br>
-				<h3>Congratulations! You have reached the end and beaten this game, but for now...</h3><br>
-				<h3>Please check the Discord to see if there are new content updates!</h3><br><br>
-				<div v-if="!player.timePlayedReset">It took you {{formatTime(player.timePlayed)}} to beat the game.</div>
-				<div v-if="player.timePlayedReset">Make sure that you record the time in your stream or else your speedrun won't count!</div>
+				<h3>恭喜! 你达到了目前的通关条件。</h3><br>
+				<h3>在作者的 discord 上可以检查是否有新的内容更新。</h3><br><br>
+				<div v-if="!player.timePlayedReset">通关用时 {{formatTime(player.timePlayed)}}。</div>
+				<div v-if="player.timePlayedReset">若这是速通记录，请在流上推送此记录。</div>
 				<br>
-				<button class="longUpg can" onclick="hardReset(true)">Play Again</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="longUpg can" onclick="keepGoing()">Keep Going</button>
+				<button class="longUpg can" onclick="hardReset(true)">重玩</button>&nbsp;&nbsp;&nbsp;&nbsp;<button class="longUpg can" onclick="keepGoing()">继续游戏</button>
 				<br><br><br>
 				<a class="link" href="http://discord.gg/wwQfgPa" target="_blank" v-bind:style="{'font-size': '16px'}">The Prestige Tree Discord</a><br>
 				<a class="link" href="https://discord.gg/F3xveHV" target="_blank" v-bind:style="modInfo.discordLink ? {'font-size': '16px'} : {}">The Modding Tree Discord</a><br>
 				<br><br>
-				If you would like to speedrun this, press Play Again and record your attempt, then submit on the Discord Server in the channel #speedrun-submissions.
+				如果你想要速通这个游戏的话，点击「重玩」按钮并记录你的游戏过程，将视频发布在 Discord 的 #speedrun-submissions 频道上。
 				<br><br><br>
 			</div>
 
@@ -65,29 +67,29 @@
 				<h3>{{VERSION.withName}}</h3>
 				<span v-if="modInfo.author">
 					<br>
-					Made by {{modInfo.author}}
+					由 {{modInfo.author}} 制作
 				</span>
 				<br>
 				The Modding Tree {{TMT_VERSION.tmtNum}} by Acamaeda
 				<br>
-				Original idea by papyrus#6977 (on discord)
+				灵感来源 papyrus#6977 (discord)
 				<br><br>
-				Note: If anyone wishes to make a mod of this game, that is perfectly fine with me, just make sure to name it something different (ex: Prestige Tree NG+), and to make sure that the credit shown above is kept in-game.<br><br>
-				<a v-bind:href="modInfo.changelogLink" target="_blank" class="link" >Changelog</a><br>
+				注意：作者支持使用 TMT 开发自己的 mod，但需要注意为你自己的树取一个不同的名字，并保证上述的制作人表在游戏中可见<br><br>
+				<a v-bind:href="modInfo.changelogLink" target="_blank" class="link" >更新记录</a><br>
 				<a class="link" href="http://discord.gg/wwQfgPa" target="_blank" v-bind:style="{'font-size': '16px'}">The Prestige Tree Discord</a><br>
 				<a class="link" href="https://discord.gg/F3xveHV" target="_blank" v-bind:style="modInfo.discordLink ? {'font-size': '16px'} : {}">The Modding Tree Discord</a><br>
-				<a class="link pat" href="http://patreon.com/Jacorb90" target="_blank" v-bind:style="{'font-size': '18px'}">Donate</a><br>
+				<a class="link pat" href="http://patreon.com/Jacorb90" target="_blank" v-bind:style="{'font-size': '18px'}">赞助</a><br>
 				<br><br>
-				Time Played: {{ formatTime(player.timePlayed) }}<br>
-				<span v-for="layer in LAYERS"><span v-if="player[layer].first!==undefined && player[layer].unlocked">First {{layer}} reset: {{formatTime(player[layer].first)}}<br></span></span><br>
-				<h3>Hotkeys</h3><br>
+				已游玩时间: {{ formatTime(player.timePlayed) }}<br>
+				<span v-for="layer in LAYERS"><span v-if="player[layer].first!==undefined && player[layer].unlocked">{{layer}} 层第一次重置于: {{formatTime(player[layer].first)}}<br></span></span><br>
+				<h3>快捷键</h3><br>
 				<span v-for="key in hotkeys" v-if="player[key.layer].unlocked"><br>{{key.description}}</span>
-				<br>Press - to Show Formulas
+				<br>按下 - 以显示公式
 			</div>
 			<div v-if="player.tab=='help' && (typeof help_data != 'undefined')" class="col right">
 				<div v-if="typeof tmp.helpTab == 'number'">
 					<button class="back" onclick="showTab('none')">←</button><br>
-					<div v-if="player.a.achievements.length==0">Why are you even here? You haven't started yet!</div>
+					<div v-if="player.a.achievements.length==0">开始游戏后再来查看帮助。</div>
 					<ul v-else><br><br><br><li v-for="data in tmp.helpData"><a v-if="data.unlocked" class="link" v-on:click="tmp.helpTab = data.id" v-html="data.title"></a><br></li></ul>
 				</div>
 				<div v-else>
@@ -210,13 +212,14 @@
 		</div>
 	</div>
 	
-<!--客服 开始-->
+<!--客服 开始 
 <script src="//g8hh.com/static/js/jquery.min.js"></script>
 <link rel="stylesheet" href="//g8hh.com/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
 <script src="//g8hh.com/static/js/kf.js"></script>
-<!-- 客服 结束 -->
-<!--站长统计-->
+<!-- 客服 结束 
+<!--站长统计 
     <div style="display: none">
-        <script type="text/javascript" src="//s13.cnzz.com/z_stat.php?id=1266957935&web_id=1266957935"></script>
+        <script type="text/javascript" src="https://s13.cnzz.com/z_stat.php?id=1266957935&web_id=1266957935"></script>
     </div>
+-->
 </body>

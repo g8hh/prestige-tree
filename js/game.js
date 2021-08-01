@@ -236,7 +236,7 @@ function doReset(layer, force=false) {
 }
 
 function resetRow(row) {
-	if (prompt('Are you sure you want to reset this row? It is highly recommended that you wait until the end of your current run before doing this! Type "I WANT TO RESET THIS" to confirm')!="I WANT TO RESET THIS") return
+	if (prompt('你确定要重置吗？我们非常建议在结束此轮运行后再进行此操作！如果你一定要重置，请输入「我要重置」')!="我要重置") return
 	let pre_layers = ROW_LAYERS[row-1]
 	let layers = ROW_LAYERS[row]
 	let post_layers = ROW_LAYERS[row+1]
@@ -313,7 +313,7 @@ function completeChallenge(layer, x) {
 	updateChallengeTemp(layer)
 }
 
-VERSION.withoutName = "v" + VERSION.num + (VERSION.pre ? (" Pre-Release " + VERSION.pre) : VERSION.beta ? (" Beta " + VERSION.beta) : "") + (VERSION.patch ? (" Patch "+VERSION.patch) : "")
+VERSION.withoutName = "v" + VERSION.num + (VERSION.pre ? (" Pre-Release " + VERSION.pre) : VERSION.beta ? (" Beta " + VERSION.beta) : "") + (VERSION.patch ? (" 补丁 "+VERSION.patch) : "")
 VERSION.withName = VERSION.withoutName + (VERSION.name ? ": " + VERSION.name : "")
 
 
@@ -381,7 +381,7 @@ function gameLoop(diff) {
 }
 
 function hardReset() {
-	if (!confirm("Are you sure you want to do this? You will lose all your progress!")) return
+	if (!confirm("你确定要硬重置吗？这会使你失去所有数据！")) return
 	player = getStartPlayer()
 	save();
 	window.location.reload();
