@@ -20,10 +20,8 @@
 	<script type="text/javascript" src="js/technical/canvas.js"></script>
 </head>
 <body onload="load()">
-<!--
 	<script src="chs.js?202106041511"></script>
 	<script src="//g8hh.com/zh/core.js"></script> 
--->
 	<div id="app">
 		<canvas id="treeCanvas" class="canvas" v-if ="!(gameEnded && !player.keepGoing)"></canvas>
 
@@ -102,61 +100,61 @@
 				<button class="back" onclick="showTab('none')">←</button><br>
 				<div class="upgTable" style="padding-top: 25px; margin-bottom: 24px;">
 					<div class="upgRow">
-						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='mainOpt'">Main Options</button></div>
-						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='displayOpt'">Display Options</button></div>
-						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='notifyOpt'">Node Glow Options</button></div>
+						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='mainOpt'">主选项</button></div>
+						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='displayOpt'">显示选项</button></div>
+						<div><button class="tabButton" style="border-color: white;" v-on:click="player.optTab='notifyOpt'">节点荧光选项</button></div>
 					</div>
 				</div>
 				<div v-if="player.optTab=='mainOpt'">
 					<table>
 						<tr>
-							<td><button class="opt" onclick="save()">Save</button></td>
-							<td><button class="opt" onclick="toggleOpt('autosave')">Autosave: {{ player.autosave?"ON":"OFF" }}</button></td>
-							<td><button class="opt" onclick="hardReset()">HARD RESET</button></td>
+							<td><button class="opt" onclick="save()">保存</button></td>
+							<td><button class="opt" onclick="toggleOpt('autosave')">自动保存: {{ player.autosave?"开":"关" }}</button></td>
+							<td><button class="opt" onclick="hardReset()">硬重置</button></td>
 						</tr>
 						<tr>
-							<td><button class="opt" onclick="exportSave()">Export to clipboard</button></td>
-							<td><button class="opt" onclick="importSave()">Import</button></td>
-							<td><button class="opt" onclick="toggleOpt('offlineProd')">Offline Prod: {{ player.offlineProd?"ON":"OFF" }}</button></td>
+							<td><button class="opt" onclick="exportSave()">导出到剪切板</button></td>
+							<td><button class="opt" onclick="importSave()">导入</button></td>
+							<td><button class="opt" onclick="toggleOpt('offlineProd')">离线进度: {{ player.offlineProd?"开":"关" }}</button></td>
 						</tr>
 						<tr>
-							<td><button class="opt" onclick="showAllSaves()">All Save Files</button></td>
-							<td><button class="opt" onclick="toggleOpt('tapNerd')">"Nerd Mode" Activation: {{player.tapNerd?"ON TAP":"ON HOLD"}}</button></td>
+							<td><button class="opt" onclick="showAllSaves()">所有存档</button></td>
+							<td><button class="opt" onclick="toggleOpt('tapNerd')">公式显示: {{player.tapNerd?"点击时":"按住时"}}</button></td>
 							<td></td>
 						</tr>
 					</table>
 				</div><div v-if="player.optTab=='displayOpt'">
 					<table>
 						<tr>
-							<td><button class="opt" onclick="switchTheme()">Theme: {{ getThemeName() }}</button></td>
-							<td><button class="opt" onclick="toggleOpt('oldStyle')">Style: {{ player.oldStyle?"v1.0":"NEW" }}</button></td>
-							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('hqTree')">High-Quality Tree: {{ (player.hqTree&&!player.oldStyle)?"ON":"OFF" }}</button></td>
+							<td><button class="opt" onclick="switchTheme()">主题: {{ getThemeName() }}</button></td>
+							<td><button class="opt" onclick="toggleOpt('oldStyle')">样式: {{ player.oldStyle?"v1.0":"NEW" }}</button></td>
+							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('hqTree')">高质量树: {{ (player.hqTree&&!player.oldStyle)?"开":"关" }}</button></td>
 						</tr>
 						<tr>
-							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('grad')">Gradients: {{ (player.grad&&!player.oldStyle)?"ON":"OFF" }}</button></td>
-							<td><button class="opt" onclick="adjustMSDisp()">Show Milestones: {{ player.msDisplay.toUpperCase() }}</button></td>
-							<td><button class="opt" onclick="toggleOpt('milNotify')">Milestone Notifications: {{ player.milNotify?"ON":"OFF" }}</button></td>
+							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('grad')">渐变: {{ (player.grad&&!player.oldStyle)?"开":"关" }}</button></td>
+							<td><button class="opt" onclick="adjustMSDisp()">显示里程碑: {{ player.msDisplay.toUpperCase() }}</button></td>
+							<td><button class="opt" onclick="toggleOpt('milNotify')">里程碑提示: {{ player.milNotify?"开":"关" }}</button></td>
 						</tr>
 						<tr>
-							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('anim')">Animations: {{ (player.anim&&!player.oldStyle)?"ON":"OFF" }}</button></td>
-							<td><button class="opt" onclick="toggleOpt('hideChallenges')">Completed Challenges: {{ player.hideChallenges?"HIDDEN":"SHOWN" }}</button></td>
-							<td><button v-if="hasAchievement('a', 21)" class="opt" onclick="toggleOpt('scShown')">Softcap Node: {{player.scShown?"SHOWN":"HIDDEN"}}</button></td>
+							<td><button v-bind:class="{opt: true, locked: player.oldStyle}" onclick="if (!player.oldStyle) toggleOpt('anim')">动画: {{ (player.anim&&!player.oldStyle)?"开":"关" }}</button></td>
+							<td><button class="opt" onclick="toggleOpt('hideChallenges')">已完成挑战: {{ player.hideChallenges?"隐藏":"显示" }}</button></td>
+							<td><button v-if="hasAchievement('a', 21)" class="opt" onclick="toggleOpt('scShown')">软上限节点: {{player.scShown?"显示":"隐藏"}}</button></td>
 						</tr>
 						<tr>
-							<td><button v-if="player.ma.unlocked" class="opt" onclick="toggleOpt('hideStars')">Mastery Stars: {{ player.hideStars?"HIDDEN":"SHOWN" }}</button></td>
+							<td><button v-if="player.ma.unlocked" class="opt" onclick="toggleOpt('hideStars')">镀金星: {{ player.hideStars?"隐藏":"显示" }}</button></td>
 						</tr>
 					</table>
 				</div><div v-if="player.optTab=='notifyOpt'">
 					<table>
 						<tr>
-							<td><button class="opt" onclick="adjustGlow('slight')">White Glow: {{ player.slightGlow.toUpperCase() }}</button></td>
-							<td><button class="opt" onclick="toggleOpt('redGlowActive')">Red Glow: {{ player.redGlowActive?"ON":"OFF" }}</button></td>
-							<td><button v-if="player.s.unlocked" class="opt" onclick="adjustGlow('space')">Red Glow - Space Buildings: {{ player.spaceGlow.toUpperCase() }}</button></td>
+							<td><button class="opt" onclick="adjustGlow('slight')">白色荧光: {{ player.slightGlow.toUpperCase() }}</button></td>
+							<td><button class="opt" onclick="toggleOpt('redGlowActive')">红色荧光: {{ player.redGlowActive?"开":"关" }}</button></td>
+							<td><button v-if="player.s.unlocked" class="opt" onclick="adjustGlow('space')">红色荧光 - 建筑: {{ player.spaceGlow.toUpperCase() }}</button></td>
 						</tr>
 						<tr>
-							<td><button v-if="player.o.unlocked" class="opt" onclick="adjustGlow('sol')">Red Glow - Solarity Buyables: {{ player.solGlow.toUpperCase() }}</button></td>
-							<td><button v-if="player.m.unlocked" class="opt" onclick="adjustGlow('maj')">Red Glow - Spells: {{ player.majGlow.toUpperCase() }}</button></td>
-							<td><button v-if="player.mc.unlocked" class="opt" onclick="toggleOpt('shellGlow')">Red Glow - Shell Expansion: {{ player.shellGlow?"ON":"OFF" }}</button></td>
+							<td><button v-if="player.o.unlocked" class="opt" onclick="adjustGlow('sol')">红色荧光 - 阳光可购买项: {{ player.solGlow.toUpperCase() }}</button></td>
+							<td><button v-if="player.m.unlocked" class="opt" onclick="adjustGlow('maj')">红色荧光 - 魔法: {{ player.majGlow.toUpperCase() }}</button></td>
+							<td><button v-if="player.mc.unlocked" class="opt" onclick="toggleOpt('shellGlow')">红色荧光 - 命令行扩展: {{ player.shellGlow?"开":"关" }}</button></td>
 						</tr>
 					</table>
 				</div><br><br>
@@ -176,16 +174,16 @@
 				</div>
 				<div class="overlayThing" style="padding-bottom:7px; width: 90%;">
 					<span v-if="player.devSpeed && player.devSpeed != 1" class="overlayThing">
-						<br>Dev Speed: {{format(player.devSpeed)}}x<br>
+						<br>进展乘速: {{format(player.devSpeed)}}x<br>
 					</span>
 					<span v-if="player.offTime !== undefined && player.offTime !== null"  class="overlayThing">
-						<br>Offline Time: {{formatTime(player.offTime?player.offTime.remain:0)}}<br>
+						<br>离线时间: {{formatTime(player.offTime?player.offTime.remain:0)}}<br>
 					</span>
 					<span v-if="!player.keepGoing" class="overlayThing">
-						<br><span v-if="modInfo.specialEndgameText">{{modInfo.specialEndgameText}}</span><span v-if="!modInfo.specialEndgameText">Reach {{formatWhole(modInfo.endgame)+" "+modInfo.pointsName}} to beat the game!</span><br>
+						<br><span v-if="modInfo.specialEndgameText">{{modInfo.specialEndgameText}}</span><span v-if="!modInfo.specialEndgameText">当前结局： {{formatWhole(modInfo.endgame)+" "+modInfo.pointsName}} </span><br>
 					</span>
 					<br>
-					<span v-if="player.points.lt('1e1000')">You have </span>
+					<span v-if="player.points.lt('1e1000')">你有 </span>
 					<h2 id="points">{{format(player.points)}}</h2>
 					<span v-if="player.points.lt('1e1e6')"> {{modInfo.pointsName}}</span>
 					<br>
@@ -212,14 +210,10 @@
 		</div>
 	</div>
 	
-<!--客服 开始 
-<script src="//g8hh.com/static/js/jquery.min.js"></script>
-<link rel="stylesheet" href="//g8hh.com/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
-<script src="//g8hh.com/static/js/kf.js"></script>
-<!-- 客服 结束 
-<!--站长统计 
+	<script src="//g8hh.com/static/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="//g8hh.com/static/css/kf.css" type="text/css" media="screen" charset="utf-8">
+	<script src="//g8hh.com/static/js/kf.js"></script>
     <div style="display: none">
         <script type="text/javascript" src="https://s13.cnzz.com/z_stat.php?id=1266957935&web_id=1266957935"></script>
     </div>
--->
 </body>

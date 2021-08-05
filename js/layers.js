@@ -7779,16 +7779,16 @@ addLayer("ge", {
 				effectDescription: "每个齿轮升级的价格增长独立计算。",
 			},
 			2: {
-				requirementDescription: "5e47 Gears & 25,000,000 Total Energy",
+				requirementDescription: "5e47 齿轮 & 25,000,000 总能量",
 				unlocked() { return player.en.unlocked },
 				done() { return player.en.unlocked && player.ge.best.gte(5e47) && player.en.total.gte(25e6) },
-				effectDescription: "Total Energy multiplies Gear gain, and gain 1% of Gear gain every second.",
+				effectDescription: "总能量乘以齿轮获取，每秒获得 1% 的齿轮。",
 			},
 			3: {
-				requirementDescription: "1e141 Gears",
+				requirementDescription: "1e141 齿轮",
 				unlocked() { return hasUpgrade("ai", 13) },
 				done() { return hasUpgrade("ai", 13) && player.ge.best.gte(1e141) },
-				effectDescription: "Teeth can be partial (can go below 1), Gear Evolution does not force a Row 7 reset, and unlock Auto-Gear Upgrades.",
+				effectDescription: "齿可以是小数（小于 1），齿轮进化不再强制进行第七行重置，解锁自动齿轮升级。",
 				toggles: [["ge", "auto"]],
 			},
 		},
@@ -7922,10 +7922,10 @@ addLayer("mc", {
 				effectDescription: "思考加成组件获取，每秒获取 1% 的组件。",
 			},
 			1: {
-				requirementDescription: "1e50,000 Mech-Energy",
+				requirementDescription: "1e50,000 机械能量",
 				unlocked() { return hasUpgrade("ai", 31) },
 				done() { return hasUpgrade("ai", 31) && player.mc.mechEn.times(tmp.mc.mechEnMult).gte("1e50000") },
-				effectDescription: "CPU's effect is raised ^25, and unlock Auto-Motherboard.",
+				effectDescription: "CPU 效果提升至 25 次方，解锁自动主板。",
 				toggles: [["mc", "auto"]],
 			},
 		},
@@ -8061,9 +8061,9 @@ addLayer("mc", {
 					let c = player.mc.points.times(tmp[this.layer].buyables[this.id].costDiv);
 					let n = b.pow(2).times(4).plus(b.times(36)).plus(c.times(80)).plus(81).sqrt().sub(11).div(2).plus(1).floor();
                     player[this.layer].buyables[this.id] = player[this.layer].buyables[this.id].max(n)
-					// if (n.sub(b).eq(1)) 
+					 if (n.sub(b).eq(1)) 
 						player.mc.points = player.mc.points.sub(tmp[this.layer].buyables[this.id].cost);
-					//else player.mc.points = player.mc.points.sub(n.sub(b).times(b.plus(n).plus(10)).times(0.05).max(n.sub(b)).div(tmp[this.layer].buyables[this.id].costDiv).floor()).max(0);
+					else player.mc.points = player.mc.points.sub(n.sub(b).times(b.plus(n).plus(10)).times(0.05).max(n.sub(b)).div(tmp[this.layer].buyables[this.id].costDiv).floor()).max(0);
                 },
 				buyMax() {
 					let c = player.mc.points.times(tmp[this.layer].buyables[this.id].costDiv);
@@ -8216,8 +8216,8 @@ addLayer("en", {
 			if (tmp.en.getResetGain.gte(player.o.points.times(0.1).max(1)) && !tmp.en.passiveGeneration) return true;
 			else return false;
 		},
-		tooltip() { return formatWhole(player.en.points)+" Energy" },
-		tooltipLocked() { return "Reach "+formatWhole(tmp.en.req)+" Solarity to unlock (You have "+formatWhole(player.o.points)+" Solarity)" },
+		tooltip() { return formatWhole(player.en.points)+" 能量" },
+		tooltipLocked() { return "达到 "+formatWhole(tmp.en.req)+" 阳光解锁（你有 "+formatWhole(player.o.points)+" 阳光）" },
         row: 4, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
             {key: "y", description: "按 Y 进行能量重置", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
@@ -8593,9 +8593,9 @@ addLayer("ne", {
 			},
 			7: {
 				unlocked() { return hasUpgrade("ai", 11) },
-				requirementDescription: "9 Neurons",
+				requirementDescription: "9 神经元",
 				done() { return hasUpgrade("ai", 11) && player.ne.best.gte(9) },
-				effectDescription: "Unlock Auto-Neural Networks.",
+				effectDescription: "解锁自动神经网络。",
 				toggles: [["ne", "autoNN"]],
 			},
 		},
@@ -8717,23 +8717,23 @@ addLayer("id", {
 			},
 			3: {
 				unlocked() { return hasMilestone("id", 2)||hasAchievement("a", 161) },
-				requirementDescription: "6 Ideas & 245 Revelations",
+				requirementDescription: "6 想法 & 245 启示",
 				done() { return (player.id.points.gte(6) && tmp.id.rev.gte(245))||hasAchievement("a", 161) },
-				effectDescription() { return "Unlock Auto-Shell Expansion, which is much more efficient than normal purchasing, and each OoM of Shell Expansions double Signal gain ("+format(Decimal.pow(2, player.mc.buyables[11].max(1).log10()))+"x)." },
+				effectDescription() { return "解锁自动命令行扩展，比正常购买更高效效，每 OoM 的命令行扩展双倍信号获取（"+format(Decimal.pow(2, player.mc.buyables[11].max(1).log10()))+"x）。" },
 				toggles: [["mc", "autoSE"]],
 			},
 			4: {
 				unlocked() { return hasUpgrade("ai", 22)||hasAchievement("a", 164) },
-				requirementDescription: "132 Revelations",
+				requirementDescription: "132 启示",
 				done() { return ((tmp.id.rev.gte(132)||hasMilestone("id", 4))&&hasUpgrade("ai", 22))||hasAchievement("a", 164) },
-				effectDescription: "Unlock Auto-Ideas, you can buy max Ideas, & the Idea effect is 50% more effective.",
+				effectDescription: "解锁自动想法，你可以最大购买想法，想法效果增强 50%。",
 				toggles: [["id", "auto"]],
 			},
 			5: {
 				unlocked() { return hasUpgrade("ai", 22) },
-				requirementDescription: "1,800 Revelations",
+				requirementDescription: "1,800 启示",
 				done() { return (tmp.id.rev.gte(1800)||hasMilestone("id", 5))&&hasUpgrade("ai", 22) },
-				effectDescription: "The Idea effect is 75% more effective, and Revelations multiply Gear & Building gain.",
+				effectDescription: "想法效果增强 75%，启示乘以零件和建筑获取。",
 			},
 		},
 })
@@ -9019,7 +9019,7 @@ addLayer("r", {
 				style: {width: "50px", height: "50px"},
 			},
 			16: {
-				title: "Distribute",
+				title: "分配",
 				unlocked() { return player.r.unlocked },
 				canClick() { return player.r.unlocked && player.r.points.gte(5) && player.r.allotted.breeders.gte(1) },
 				onClick() { 
@@ -9091,63 +9091,65 @@ addLayer("r", {
 		},
 		milestones: {
 			0: {
-				requirementDescription: "50 Total Robots",
+				requirementDescription: "50 总机器人",
 				done() { return player.r.total.gte(50) },
-				effectDescription: "Minibots multiply Energy & Signal gain",
+				effectDescription: "迷你机器人乘以能量和信号获取。",
 			},
 			1: {
-				requirementDescription: "100 Total Robots",
+				requirementDescription: "100 总机器人",
 				done() { return player.r.total.gte(100)||hasAchievement("a", 161) },
-				effectDescription: "Non-selected Watts are still generated (but 3x slower), and Total Robots multiply Watt generation speed",
+				effectDescription: "未选择能量依然生成（速度减缓 3x），总机器人乘以能量生成速度。",
 			},
 			2: {
-				requirementDescription: "360 Total Robots",
+				requirementDescription: "360 总机器人",
 				done() { return player.r.total.gte(360) },
-				effectDescription: "Effective Breeders are squared",
+				effectDescription: "有效饲养者平方。",
 			},
 			3: {
-				requirementDescription: "500 Total Robots",
+				requirementDescription: "500 总机器人",
 				done() { return player.r.total.gte(500) },
-				effectDescription: "Double Robot gain, and when a Minibot is transformed into a Robot, the requirement for the next Minibot is reduced by 0.5 levels & the Producer effect is 25% stronger (additive)",
+				effectDescription: "双倍机器人获取，当迷你机器人转变为机器人时，下一个迷你机器人的需求降低 0.5 等级，生产者效果提高 25%（叠加）。",
 			},
 			4: {
 				unlocked() { return player.id.unlocked||hasAchievement("a", 161) },
-				requirementDescription: "2,000 Total Robots",
+				requirementDescription: "2,000 总机器人",
 				done() { return player.r.total.gte(2e3)||hasAchievement("a", 161) },
-				effectDescription: "Triple Robot gain, and the Producer effect also multiplies Watt generation speed & Signal gain",
+				effectDescription: "三倍机器人获取，生产者效果乘以能量（有很多种的那个能量）生成和信号获取。",
 			},
 			5: {
 				unlocked() { return hasUpgrade("ai", 21) },
-				requirementDescription: "4,000,000 Total Robots",
+				requirementDescription: "4,000,000 总机器人",
 				done() { return player.r.total.gte(4e6) && hasUpgrade("ai", 21) },
-				effectDescription: "Automatically distribute 10% of your Robots every second without actually spending any Robots.",
+				effectDescription: "自动分配你 10% 的机器人而并不实际消耗他们。",
 			},
 		},
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                          
+                          
+                    iiii  
+                   i::::i 
+                    iiii  
+                          
+  aaaaaaaaaaaaa   iiiiiii 
+  a::::::::::::a  i:::::i 
+  aaaaaaaaa:::::a  i::::i 
+           a::::a  i::::i 
+    aaaaaaa:::::a  i::::i 
+  aa::::::::::::a  i::::i 
+ a::::aaaa::::::a  i::::i 
+a::::a    a:::::a  i::::i 
+a::::a    a:::::a i::::::i
+a:::::aaaa::::::a i::::::i
+ a::::::::::aa:::ai::::::i
+  aaaaaaaaaa  aaaaiiiiiiii
+                          
+                          
+                          
+                          
+                          
+                          
+                          
 */
 addLayer("ai", {
 		name: "AI", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -9172,8 +9174,8 @@ addLayer("ai", {
 			},
 		},
         requires: new Decimal(408), // Can be a function that takes requirement increases into account
-        resource: "superintelligence", // Name of prestige currency 
-        baseResource: "revelations", // Name of resource prestige is based on
+        resource: "超级智能", // Name of prestige currency 
+        baseResource: "启示", // Name of resource prestige is based on
         baseAmount() {return tmp.id.rev}, // Get the current amount of baseResource
         type: "normal", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
         exponent: new Decimal(2), // Prestige currency exponent
@@ -9191,7 +9193,7 @@ addLayer("ai", {
         },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "R", description: "Press Shift+R to AI Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "R", description: "按 Shift+R 进行 AI 重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		passiveGeneration() { return 0 },
         doReset(resettingLayer){ 
@@ -9218,10 +9220,10 @@ addLayer("ai", {
 			"prestige-button",
 			"resource-display", "blank",
 			["buyable", 11], "blank",
-			["display-text", function() { return "<h3>"+format(player.ai.consc)+"</h3> Artificial Consciousness (divided by "+format(tmp.ai.divConsc)+" each second, based on time in this Row 7 run)" }], 
-			["display-text", function() { return "Effect: Multiplies Energy, Signal, & Robot gain by "+format(tmp.ai.conscEff1)+(tmp.nerdMode?" (x+1)":"")+", and divides the Robot & Idea req by "+format(tmp.ai.conscEff2)+(tmp.nerdMode?" (log3(x+1)+1)":".") }],"blank", "blank",
+			["display-text", function() { return "<h3>"+format(player.ai.consc)+"</h3> 人工意识（基于当前第七行重置后时间，每秒除以 "+format(tmp.ai.divConsc)+"）" }], 
+			["display-text", function() { return "效果：将能量、信号和机器人获取乘以 "+format(tmp.ai.conscEff1)+(tmp.nerdMode?" (x+1)":"")+"，并将机器人和想法需求除以 "+format(tmp.ai.conscEff2)+(tmp.nerdMode?" (log3(x+1)+1)":".") }],"blank", "blank",
 			["clickable", 11],
-			["display-text", function() { return "Nodes: "+formatWhole(player.ai.upgrades.length)+" / "+formatWhole(tmp.ai.nodeSlots) }], "blank",
+			["display-text", function() { return "节点："+formatWhole(player.ai.upgrades.length)+" / "+formatWhole(tmp.ai.nodeSlots) }], "blank",
 			"upgrades", "blank",
 		],
 		nodeSlots() { return player.ai.buyables[11].div(2).plus(player.ai.buyables[11].sub(6).div(2).max(0)).plus(player.ai.buyables[11].gte(1)?1:0).floor().min(16).toNumber() },
@@ -9229,14 +9231,14 @@ addLayer("ai", {
 			rows: 4,
 			cols: 4,
 			11: {
-				title: "Node AA",
-				description: "Neural Networks are 50% stronger, and unlock a new Neuron milestone.",
+				title: "节点 AA",
+				description: "神经网络增强 50%，解锁新的神经元里程碑。",
 				multiRes: [
 					{
 						cost: new Decimal(2),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(5),
@@ -9250,14 +9252,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			12: {
-				title: "Node AB",
-				description: "Each Minibot that transforms into a Robot grants you 5% of your Robot gain, and start with 5 of each Robot specialization.",
+				title: "节点 AB",
+				description: "每个转化为机器人的迷你机器人加成机器人获取 5%，起始时每个专业机器人有 5 个。",
 				multiRes: [
 					{
 						cost: new Decimal(10),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(180),
@@ -9271,14 +9273,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			13: {
-				title: "Node AC",
-				description: "Gear Evolution is 50% stronger, and unlock a new Gear milestone.",
+				title: "节点 AC",
+				description: "齿轮进化变强 50%，解锁一个新的齿轮里程碑。",
 				multiRes: [
 					{
 						cost: new Decimal(300),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(48e3),
@@ -9293,13 +9295,13 @@ addLayer("ai", {
 			},
 			14: {
 				title: "Node AD",
-				description: "Improve Revelation gain by 50% & improve Gear Evolution power by 11.1%.",
+				description: "启示获取提高 50%，齿轮进化效果增强 11.1%。",
 				multiRes: [
 					{
 						cost: new Decimal(5e3),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(5e8),
@@ -9313,14 +9315,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			21: {
-				title: "Node BA",
-				description: "Minibot growth is 5x as fast, and unlock a new Robot milestone, but Miniboth death is 20x as fast.",
+				title: "节点 BA",
+				description: "迷你机器人生长加快 5 倍，解锁一个新的机器人里程碑，但迷你机器人死亡变快 20 倍。",
 				multiRes: [
 					{
 						cost: new Decimal(15),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(190),
@@ -9334,14 +9336,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			22: {
-				title: "Node BB",
-				description: "Triple Superintelligence gain, start with 4 Ideas, and unlock two new Idea milestones.",
+				title: "节点 BB",
+				description: "三倍超级智能获取，起始时拥有 4 想法，解锁两个新的想法里程碑。",
 				multiRes: [
 					{
 						cost: new Decimal(50),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(2e3),
@@ -9355,14 +9357,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			23: {
-				title: "Node BC",
-				description: "When a Minibot grows up into a Robot, the requirement for the next Minibot is reduced by 0.5 more levels & the Producer effect is 40% stronger (additive).",
+				title: "节点 BC",
+				description: "当迷你机器人变为机器人时，下一个迷你机器人的需求降低 0.5 级，生产者效果增强 40%（叠加）。",
 				multiRes: [
 					{
 						cost: new Decimal(500),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(196000),
@@ -9376,14 +9378,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			24: {
-				title: "Node BD",
-				description: "Gears boost Nebula Energy gain.",
+				title: "节点 BD",
+				description: "齿轮加成星云获取。",
 				multiRes: [
 					{
 						cost: new Decimal(2e4),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(2e9),
@@ -9400,14 +9402,14 @@ addLayer("ai", {
 				formula: "x^5",
 			},
 			31: {
-				title: "Node CA",
-				description: "Mech-Energy loss is halved, and unlock a new Machine milestone.",
+				title: "节点 CA",
+				description: "机械能量损失减半，解锁一个新的机械里程碑。",
 				multiRes: [
 					{
 						cost: new Decimal(300),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(48e3),
@@ -9421,14 +9423,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			32: {
-				title: "Node CB",
-				description: "The Idea effect is increased by 0.04, and gain 50% more Revelations.",
+				title: "节点 CB",
+				description: "想法效果增加 0.04，启示获取加成 50%。",
 				multiRes: [
 					{
 						cost: new Decimal(500),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(196000),
@@ -9442,14 +9444,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			33: {
-				title: "Node CC",
-				description: "Superintelligence boosts Gear, Machine Part, & Robot gain, & Shell Expansion's boost to Mech-Energy gain is raised ^100.",
+				title: "节点 CC",
+				description: "超级智能加成齿轮、组件和机器人获取，命令行扩展对机械能量获取加成提升至 100 次幂。",
 				multiRes: [
 					{
 						cost: new Decimal(1500),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(790000),
@@ -9466,14 +9468,14 @@ addLayer("ai", {
 				formula: "(x+1)^1.5",
 			},
 			34: {
-				title: "Node CD",
-				description: "Super Watts, Mind Watts, & Gear gain are raised ^1.2.",
+				title: "节点 CD",
+				description: "超级能量，思维能量，齿轮获取提高到 1.2 次幂。",
 				multiRes: [
 					{
 						cost: new Decimal(5e4),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(1e10),
@@ -9487,14 +9489,14 @@ addLayer("ai", {
 				style: {height: '150px', width: '150px'},
 			},
 			41: {
-				title: "Node DA",
-				description: "Mastery boosts Superintelligence gain.",
+				title: "节点 DA",
+				description: "支配加成超级能量获取。",
 				multiRes: [
 					{
 						cost: new Decimal(5e3),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(5e8),
@@ -9511,14 +9513,14 @@ addLayer("ai", {
 				formula: "1.05^x",
 			},
 			42: {
-				title: "Node DB",
-				description: "Each Active AI Node multiplies Signal gain by 100x.",
+				title: "节点 DB",
+				description: "每个激活的 AI 节点将信号获取乘以 100。",
 				multiRes: [
 					{
 						cost: new Decimal(2e4),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(2e9),
@@ -9535,14 +9537,14 @@ addLayer("ai", {
 				formula: "100^x",
 			},
 			43: {
-				title: "Node DC",
-				description: "Ideas boosts Superintelligence gain.",
+				title: "节点 DC",
+				description: "想法增幅超级能量获取。",
 				multiRes: [
 					{
 						cost: new Decimal(5e4),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(1e10),
@@ -9559,14 +9561,14 @@ addLayer("ai", {
 				formula: "1.075^x",
 			},
 			44: {
-				title: "Node DD",
-				description: "Artificial Consciousness boosts Gear gain, and AI Networks multiply Superintelligence gain.",
+				title: "节点 DD",
+				description: "人工意识增幅齿轮获取，AI 网络乘以超级智能获取。",
 				multiRes: [
 					{
 						cost: new Decimal(1e6),
 					},
 					{
-						currencyDisplayName: "artificial consciousness",
+						currencyDisplayName: "人工意识",
 						currencyInternalName: "consc",
 						currencyLayer: "ai",
 						cost: new Decimal(5e11),
@@ -9587,7 +9589,7 @@ addLayer("ai", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "AI Network",
+				title: "AI 网络",
 				cost(x=player[this.layer].buyables[this.id]) {
 					return {
 						ai: Decimal.pow(2, x),
@@ -9600,7 +9602,7 @@ addLayer("ai", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = formatWhole(player.ai.points)+" / "+formatWhole(cost.ai)+" Superintelligence"+(tmp.nerdMode?(" (2^x)"):"")+"<br>"+formatWhole(player.ge.points)+" / "+formatWhole(cost.ge)+" Gears"+(tmp.nerdMode?(" (100^(x^1.8)*1e78)"):"")+"<br>"+formatWhole(player.mc.mechEn.times(tmp.mc.mechEnMult))+" / "+formatWhole(cost.mc)+" Mech-Energy"+(tmp.nerdMode?(" (1e525^(x^2.5)*1e750)"):"")+"<br><br>Level: "+formatWhole(amt)+"<br><br>Reward: Generates "+formatWhole(data.effect)+" Artificial Consciousness/sec"+(tmp.nerdMode?" (4^x-1)":".");
+                    let display = formatWhole(player.ai.points)+" / "+formatWhole(cost.ai)+" 超级智能"+(tmp.nerdMode?(" (2^x)"):"")+"<br>"+formatWhole(player.ge.points)+" / "+formatWhole(cost.ge)+" 齿轮"+(tmp.nerdMode?(" (100^(x^1.8)*1e78)"):"")+"<br>"+formatWhole(player.mc.mechEn.times(tmp.mc.mechEnMult))+" / "+formatWhole(cost.mc)+" 机械能量"+(tmp.nerdMode?(" (1e525^(x^2.5)*1e750)"):"")+"<br><br>等级: "+formatWhole(amt)+"<br><br>奖励: 每秒产生 "+formatWhole(data.effect)+" 人工意识"+(tmp.nerdMode?" (4^x-1)":".");
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -9624,12 +9626,12 @@ addLayer("ai", {
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "Delete all AI Nodes",
+				title: "删除所有 AI 节点",
 				display: "",
 				unlocked() { return player.ai.unlocked },
 				canClick() { return player.ai.unlocked && player.ai.upgrades.length>0 },
 				onClick() { 
-					if (!confirm("Are you sure you want to delete all AI Nodes? This will force an AI reset!")) return;
+					if (!confirm("你确定要删除所有节点吗？会强制进行一次 AI 重置！")) return;
 					player.ai.upgrades = [];
 					doReset("ai", true);
 				},
@@ -9638,29 +9640,31 @@ addLayer("ai", {
 		},
 })
 /*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                    
+                    
+                    
+                    
+                    
+                    
+    cccccccccccccccc
+  cc:::::::::::::::c
+ c:::::::::::::::::c
+c:::::::cccccc:::::c
+c::::::c     ccccccc
+c:::::c             
+c:::::c             
+c::::::c     ccccccc
+c:::::::cccccc:::::c
+ c:::::::::::::::::c
+  cc:::::::::::::::c
+    cccccccccccccccc
+                    
+                    
+                    
+                    
+                    
+                    
+                    
 */
 addLayer("c", {
 		name: "civilizations", // This is optional, only used in a few places, If absent it just uses the layer id.
@@ -9675,8 +9679,8 @@ addLayer("c", {
         }},
         color: "#edb3ff",
         requires() { return Decimal.sub(108, hasAchievement("a", 164)?player.c.buyables[11].times(2):0).max(8) }, // Can be a function that takes requirement increases into account
-        resource: "civilization power", // Name of prestige currency
-        baseResource: "imperium bricks", // Name of resource prestige is based on
+        resource: "文明力量", // Name of prestige currency
+        baseResource: "砖石", // Name of resource prestige is based on
         baseAmount() {return player.i.points}, // Get the current amount of baseResource
 		roundUpCost: true,
         type: "static", // normal: cost to gain currency depends on amount gained. static: cost depends on how much you already have
@@ -9692,7 +9696,7 @@ addLayer("c", {
 		canBuyMax() { return false },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "C", description: "Press Shift+C to Civilization Reset", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "C", description: "按 Shift+C 进行文明重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return false },
         doReset(resettingLayer){ 
@@ -9723,37 +9727,37 @@ addLayer("c", {
 			"resource-display", "blank",
 			["row", [
 				["column", [
-					["display-text", "<h3>Civ<sub>1</sub></h3>"],
-					["display-text", function() { return (player.c.assigned[0].gt(0)?("Population: "+formatWhole(player.c.assigned[0])+"<br>"):"")+"Power: "+format(tmp.c.power[1].times(100))+"%" }], "blank",
-					["display-text", function() { return "Effect: +"+format(tmp.c.eff1.times(100))+"% Hyper Building Power" }],
+					["display-text", "<h3>文明<sub>1</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[0].gt(0)?("人口: "+formatWhole(player.c.assigned[0])+"<br>"):"")+"力量: "+format(tmp.c.power[1].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: +"+format(tmp.c.eff1.times(100))+"% 超建筑增益" }],
 					"blank", ["clickable", 11],
 				], function() { return {width: "9em", visibility: player.c.points.gte(1)?"visible":"hidden"}}],
 				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(2)?"visible":"hidden"}}],
 				["column", [
-					["display-text", "<h3>Civ<sub>2</sub></h3>"],
-					["display-text", function() { return (player.c.assigned[1].gt(0)?("Population: "+formatWhole(player.c.assigned[1])+"<br>"):"")+"Power: "+format(tmp.c.power[2].times(100))+"%" }], "blank",
-					["display-text", function() { return "Effect: Divide Thought requirement by "+format(tmp.c.eff2) }],
+					["display-text", "<h3>文明<sub>2</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[1].gt(0)?("人口: "+formatWhole(player.c.assigned[1])+"<br>"):"")+"力量: "+format(tmp.c.power[2].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 将思考需求除以 "+format(tmp.c.eff2) }],
 					"blank", ["clickable", 12],
 				], function() { return {width: "9em", visibility: player.c.points.gte(2)?"visible":"hidden"}}],
 				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(3)?"visible":"hidden"}}],
 				["column", [
-					["display-text", "<h3>Civ<sub>3</sub></h3>"],
-					["display-text", function() { return (player.c.assigned[2].gt(0)?("Population: "+formatWhole(player.c.assigned[2])+"<br>"):"")+"Power: "+format(tmp.c.power[3].times(100))+"%" }], "blank",
-					["display-text", function() { return "Effect: Multiply Signal gain by "+format(tmp.c.eff3) }],
+					["display-text", "<h3>文明<sub>3</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[2].gt(0)?("人口: "+formatWhole(player.c.assigned[2])+"<br>"):"")+"力量: "+format(tmp.c.power[3].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 将信号获取乘以 "+format(tmp.c.eff3) }],
 					"blank", ["clickable", 13],
 				], function() { return {width: "9em", visibility: player.c.points.gte(3)?"visible":"hidden"}}],
 				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(4)?"visible":"hidden"}}],
 				["column", [
-					["display-text", "<h3>Civ<sub>4</sub></h3>"],
-					["display-text", function() { return (player.c.assigned[3].gt(0)?("Population: "+formatWhole(player.c.assigned[3])+"<br>"):"")+"Power: "+format(tmp.c.power[4].times(100))+"%" }], "blank",
-					["display-text", function() { return "Effect: Multiply Damned Soul & Mech-Energy gain by "+format(tmp.c.eff4) }],
+					["display-text", "<h3>文明<sub>4</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[3].gt(0)?("人口: "+formatWhole(player.c.assigned[3])+"<br>"):"")+"力量: "+format(tmp.c.power[4].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 恶魂和机械能量获取乘以 "+format(tmp.c.eff4) }],
 					"blank", ["clickable", 14],
 				], function() { return {width: "9em", visibility: player.c.points.gte(4)?"visible":"hidden"}}],
 				["tall-display-text", "<div class='vl2'></div>", function() { return {height: "223.667px", visibility: player.c.points.gte(5)?"visible":"hidden"}}],
 				["column", [
-					["display-text", "<h3>Civ<sub>5</sub></h3>"],
-					["display-text", function() { return (player.c.assigned[4].gt(0)?("Population: "+formatWhole(player.c.assigned[4])+"<br>"):"")+"Power: "+format(tmp.c.power[5].times(100))+"%" }], "blank",
-					["display-text", function() { return "Effect: Super Boosters & Neural Networks are "+format(tmp.c.eff5.sub(1).times(100))+"% stronger" }],
+					["display-text", "<h3>文明<sub>5</sub></h3>"],
+					["display-text", function() { return (player.c.assigned[4].gt(0)?("人口: "+formatWhole(player.c.assigned[4])+"<br>"):"")+"力量: "+format(tmp.c.power[5].times(100))+"%" }], "blank",
+					["display-text", function() { return "效果: 超级增幅器和神经网络增强 "+format(tmp.c.eff5.sub(1).times(100))+"%" }],
 					"blank", ["clickable", 15],
 				], function() { return {width: "9em", visibility: player.c.points.gte(5)?"visible":"hidden"}}],
 			], function() { return {visibility: player.c.unlocked?"visible":"hidden"} }], "blank", "blank",
@@ -9767,11 +9771,11 @@ addLayer("c", {
 				player.c.gainedPower = [new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0), new Decimal(0)];
                 doReset(this.layer, true);
             },
-			respecText: "Reset Populations",
+			respecText: "重置人口",
 			rows: 1,
 			cols: 1,
 			11: {
-				title: "Population",
+				title: "人口",
 				cost(x=player[this.layer].buyables[this.id]) {
 					return Decimal.pow(1.5, x.pow(1.1)).times(4e5).round();
 				},
@@ -9785,7 +9789,7 @@ addLayer("c", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = formatWhole(player.ai.points)+" / "+formatWhole(cost)+" Superintelligence"+(tmp.nerdMode?(" (1.5^(x^1.1))*400,000"):"")+"<br><br>Population: "+formatWhole(amt)+" / "+formatWhole(data.cap);
+                    let display = formatWhole(player.ai.points)+" / "+formatWhole(cost)+" 超级智能"+(tmp.nerdMode?(" (1.5^(x^1.1))*400,000"):"")+"<br><br>人口: "+formatWhole(amt)+" / "+formatWhole(data.cap);
 					return display;
                 },
                 unlocked() { return unl(this.layer) && player.c.points.gte(6) }, 
@@ -9807,7 +9811,7 @@ addLayer("c", {
 			rows: 1,
 			cols: 5,
 			11: {
-				title: "+1 Population",
+				title: "+1 人口",
 				display: "",
 				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
 				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[0]) },
@@ -9817,7 +9821,7 @@ addLayer("c", {
 				style: {width: "120px", height: "50px", "border-radius": "0px"},
 			},
 			12: {
-				title: "+1 Population",
+				title: "+1 人口",
 				display: "",
 				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
 				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[1]) },
@@ -9827,7 +9831,7 @@ addLayer("c", {
 				style: {width: "120px", height: "50px", "border-radius": "0px"},
 			},
 			13: {
-				title: "+1 Population",
+				title: "+1 人口",
 				display: "",
 				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
 				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[2]) },
@@ -9837,7 +9841,7 @@ addLayer("c", {
 				style: {width: "120px", height: "50px", "border-radius": "0px"},
 			},
 			14: {
-				title: "+1 Population",
+				title: "+1 人口",
 				display: "",
 				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
 				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[3]) },
@@ -9847,7 +9851,7 @@ addLayer("c", {
 				style: {width: "120px", height: "50px", "border-radius": "0px"},
 			},
 			15: {
-				title: "+1 Population",
+				title: "+1 人口",
 				display: "",
 				unlocked() { return player.c.unlocked && player.c.points.gte(6) },
 				canClick() { return player.c.unlocked && player.c.points.gte(6) && layers.c.totalAssigned().lt(player.c.buyables[11]) && layers.c.minAssigned().eq(player.c.assigned[4]) },
@@ -10351,40 +10355,40 @@ addLayer("a", {
 				image: "images/achs/153.png",
 			},
 			154: {
-				name: "Floating Prism",
+				name: "悬浮棱镜",
 				done() { return player.ne.thoughts.gte(625) && player.ne.points.lt(player.id.points) },
-				tooltip: "Reach 625 Thoughts while having less Neurons than Ideas.",
+				tooltip: "在神经元少于想法的情况下，达到 625 思考。",
 				image: "images/achs/154.png",
 			},
 			155: {
-				name: "Epic Big Brain",
+				name: "超级大脑",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ne.thoughts.gte(1000) },
-				tooltip: "Reach 1,000 Thoughts. Reward: The Idea effect is increased by 0.005.",
+				tooltip: "达到 1,000 思考。\n 奖励: 想法效果增加 0.005。",
 				image: "images/achs/155.png",
 			},
 			161: {
-				name: "The World is Ours!",
+				name: "世界属于我们！",
 				done() { return player.ai.unlocked },
-				tooltip: "Unlock AI. Reward: Permanently keep Neuron milestone 6, Robot milestones 2 & 5, & Idea milestone 4.",
+				tooltip: "解锁 AI。\n奖励: 永远保留神经元里程碑 6、机器人里程碑 2 和 5、想法里程碑 4。",
 				image: "images/achs/161.png",
 			},
 			162: {
-				name: "What a useless feature!",
+				name: "这功能咋没用啊？",
 				done() { return tmp.id.rev.gte(1650) && player.ai.upgrades.length==0 },
-				tooltip: "Reach 1,650 Revelations without any AI Nodes.",
+				tooltip: "无 AI 节点达到 1,650 启示。",
 				image: "images/achs/162.png",
 			},
 			163: {
-				name: "I Own The World",
+				name: "坐拥天下",
 				done() { return player.c.unlocked },
-				tooltip() { return "Unlock Civilizations. Reward: Ideas multiply Artificial Consciousness gain, and divide the Mastery requirement by 1.1 for each achievement in this row and below (/"+format(Decimal.pow(1.1, player.a.achievements.filter(x => x>160).length))+")." },
+				tooltip() { return "解锁文明。\n奖励: 想法乘以人工意识获取，这一行及以下的每个成就将支配需求除以 1.1（/"+format(Decimal.pow(1.1, player.a.achievements.filter(x => x>160).length))+"）。" },
 				image: "images/achs/163.png",
 			},
 			164: {
-				name: "Existence was a Mistake",
+				name: "存在即错误",
 				done() { return player.c.buyables[11].gte(1) },
-				tooltip() { return "Get a Population of at least 1. Reward: Always have the first & fifth Idea milestones, and each Population decreases the Civilization requirement by 2 (-"+formatWhole(player.c.buyables[11].times(2).min(100))+", caps at -100)." },
+				tooltip() { return "获得至少 1 人口。\n奖励: 永远保留想法里程碑 1/5，每人口降低文明力量需求 2（-"+formatWhole(player.c.buyables[11].times(2).min(100))+"，上限位于 -100）。" },
 				image: "images/achs/164.png",
 			},
 			165: {
@@ -10661,7 +10665,7 @@ addLayer("ab", {
 			style: {"background-color"() { return player.hs.auto?"#dfdfff":"#666666" }},
 		},
 		52: {
-			title: "Gear Upgrades",
+			title: "齿轮升级",
 			display() { return hasMilestone("ge", 3)?(player.ge.auto?"开":"关"):"禁用" },
 			unlocked() { return player.ai.unlocked && player.ge.unlocked },
 			canClick() { return hasMilestone("ge", 3) },
@@ -10669,7 +10673,7 @@ addLayer("ab", {
 			style: {"background-color"() { return player.ge.auto?"#ababab":"#666666" }},
 		},
 		53: {
-			title: "Shell Expansion",
+			title: "命令行扩展",
 			display() {
 				return hasMilestone("id", 3)?(player.mc.autoSE?"开":"关"):"禁用"
 			},
@@ -10679,7 +10683,7 @@ addLayer("ab", {
 			style: {"background-color"() { return player.mc.autoSE?"#c99a6b":"#666666" }},
 		},
 		54: {
-			title: "Motherboard",
+			title: "主板",
 			display() { return hasMilestone("mc", 1)?(player.mc.auto?"开":"关"):"禁用" },
 			unlocked() { return player.ai.unlocked && player.mc.unlocked },
 			canClick() { return hasMilestone("mc", 1) },
@@ -10697,7 +10701,7 @@ addLayer("ab", {
 			style: {"background-color"() { return player.ne.auto?"#ded9ff":"#666666" }},
 		},
 		62: {
-			title: "Neural Networks",
+			title: "神经网络",
 			display() {
 				return hasMilestone("ne", 7)?(player.ne.autoNN?"开":"关"):"禁用"
 			},
@@ -10707,7 +10711,7 @@ addLayer("ab", {
 			style: {"background-color"() { return player.ne.autoNN?"#ded9ff":"#666666" }},
 		},
 		63: {
-			title: "Ideas",
+			title: "想法",
 			display() { return hasMilestone("id", 4)?(player.id.auto?"开":"关"):"禁用" },
 			unlocked() { return player.id.unlocked && player.ai.unlocked },
 			canClick() { return hasMilestone("id", 4) },

@@ -247,12 +247,12 @@ const SOFTCAPS = {
 		info() { return "开始于 "+format(this.start)+" 免费诡异层, 基于  "+format(this.mag)+" 次根的指数" },
 	},
 	posBuff: {
-		title: "Positivity Buff",
+		title: "积极效果",
 		type: "root",
 		start() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("ba"):false)?"1e400":1e6) },
 		mag: new Decimal(3),
 		display() { return player.ba.unlocked && tmp.ba.posBuff.gte(this.start()) },
-		info() { return "开始于 "+format(this.start())+"x, cube rooted" },
+		info() { return "开始于 "+format(this.start())+"x, 三次根" },
 	},
 	negBuff: {
 		title: "消极效果",
