@@ -466,7 +466,7 @@ addLayer("b", {
 			},
 			12: {
 				title: "交叉污染",
-				description: "生成器加成增幅器基础。",
+				description: "生成器加成增幅器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1250:7) },
 				effect() {
 					let ret = player.g.points.add(1).log10().sqrt().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -485,7 +485,7 @@ addLayer("b", {
 			},
 			13: {
 				title: "PB 反转",
-				description: "总声望加成增幅器基础。",
+				description: "总声望加成增幅器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1436:8) },
 				effect() { 
 					let ret = player.p.total.add(1).log10().add(1).log10().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1) 
@@ -543,7 +543,7 @@ addLayer("b", {
 			},
 			24: {
 				title: "增幅递归",
-				description: "增幅器加成增幅器基础。",
+				description: "增幅器加成增幅器底数。",
 				cost() { return tmp.h.costMult11b.times(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?1438:2225) },
 				pseudoUnl() { return player.i.buyables[12].gte(1)&&hasUpgrade("b", 23) },
 				pseudoReq: "需要: 无妖术下获得 2,150 增幅器",
@@ -775,7 +775,7 @@ addLayer("g", {
 			},
 			12: {
 				title: "给我更多！",
-				description: "增幅器加成生成器基础。",
+				description: "增幅器加成生成器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?375:7) },
 				effect() { 
 					let ret = player.b.points.add(1).log10().sqrt().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -792,7 +792,7 @@ addLayer("g", {
 			},
 			13: {
 				title: "给我更多 II",
-				description: "最多声望加成生成器基础。",
+				description: "最多声望加成生成器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?381:8) },
 				effect() { 
 					let ret = player.p.best.add(1).log10().add(1).log10().div(3).times(hasUpgrade("e", 14)?upgradeEffect("e", 14):1);
@@ -906,7 +906,7 @@ addLayer("g", {
 			},
 			31: {
 				title: "荒诞生成器",
-				description: "GP 加成超级生成器基础。",
+				description: "GP 加成超级生成器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"1e47545":"e4.4e7") },
 				currencyDisplayName: "GP",
                 currencyInternalName: "power",
@@ -1145,7 +1145,7 @@ addLayer("t", {
 			cols: 5,
 			11: {
 				title: "伪增幅",
-				description: "非扩展时空胶囊加成增幅器基础。",
+				description: "非扩展时空胶囊加成增幅器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?750:2) },
 				unlocked() { return player.t.unlocked },
 				effect() { 
@@ -1238,8 +1238,8 @@ addLayer("t", {
 				unlocked() { return hasAchievement("a", 33) },
 			},
 			25: {
-				title: "基础",
-				description: "TE 加成增幅器基础。",
+				title: "底数",
+				description: "TE 加成增幅器底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?'1e9000':3e19) },
 				currencyDisplayName: "TE",
 				currencyInternalName: "energy",
@@ -1275,7 +1275,7 @@ addLayer("t", {
 			},
 			33: {
 				title: "近似无限",
-				description: "TE 加成 TE 上限基础。",
+				description: "TE 加成 TE 上限底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?759:750) },
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
 				pseudoReq: "需要: 30 幽魂",
@@ -1311,7 +1311,7 @@ addLayer("t", {
 			},
 			41: {
 				title: "亚时态之幂",
-				description: "将子空间基础提高至 1.5 次幂，同时增加超空间能量获取 2,500x。",
+				description: "将子空间底数提高至 1.5 次幂，同时增加超空间能量获取 2,500x。",
 				cost: new Decimal(1050),
 				pseudoUnl() { return player.i.buyables[12].gte(4)&&player.t.upgrades.length>=9 },
 				pseudoReq: "需要: 1e60 荣耀 & 1e575 魂力",
@@ -1496,7 +1496,7 @@ addLayer("e", {
 					let exp = 1
 					return {g: player.b.points.add(1).log10().pow(exp), b: player.g.points.add(1).log10().pow(exp)} 
 				},
-				effectDisplay() { return "生成器基础+"+format(tmp.e.upgrades[11].effect.g)+"，增幅器基础+"+format(tmp.e.upgrades[11].effect.b) },
+				effectDisplay() { return "生成器底数+"+format(tmp.e.upgrades[11].effect.g)+"，增幅器底数+"+format(tmp.e.upgrades[11].effect.b) },
 				formula: "log(x+1)",
 			},
 			12: {
@@ -1525,7 +1525,7 @@ addLayer("e", {
 			},
 			14: {
 				title: "更多添加物",
-				description: "对于增幅器和生成器基础的任何增幅器和生成器升级效果 x4。",
+				description: "对于增幅器和生成器底数的任何增幅器和生成器升级效果 x4。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e1.01e5":3e23) },
 				unlocked() { return hasAchievement("a", 33) },
 				effect() {
@@ -1573,7 +1573,7 @@ addLayer("e", {
 			},
 			31: {
 				title: "放大",
-				description: "增强子的第二个效果同样生效于超级增幅器、超级生成器和子空间基础。",
+				description: "增强子的第二个效果同样生效于超级增幅器、超级生成器和子空间底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e3450000":"e4125000") },
 				pseudoUnl() { return player.i.buyables[12].gte(3)&&player.e.upgrades.length>=7 },
 				pseudoReq: "需要: 无超级增幅器和超级生成器达到e2,464,000 增强（使用第四行重置）。",
@@ -1661,7 +1661,7 @@ addLayer("e", {
                     let data = tmp[this.layer].buyables[this.id]
                     return (tmp.nerdMode?("价格公式: 2^("+((player[this.layer].buyables[this.id].gte(25)&&data.costScalingEnabled)?"((x^2)/25)":"x")+"^1.5)"):("价格: " + formatWhole(data.cost) + " 增强"))+"\n\
                     数量: " + formatWhole(player[this.layer].buyables[this.id])+(tmp.e.freeEnh.gt(0)?(" + "+formatWhole(tmp.e.freeEnh)):"") + "\n\
-                   "+(tmp.nerdMode?(" 公式 1: 25^(x^"+format(data.power.times(1.1))+")\n\ 公式 2: x^"+format(data.power.times(0.8))):(" 增幅声望获取 " + format(data.effect.first) + "x 并提高增幅器和生成器的基础 " + format(data.effect.second)))+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
+                   "+(tmp.nerdMode?(" 公式 1: 25^(x^"+format(data.power.times(1.1))+")\n\ 公式 2: x^"+format(data.power.times(0.8))):(" 增幅声望获取 " + format(data.effect.first) + "x 并提高增幅器和生成器的底数 " + format(data.effect.second)))+(inChallenge("h", 31)?("\n剩余购买量: "+String(10-player.h.chall31bought)):"")
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
@@ -2007,7 +2007,7 @@ addLayer("s", {
 			},
 			34: {
 				title: "能量还原",
-				description: "空间能量降低前五个建筑的价格基础。",
+				description: "空间能量降低前五个建筑的价格底数。",
 				cost() { return new Decimal(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes(this.layer):false)?"e9.01e5":"e1.95e8") },
 				currencyDisplayName: "GP",
 				currencyInternalName: "power",
@@ -2137,7 +2137,7 @@ addLayer("s", {
                     let data = tmp[this.layer].buyables[this.id]
                     return (tmp.nerdMode?("价格公式: "+format(tmp.s.buildingBaseCosts[this.id])+"^((x*"+format(tmp.s.buildScalePower)+")^"+format(tmp[this.layer].buyables[this.id].costExp)+")*"+format(tmp.s.buildingBaseCosts[this.id])+"/"+format(tmp.s.divBuildCosts)):("价格: " + formatWhole(data.cost) + " GP"))+"\n\
                     等级: " + formatWhole(player[this.layer].buyables[this.id])+(data.freeLevels.gt(0)?(" + "+formatWhole(data.freeLevels)):"") + "\n\
-                    "+(tmp.nerdMode?("公式: sqrt(等级)"):("加成增幅器和生成器基础 +" + format(data.effect)))
+                    "+(tmp.nerdMode?("公式: sqrt(等级)"):("加成增幅器和生成器底数 +" + format(data.effect)))
                 },
                 unlocked() { return player[this.layer].unlocked }, 
                 canAfford() {
@@ -2680,7 +2680,7 @@ addLayer("sb", {
 			return Decimal.pow(this.effectBase(), player.sb.points).max(0);
 		},
 		effectDescription() {
-			return "增幅增幅器基础 "+format(tmp.sb.effect)+"x"+(tmp.nerdMode?("\n (每个 "+format(tmp.sb.effectBase)+"x)"):"")
+			return "增幅增幅器底数 "+format(tmp.sb.effect)+"x"+(tmp.nerdMode?("\n (每个 "+format(tmp.sb.effectBase)+"x)"):"")
 		},
 		doReset(resettingLayer){ 
 			let keep = []
@@ -2805,7 +2805,7 @@ addLayer("sg", {
 			"prestige-button",
 			"blank",
 			["display-text",
-				function() {return '你有 ' + format(player.sg.power) + ' 超级 GP，增幅生成器基础 '+format(tmp.sg.enEff)+'x'+(tmp.nerdMode?(" (sqrt(x+1))"):"")},
+				function() {return '你有 ' + format(player.sg.power) + ' 超级 GP，增幅生成器底数 '+format(tmp.sg.enEff)+'x'+(tmp.nerdMode?(" (sqrt(x+1))"):"")},
 					{}],
 			"blank",
 			["display-text", function() { return ((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("sg"):false)?("你的超级生成器为你提供了 <h3 style='color: #84b88a; text-shadow: #78c48f 0px 0px 10px;'>"+formatWhole(tmp.sg.spectralTotal)+"</h3> 虚生成器"+(tmp.nerdMode?(" (((log(timeSinceRow4Reset+1)*(SG^2))^0.95)*1.2)"):"")+"，计算入生成器效果，但不计入生成器相关的升级效果。"):"" }],
@@ -2970,12 +2970,12 @@ addLayer("h", {
 			12: {
 				name: "速度之魔",
 				completionLimit: 1,
-				challengeDescription: "增幅器/生成器基础被时间消减（你的超级增幅器会放大此效果）。",
+				challengeDescription: "增幅器/生成器底数被时间消减（你的超级增幅器会放大此效果）。",
 				unlocked() { return hasChallenge("h", 11) },
 				goal() { return new Decimal(player.ma.current=="h"?"e5e8":"1e3550") },
 				currencyDisplayName: "点数",
 				currencyInternalName: "points",
-				rewardDescription() { return "超级增幅器基础增加 0.25"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false)?(" 并以超空间能量加成它"):"")+"。" },
+				rewardDescription() { return "超级增幅器底数增加 0.25"+(((Array.isArray(tmp.ma.mastered))?tmp.ma.mastered.includes("h"):false)?(" 并以超空间能量加成它"):"")+"。" },
 			},
 			21: {
 				name: "空间紧缺",
@@ -3404,7 +3404,7 @@ addLayer("q", {
 			},
 			12: {
 				title: "回到第 2 层",
-				description: "总诡异加成增幅器/生成器基础。",
+				description: "总诡异加成增幅器/生成器底数。",
 				cost() { return player.q.time.plus(1).pow(1.4).times(500).pow(player.ma.current=="q"?(Math.pow(this.id, this.id/10)*(this.id-10)):1) },
 				costFormula: "500*(time+1)^1.4",
 				currencyDisplayName: "QE",
@@ -3511,7 +3511,7 @@ addLayer("q", {
 			},
 			25: {
 				title: "高级洋葱",
-				description: "星云砖降低诡异层价格基础。",
+				description: "星云砖降低诡异层价格底数。",
 				cost() { return Decimal.pow("e3e6", player.q.time.times(4).plus(1).log10().pow(2)).times("e2e7") },
 				costFormula: "(e3,000,000^(log(time*4+1)^2))*e20,000,000",
 				currencyDisplayName: "QE",
@@ -3560,7 +3560,7 @@ addLayer("q", {
 			},
 			34: {
 				title: "增幅狂怒",
-				description: "任何增加增幅器基础的东西都会以较低的比例对其做乘法。",
+				description: "任何增加增幅器底数的东西都会以较低的比例对其做乘法。",
 				cost() { return player.q.time.plus(1).pow(15).times(2.5e94).pow(player.ma.current=="q"?(this.id/1.85):1) },
 				costFormula: "2.5e94*(time+1)^15",
 				currencyDisplayName: "QE",
@@ -3766,7 +3766,7 @@ addLayer("q", {
 			42: {
 				num: 281,
 				title: "子空间改良",
-				description: "子空间基础增强。",
+				description: "子空间底数提高。",
 				unlocked() { return (tmp.ps.buyables[11].effects.quirkImpr||0)>=2 },
 				effect() { return Decimal.pow(10, Decimal.pow(getImprovements("q", 42).plus(tmp.q.impr.free), 0.75)) },
 				effectDisplay() { return format(tmp.q.impr[42].effect)+"x" },
@@ -3972,7 +3972,7 @@ addLayer("o", {
                     let display = ("献祭你所有的阳光和 SE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 差旋层电浆\n"+
 					"需要: 100 阳光、2,500 SE\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: "+(hasUpgrade("p", 24)?"10^cbrt(log(x+1))":"log(log(x+1)+1)*10+1")):("效果: 加成超级增幅器基础和诡异层 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
+					(tmp.nerdMode?("公式: "+(hasUpgrade("p", 24)?"10^cbrt(log(x+1))":"log(log(x+1)+1)*10+1")):("效果: 加成超级增幅器底数和诡异层 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked }, 
@@ -3997,7 +3997,7 @@ addLayer("o", {
                     let display = ("献祭所有阳光、SE 和子空间，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 对流能\n"+
 					"需要: 1e3 阳光、2e5 SE 和 10 子空间\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: (log(x+1)+1)^2.5"):("效果: 加成时间胶囊基础和子空间获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
+					(tmp.nerdMode?("公式: (log(x+1)+1)^2.5"):("效果: 加成时间胶囊底数和子空间获取 "+format(tmp[this.layer].buyables[this.id].effect) + 'x'))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked&&player.ss.unlocked }, 
@@ -4029,7 +4029,7 @@ addLayer("o", {
                     let display = ("献祭所有阳光、SE、子空间和 QE，获得 "+formatWhole(tmp[this.layer].buyables[this.id].gain)+" 日冕波动\n"+
 					"需要: 1e5 阳光、1e30 SE、5e8 子空间和 1e675 QE\n"+
 					"数量: " + formatWhole(player[this.layer].buyables[this.id])+((tmp.o.multiplyBuyables||new Decimal(1)).eq(1)?"":(" x "+format(tmp.o.multiplyBuyables))))+"\n"+
-					(tmp.nerdMode?("公式: log(log(x+1)+1)"):("效果: 子空间基础+"+format(tmp[this.layer].buyables[this.id].effect)+"，太阳能+"+format(tmp[this.layer].buyables[this.id].effect.times(100))+"%"))
+					(tmp.nerdMode?("公式: log(log(x+1)+1)"):("效果: 子空间底数+"+format(tmp[this.layer].buyables[this.id].effect)+"，太阳能+"+format(tmp[this.layer].buyables[this.id].effect.times(100))+"%"))
 					return display;
                 },
                 unlocked() { return player[this.layer].unlocked&&hasUpgrade("ss", 41) }, 
@@ -4379,7 +4379,7 @@ addLayer("ss", {
 			},
 			32: {
 				title: "超越无限",
-				description: "诡异层加成子空间能量和超级生成器基础。.",
+				description: "诡异层加成子空间能量和超级生成器底数。.",
 				cost() { return new Decimal((player.ma.current=="ss")?1628:43) },
 				currencyDisplayName: "空间能量",
 				currencyInternalName: "points",
@@ -4601,7 +4601,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 增幅器基础提升至 ^1.05 次幂， x" + format(data.effect)+"\n\
+                    let display = "效果: 增幅器底数提升至 ^1.05 次幂， x" + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: ((log(inserted+1)+1)/2+1)/1.5"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4639,7 +4639,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 时间胶囊基础提升至 ^1.1 次幂， x" + format(data.effect)+"\n\
+                    let display = "效果: 时间胶囊底数提升至 ^1.1 次幂， x" + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: ((log(inserted+1)+1)/5+1)/1.2"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4784,7 +4784,7 @@ addLayer("m", {
 				},
 				display() { // Everything else displayed in the buyable button after the title
                     let data = tmp[this.layer].buyables[this.id]
-                    let display = "效果: 超级生成器基础乘以 " + format(data.effect)+"\n\
+                    let display = "效果: 超级生成器底数乘以 " + format(data.effect)+"\n\
 					时间: "+formatTime(player.m.spellTimes[this.id]||0);
 					if (hasMilestone("m", 3)) display += "\n "+(tmp.nerdMode?("公式: (log(inserted+1)+1)^400"):("待插入: "+formatWhole(tmp.m.spellInputAmt.div((player.m.distrAll && hasMilestone("m", 4))?tmp.m.spellsUnlocked:1))));
 					return display;
@@ -4963,7 +4963,7 @@ addLayer("ba", {
 				["column", [["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(1-barPercent/100)*(1-barBercent/100)"+(tmp.ba.negGainMult.eq(1)?"":("*"+format(tmp.ba.negGainMult)))):("+"+format(tmp.ba.negGain)+"/sec")}, {}], ["display-text", function() {return "消极: "+format(player.ba.neg)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: "+((hasUpgrade("ba", 13))?"(x+1)^10":"x+1")):("效果: 加成诡异层 "+format(tmp.ba.negBuff) + "x"))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: "+(hasUpgrade("ba", 14)?"sqrt(log(x+1)+1)"+(inChallenge("h", 41)?"^100":"")+"/2":"sqrt(log(x+1)+1)")):("惩罚: 将积极效果除以 "+format(tmp.ba.negNerf)))}, {}], "blank", ["row", [["upgrade", 11], ["upgrade", 13]]]], {"max-width": "240px"}], 
 				"blank", "blank", "blank", 
 				["column", 
-				[["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(barPercent/100)*(barBercent/100)"+(tmp.ba.posGainMult.eq(1)?"":("*"+format(tmp.ba.posGainMult)))):("+"+format(tmp.ba.posGain)+"/sec")}, {}], ["display-text", function() {return "积极: "+format(player.ba.pos)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: log(x+1)+1"):("效果: 加成子空间和时间基础 "+format(tmp.ba.posBuff + "x")))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: sqrt(x+1)"+(inChallenge("h", 41)?"^100":"")):("惩罚: 将消极效果除以 "+format(tmp.ba.posNerf)))}, {}], "blank", ["row", [["upgrade", 14], ["upgrade", 12]]]], {"max-width": "240px"}]], {"visibility": function() { return player.ba.unlocked?"visible":"hidden" }}],
+				[["display-text", function() {return tmp.nerdMode?("获取公式: "+format(tmp.ba.dirBase)+"^(barPercent/100)*(barBercent/100)"+(tmp.ba.posGainMult.eq(1)?"":("*"+format(tmp.ba.posGainMult)))):("+"+format(tmp.ba.posGain)+"/sec")}, {}], ["display-text", function() {return "积极: "+format(player.ba.pos)}, {}], ["display-text", function() {return (tmp.nerdMode?("效果公式: log(x+1)+1"):("效果: 加成子空间和时间底数 "+format(tmp.ba.posBuff + "x")))}, {}], ["display-text", function() {return tmp.ba.noNerfs?"":(tmp.nerdMode?("惩罚公式: sqrt(x+1)"+(inChallenge("h", 41)?"^100":"")):("惩罚: 将消极效果除以 "+format(tmp.ba.posNerf)))}, {}], "blank", ["row", [["upgrade", 14], ["upgrade", 12]]]], {"max-width": "240px"}]], {"visibility": function() { return player.ba.unlocked?"visible":"hidden" }}],
 			["row", [["upgrade", 22], ["upgrade", 21], ["upgrade", 23]]],
 			["row", [["upgrade", 31], ["upgrade", 24], ["upgrade", 32]]],
 			["upgrade", 33],
@@ -5128,7 +5128,7 @@ addLayer("ba", {
 			},
 			32: {
 				title: "实体重生",
-				description: "积极加成超级生成器基础。",
+				description: "积极加成超级生成器底数。",
 				cost() { return new Decimal(player.ma.current=="ba"?"1e205500":1e52) },
 				currencyDisplayName: "积极",
 				currencyInternalName: "pos",
@@ -5521,7 +5521,7 @@ addLayer("ps", {
 			32: {
 				num: 1751,
 				title: "幽魂增幅器 VI",
-				description: "幽魂降低幽魂价格基础。",
+				description: "幽魂降低幽魂价格底数。",
 				unlocked() { return hasMilestone("hn", 7) && player.i.buyables[14].gte(2) },
 				effect() { return getImprovements("ps", 31).times(tmp.ps.impr.power).pow(2).times(player.ps.points).plus(1).log10().plus(1).pow(1.2) },
 				effectDisplay() { return "降低至 "+format(tmp.ps.impr[32].effect)+" 次根" },
@@ -5964,7 +5964,7 @@ addLayer("hn", {
 			},
 			35: {
 				title: "不致死",
-				description: "紫尘蓝尘加成子空间基础。",
+				description: "紫尘蓝尘加成子空间底数。",
 				multiRes: [
 					{
 						cost: new Decimal(1.5e13),
@@ -6094,7 +6094,7 @@ addLayer("hn", {
 			},
 			52: {
 				title: "循环生长",
-				description: "<b>差旋层电浆</b> 加成超级生成器基础。",
+				description: "<b>差旋层电浆</b> 加成超级生成器底数。",
 				multiRes: [
 					{
 						cost() { return new Decimal(player.ma.current=="hn"?"1e30000":1e7) },
@@ -6279,13 +6279,13 @@ addLayer("n", {
 				
 				(second?["column", [["clickable", 11], ["display-text", ("加成魔法获取 <span style='color: #ee82ee; font-size: 24px'>"+format(tmp.n.dustEffs2.purpleBlue)+"x</span>"+(tmp.nerdMode?" (效果公式: (purple*blue+1)^10)":" (基于紫尘蓝尘)"))]], {"background-color": "rgba(238, 130, 238, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
-				["row", [["display-text", ("<span style='color: #7569ff; font-size: 24px'>"+format(player.n.blueDust)+"</span> 蓝尘"+(tmp.nerdMode?" (获取公式: (x^0.5)*"+format(tmp.n.dustGainMult.div(1e3))+")":((tmp.n.effect.blue||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.blue||new Decimal(1))+"/sec)"):""))+"<br><br>加成超级增幅器基础 <span style='color: #7569ff; font-size: 24px'>"+format(tmp.n.dustEffs.blue)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^50)":""))]], {"background-color": "rgba(117, 105, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
+				["row", [["display-text", ("<span style='color: #7569ff; font-size: 24px'>"+format(player.n.blueDust)+"</span> 蓝尘"+(tmp.nerdMode?" (获取公式: (x^0.5)*"+format(tmp.n.dustGainMult.div(1e3))+")":((tmp.n.effect.blue||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.blue||new Decimal(1))+"/sec)"):""))+"<br><br>加成超级增幅器底数 <span style='color: #7569ff; font-size: 24px'>"+format(tmp.n.dustEffs.blue)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^50)":""))]], {"background-color": "rgba(117, 105, 255, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
 				(second?["column", [["clickable", 12], ["display-text", ("加成 <b>永恒</b> 和 <b>D 选项</b> 效果 <span style='color: #ba9397; font-size: 24px'>"+format(tmp.n.dustEffs2.blueOrange)+"x</span><br>(不受软上限影响)"+(tmp.nerdMode?" (效果公式: (blue*orange+1)^5)":" (基于蓝尘橙尘)"))]], {"background-color": "rgba(186, 147, 151, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 				
 				["row", [["display-text", ("<span style='color: #ffbd2e; font-size: 24px'>"+format(player.n.orangeDust)+"</span> 橙尘"+(tmp.nerdMode?" (获取公式: (x^0.2)*"+format(tmp.n.dustGainMult.div(5))+")":((tmp.n.effect.orange||new Decimal(1)).lt("1e1000")?(" (+"+format(tmp.n.effect.orange||new Decimal(1))+"/sec)"):""))+"<br><br> 加成所有阳光购买项数量 <span style='color: #ffbd2e; font-size: 24px'>"+format(tmp.n.dustEffs.orange)+"x</span>"+(tmp.nerdMode?" (效果公式: (x+1)^75)":""))]], {"background-color": "rgba(255, 189, 46, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}],
 				
-				(second?["column", [["clickable", 13], ["display-text", ("加成时间胶囊上限基础 <span style='color: #94de95; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (orange*purple+1)^0.6)":" (基于橙尘紫尘)"))]], {"background-color": "rgba(148, 222, 149, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
+				(second?["column", [["clickable", 13], ["display-text", ("加成时间胶囊上限底数 <span style='color: #94de95; font-size: 24px'>"+format(tmp.n.dustEffs2.orangePurple)+"x</span><br>"+(tmp.nerdMode?" (效果公式: (orange*purple+1)^0.6)":" (基于橙尘紫尘)"))]], {"background-color": "rgba(148, 222, 149, 0.25)", width: "50vw", padding: "10px", margin: "0 auto"}]:[]),
 			]],
 			"blank", "blank", ["buyable", 11], "blank", "blank",
 		]},
@@ -7215,7 +7215,7 @@ addLayer("ma", {
         }},
         color: "#ff9f7f",
         requires() { return new Decimal(100) }, // Can be a function that takes requirement increases into account
-        resource: "支配", // Name of prestige currency
+        resource: "专精", // Name of prestige currency
         baseResource: "幽魂", // Name of resource prestige is based on
         baseAmount() {return player.ps.points}, // Get the current amount of baseResource
 		roundUpCost: true,
@@ -7245,7 +7245,7 @@ addLayer("ma", {
 		canBuyMax() { return false },
         row: 6, // Row the layer is in on the tree (0 is the first row)
         hotkeys: [
-            {key: "A", description: "按 Shift+A 进行支配重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
+            {key: "A", description: "按 Shift+A 进行专精重置。", onPress(){if (canReset(this.layer)) doReset(this.layer)}},
         ],
 		resetsNothing() { return false },
         doReset(resettingLayer){ 
@@ -7273,57 +7273,57 @@ addLayer("ma", {
 		rewardDesc() {
 			let desc = "";
 			if (player.ma.mastered.includes("p")) desc += "<h2>声望</h2><br><br><ul><li>基础声望获取指数提高 (0.5 -> 0.75)</li><li><b>声望增益</b> 提高 ^1.1 (软上限之后)</li><li><b>自协同</b> 提高 ^75</li><li><b>更多声望</b> 提高 (+80% -> +1e52%)</li><li><b>力量升级</b> 提高 ^40</li><li><b>翻转声望增益</b> 提高 ^1.5</li></ul><br><br>";
-			if (player.ma.mastered.includes("b")) desc += "<h2>增幅器</h2><br><br><ul><li>降低增幅器价格基础 (5 -> 1.5)</li><li>降低增幅器价格指数 (1.25 -> 0.75)</li><li><b>BP 连击</b> & <b>一折</b> 提高 ^1.5</li><li><b>交叉污染</b> & <b>PB 反转</b> 增幅超级增幅器基础</li><li><b>差的 BP 连击</b> 提高 ^20,000</li><li><b>更更多添加物</b> 提高至立方</li></ul><br><br>";
-			if (player.ma.mastered.includes("g")) desc += "<h2>生成器</h2><br><br><ul><li>生成器价格基础降低 (5 -> 2.5)</li><li>生成器价格指数降低 (1.25 -> 1.1)</li><li>GP 效果提高 ^1.05</li><li><b>GP 连击</b> 提高 ^500,000</li><li><b>给我更多 III</b> 提高 ^10,000</li></ul><br><br>";
-			if (player.ma.mastered.includes("t")) desc += "<h2>时间</h2><br><br><ul><li>时间价格基础降低 (1e15 -> 10)</li><li>时间价格指数降低 (1.85 -> 1.4)</li><li>时间胶囊获得新效果</li><li>任何加成 TE 上限基础的效果增益增幅器和生成器基础（乘）</li><li>TE 第一效果软上限延迟 (e3.1e9)</li><li>扩展时空胶囊价格降低至 ^0.9</li><li><b>伪增益</b> & <b>基础</b> 加成 TE 获取（乘），且效果提升至立方</li><li><b>增强时间</b> 提升至 1.1 次幂</li></ul><br><br>";
-			if (player.ma.mastered.includes("e")) desc += "<h2>增强</h2><br><br><ul><li>增强获取指数提高 (0.02 -> 0.025)</li><li>增强子第二效果提升至 100 次方</li><li><b>增强声望</b> 影响点数获取，且效果提高 ^1.5</li><li><b>进入 E-空间</b> 加强 250%</li><li><b>野兽般增长</b> 基础提高 (1.1 -> 1e2,000)</li><li><b>进阶</b> 提高至立方</li></ul><br><br>";
-			if (player.ma.mastered.includes("s")) desc += "<h2>空间</h2><br><br><ul><li>空间价格基础降低 (1e10 -> 10)</li><li>空间价格指数降低 (1.85 -> 1.4)</li><li>建筑增益除以 3.85，但建筑价格缩放被 5 倍减缓</li></ul><br><br>";
-			if (player.ma.mastered.includes("sb")) desc += "<h2>超级增幅器</h2><br><br><ul><li>超级增幅器价格基础降低 (1.05 -> 1.025)</li><li>超级增幅器价格指数降低 (1.25 -> 1.075)</li><li>超级增幅器价格除以 1.333</li><li>超级增幅器提供虚增幅器</li></ul><br><br>";
-			if (player.ma.mastered.includes("sg")) desc += "<h2>超级生成器</h2><br><br><ul><li>超级生成器价格基础降低 (1.05 -> 1.04)</li><li>超级生成器价格指数降低 (1.25 -> 1.225)</li><li>超级生成器价格除以 1.1</li><li>超级 GP 效果平方</li><li>超级生成器随时间提供虚生成器</li></ul><br><br>";
-			if (player.ma.mastered.includes("q")) desc += "<h2>诡异</h2><br><br><ul><li>诡异获取指数提高 (7.5e-3 -> 8e-3)</li><li>QE 效果软上限开始提高 ^1.5</li><li>诡异层价格基础降低至 ^0.75</li><li><b>千种能力</b> 提高 50%</li><li>第十建筑等级提供免费的诡异改良（等于其等级除以 4）</li></ul><br><br>";
-			if (player.ma.mastered.includes("h")) desc += "<h2>障碍</h2><br><br><ul><li>障碍灵魂获取指数提高 (0.125 -> 0.2)</li><li>障碍灵魂软上限效果变弱 (指数 4 次根 -> 指数 2.5 次根)</li><li>解锁一个新障碍里程碑</li><li><b>速度之魔</b> 有第二效果</li><li><b>空间紧缺</b> 提高 40%</li><li><b>永恒</b> & <b>D 选项</b> 不再有完成次数限制</li><li><b>永恒</b> 效果提升 ^5</li><li><b>减产</b>对诡异层价格基础的削弱更强 (0.15 -> 0.2)</li></ul><br><br>";
+			if (player.ma.mastered.includes("b")) desc += "<h2>增幅器</h2><br><br><ul><li>降低增幅器价格底数 (5 -> 1.5)</li><li>降低增幅器价格指数 (1.25 -> 0.75)</li><li><b>BP 连击</b> & <b>一折</b> 提高 ^1.5</li><li><b>交叉污染</b> & <b>PB 反转</b> 增幅超级增幅器底数</li><li><b>差的 BP 连击</b> 提高 ^20,000</li><li><b>更更多添加物</b> 提高至立方</li></ul><br><br>";
+			if (player.ma.mastered.includes("g")) desc += "<h2>生成器</h2><br><br><ul><li>生成器价格底数降低 (5 -> 2.5)</li><li>生成器价格指数降低 (1.25 -> 1.1)</li><li>GP 效果提高 ^1.05</li><li><b>GP 连击</b> 提高 ^500,000</li><li><b>给我更多 III</b> 提高 ^10,000</li></ul><br><br>";
+			if (player.ma.mastered.includes("t")) desc += "<h2>时间</h2><br><br><ul><li>时间价格底数降低 (1e15 -> 10)</li><li>时间价格指数降低 (1.85 -> 1.4)</li><li>时间胶囊获得新效果</li><li>任何加成 TE 上限底数的效果增益增幅器和生成器底数（乘）</li><li>TE 第一效果软上限延迟 (e3.1e9)</li><li>扩展时空胶囊价格降低至 ^0.9</li><li><b>伪增益</b> & <b>底数</b> 加成 TE 获取（乘），且效果提升至立方</li><li><b>增强时间</b> 提升至 1.1 次幂</li></ul><br><br>";
+			if (player.ma.mastered.includes("e")) desc += "<h2>增强</h2><br><br><ul><li>增强获取指数提高 (0.02 -> 0.025)</li><li>增强子第二效果提升至 100 次方</li><li><b>增强声望</b> 影响点数获取，且效果提高 ^1.5</li><li><b>进入 E-空间</b> 加强 250%</li><li><b>野兽般增长</b> 底数提高 (1.1 -> 1e2,000)</li><li><b>进阶</b> 提高至立方</li></ul><br><br>";
+			if (player.ma.mastered.includes("s")) desc += "<h2>空间</h2><br><br><ul><li>空间价格底数降低 (1e10 -> 10)</li><li>空间价格指数降低 (1.85 -> 1.4)</li><li>建筑增益除以 3.85，但建筑价格缩放被 5 倍减缓</li></ul><br><br>";
+			if (player.ma.mastered.includes("sb")) desc += "<h2>超级增幅器</h2><br><br><ul><li>超级增幅器价格底数降低 (1.05 -> 1.025)</li><li>超级增幅器价格指数降低 (1.25 -> 1.075)</li><li>超级增幅器价格除以 1.333</li><li>超级增幅器提供虚增幅器</li></ul><br><br>";
+			if (player.ma.mastered.includes("sg")) desc += "<h2>超级生成器</h2><br><br><ul><li>超级生成器价格底数降低 (1.05 -> 1.04)</li><li>超级生成器价格指数降低 (1.25 -> 1.225)</li><li>超级生成器价格除以 1.1</li><li>超级 GP 效果平方</li><li>超级生成器随时间提供虚生成器</li></ul><br><br>";
+			if (player.ma.mastered.includes("q")) desc += "<h2>诡异</h2><br><br><ul><li>诡异获取指数提高 (7.5e-3 -> 8e-3)</li><li>QE 效果软上限开始提高 ^1.5</li><li>诡异层价格底数降低至 ^0.75</li><li><b>千种能力</b> 提高 50%</li><li>第十建筑等级提供免费的诡异改良（等于其等级除以 4）</li></ul><br><br>";
+			if (player.ma.mastered.includes("h")) desc += "<h2>障碍</h2><br><br><ul><li>障碍灵魂获取指数提高 (0.125 -> 0.2)</li><li>障碍灵魂软上限效果变弱 (指数 4 次根 -> 指数 2.5 次根)</li><li>解锁一个新障碍里程碑</li><li><b>速度之魔</b> 有第二效果</li><li><b>空间紧缺</b> 提高 40%</li><li><b>永恒</b> & <b>D 选项</b> 不再有完成次数限制</li><li><b>永恒</b> 效果提升 ^5</li><li><b>减产</b>对诡异层价格底数的削弱更强 (0.15 -> 0.2)</li></ul><br><br>";
 			if (player.ma.mastered.includes("o")) desc += "<h2>阳光</h2><br><br><ul><li>每个超级增幅器为阳光获取指数提高 0.5%（叠加）</li><li>SE 获取指数限制提高到 0.15，但 0.1 之后它增长大幅度减缓</li><li>SE 第二效果提高 10%</li><li>每 OoM 阳光为太阳能 +20%</li><li>阳光可购买项获取提高 ^2.6</li><li>一行阳光可购买项的所有效果提升 ^1.1</li><li><b>对流能</b> 效果提高 ^25</li><li>第二行所有阳光可购买项的所有效果乘以 1.4</li><li>第三行阳光可购买项的效果乘以 1.9</li></ul><br><br>";
-			if (player.ma.mastered.includes("ss")) desc += "<h2>子空间</h2><br><br><ul><li>子空间价格基础降低 (1.15 -> 1.1)</li><li>子空间价格指数降低 (1.1 -> 1.07)</li><li>每个子空间能量将子空间基础乘 1e10</li><li>第三建筑效果提高 ^3</li><li>当 <b>子空间觉醒</b> 效果超过 100%，其被立方但除以 10,000</li><li><b>粉碎使徒</b> 效果提升 ^400</li><li><b>止步</b> 效果翻倍</li><li><b>挑战加速</b> 的临界点大幅度提高 (e1,000,000 -> e1e11)</li></ul><br><br>";
+			if (player.ma.mastered.includes("ss")) desc += "<h2>子空间</h2><br><br><ul><li>子空间价格底数降低 (1.15 -> 1.1)</li><li>子空间价格指数降低 (1.1 -> 1.07)</li><li>每个子空间能量将子空间底数乘 1e10</li><li>第三建筑效果提高 ^3</li><li>当 <b>子空间觉醒</b> 效果超过 100%，其被立方但除以 10,000</li><li><b>粉碎使徒</b> 效果提升 ^400</li><li><b>止步</b> 效果翻倍</li><li><b>挑战加速</b> 的临界点大幅度提高 (e1,000,000 -> e1e11)</li></ul><br><br>";
 			if (player.ma.mastered.includes("m")) desc += "<h2>魔法</h2><br><br><ul><li>魔法获取指数提高 (7e-3 -> 8.5e-3)</li><li>魔法强度 +50%</li><li>妖术效果软上限不再作用于对障碍灵魂、诡异和 SE 的获取增幅，但这个效果被开方</li><li>每 OoM 魔法延迟妖术效果软上限 1e-3%</li><li>妖术效果软上限指数提高 (10 -> 2e3)</li></ul><br><br>";
 			if (player.ma.mastered.includes("ba")) desc += "<h2>平衡</h2><br><br><ul><li>平衡获取指数提高 (5e-3 -> 0.0125)</li><li>消极和积极不再有惩罚</li><li><b>净中立</b> 的两个效果指数提高 ^2.5</li><li><b>实体重生</b> 提高 ^10</li></ul><br><br>";
-			if (player.ma.mastered.includes("ps")) desc += "<h2>幽魂</h2><br><br><ul><li>幽魂价格基础开方</li><li>幽魂获取公式提高 (PS^1.5 -> 1.2^PS)</li><li>恶魂效果提高 ^100</li><li>幽魂价格缩放减缓 50% </li><li>灵魂价格缩放减缓 20%</li><li>幽魂增幅器增强 10%</li></ul><br><br>";
+			if (player.ma.mastered.includes("ps")) desc += "<h2>幽魂</h2><br><br><ul><li>幽魂价格底数开方</li><li>幽魂获取公式提高 (PS^1.5 -> 1.2^PS)</li><li>恶魂效果提高 ^100</li><li>幽魂价格缩放减缓 50% </li><li>灵魂价格缩放减缓 20%</li><li>幽魂增幅器增强 10%</li></ul><br><br>";
 			if (player.ma.mastered.includes("hn")) desc += "<h2>荣耀</h2><br><br><ul><li>对于平衡的荣耀获取指数提高 (0.02 -> 0.05)</li><li>第二个荣耀升级不再有软上限</li><li><b>自自协同</b> 效果乘 5</li><li><b>点数效率</b> 上限由 90% 提高至 92%%</li><li><b>超级升级</b> 效果乘 3</li><li><b>翻转强化</b> 提高 10%</li><li><b>列长长</b> 提高 10%</li><li><b>一次又一次</b> 效果翻倍</li><li><b>诅咒</b> 效果提高到 ^50</li></ul><br><br>";
 			if (player.ma.mastered.includes("n")) desc += "<h2>星云</h2><br><br><ul><li>星云获取指数提高 (0.03 -> 0.05)</li><li>一级星尘效果提升 ^1.6</li><li>二级星尘效果提升 ^1.4</li><li>星尘获取提升 1e30x</li></ul><br><br>";
 			if (player.ma.mastered.includes("hs")) desc += "<h2>超空间</h2><br><br><ul><li>超建筑上限需求缩放减缓 20%</li><li>每个购买的超空间提供 0.1% 超建筑增益</li><li>超建筑软上限延迟 0.1 等级开始</li></ul><br><br>";
-			if (player.ma.mastered.includes("i")) desc += "<h2>砖石</h2><br><br><ul><li>帝国建筑价格基础降低 (1e250 -> 1e100)</li><li>每个星云砖将星云获取乘以 10</li><li>每个超空间砖将超空间能量获取乘以 10</li><li>解锁 2 个新的帝国建筑</li></ul><br><br>";
+			if (player.ma.mastered.includes("i")) desc += "<h2>砖石</h2><br><br><ul><li>帝国建筑价格底数降低 (1e250 -> 1e100)</li><li>每个星云砖将星云获取乘以 10</li><li>每个超空间砖将超空间能量获取乘以 10</li><li>解锁 2 个新的帝国建筑</li></ul><br><br>";
 			return desc;
 		},
 		milestones: {
 			0: {
-				requirementDescription: "1 支配",
+				requirementDescription: "1 专精",
 				done() { return player.ma.best.gte(1) },
 				effectDescription: "对于所有第七行重置保留超空间和星团，解锁自动幽灵。",
 				toggles: [["ps", "autoGhost"]],
 			},
 			1: {
-				requirementDescription: "2 支配",
+				requirementDescription: "2 专精",
 				done() { return player.ma.best.gte(2) },
 				effectDescription: "你可以最大购买砖石（同时不重置任何东西），每秒获得 100% 的荣耀，对于任何重置保留荣耀里程碑和荣耀升级。",
 			},
 			2: {
-				requirementDescription: "3 支配",
+				requirementDescription: "3 专精",
 				done() { return player.ma.best.gte(3) },
 				effectDescription: "重置时保留帝国建筑 I 和超建筑，每秒获取 100% 超空间能量。",
 			},
 			3: {
-				requirementDescription: "4 支配",
+				requirementDescription: "4 专精",
 				done() { return player.ma.best.gte(4) },
 				effectDescription: "每秒获得 100% 星云。",
 			},
 			4: {
-				requirementDescription: "5 支配",
+				requirementDescription: "5 专精",
 				done() { return player.ma.best.gte(5) },
 				effectDescription: "解锁自动砖石。",
 				toggles: [["i", "auto"]],
 			},
 			5: {
 				unlocked() { return hasMilestone("ma", 4) },
-				requirementDescription: "16 支配",
+				requirementDescription: "16 专精",
 				done() { return player.ma.best.gte(16) },
 				effectDescription: "解锁自动超空间",
 				toggles: [["hs", "auto"]],
@@ -7337,7 +7337,7 @@ addLayer("ma", {
 				cap: 19,
 				display() {
 					if (player.ma.current!==null) return "正在镀金: "+tmp[player.ma.current].name+"。点此结束此运行。";
-					else return player.ma.selectionActive?"你在镀金模式中。点击你想要镀金的层，点此退出镀金。":("开始一次镀金。<br><br>"+((tmp.ma.amtMastered>=this.cap)?"已满":("需要: "+formatWhole(tmp[this.layer].clickables[this.id].req)+" 支配")));
+					else return player.ma.selectionActive?"你在镀金模式中。点击你想要镀金的层，点此退出镀金。":("开始一次镀金。<br><br>"+((tmp.ma.amtMastered>=this.cap)?"已满":("需要: "+formatWhole(tmp[this.layer].clickables[this.id].req)+" 专精")));
 				},
 				unlocked() { return player.ma.unlocked },
 				req() { return [2,5,7,8,9,9,10,10,11,12,14,14,15,16,18,20,21,22,23,(1e300)][tmp.ma.amtMastered||0] },
@@ -7626,7 +7626,7 @@ addLayer("ge", {
                     let data = tmp[this.layer].buyables[this.id];
 					let cost = data.cost;
 					let amt = player[this.layer].buyables[this.id];
-                    let display = "重置所有齿轮升级，并进行一次第七行重置，对每个效果基础加成 "+format(data.effectPer)+"，并降低它们的价格 "+format(data.effectPer.times(4))+" 次购买。<br><br>需要: "+formatWhole(cost)+" 转速"+(tmp.nerdMode?" (价格公式: 125^(x^1.425)*1e3)":"")+".<br>当前: 基础+"+format(data.effect)+"，价格降低 "+format(data.effect.times(4))+" 购买";
+                    let display = "重置所有齿轮升级，并进行一次第七行重置，对每个效果底数加成 "+format(data.effectPer)+"，并降低它们的价格 "+format(data.effectPer.times(4))+" 次购买。<br><br>需要: "+formatWhole(cost)+" 转速"+(tmp.nerdMode?" (价格公式: 125^(x^1.425)*1e3)":"")+".<br>当前: 底数+"+format(data.effect)+"，价格降低 "+format(data.effect.times(4))+" 购买";
 					return display;
                 },
                 unlocked() { return unl(this.layer) }, 
@@ -7983,7 +7983,7 @@ addLayer("mc", {
 			21: {
 				title: "北桥",
 				display() { 
-					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 阳光增幅超级生成器基础 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (solarity+1)^("+formatWhole(tmp.mc.clickables[this.id].effExp)+"-"+formatWhole(tmp.mc.clickables[this.id].effExp)+"/((log(activeMechEnergy+1)+1)^0.125)))":"x");
+					return "激活的机械能量: "+format(player.mc.clickables[this.id])+"<br><br>当前: 阳光增幅超级生成器底数 "+format(tmp.mc.clickables[this.id].effect)+(tmp.nerdMode?"x (公式: (solarity+1)^("+formatWhole(tmp.mc.clickables[this.id].effExp)+"-"+formatWhole(tmp.mc.clickables[this.id].effExp)+"/((log(activeMechEnergy+1)+1)^0.125)))":"x");
 				},
 				effExp() { return hasAchievement("a", 133)?3:1 },
 				effect() { return Decimal.pow(player.o.points.plus(1), Decimal.sub(tmp.mc.clickables[this.id].effExp, Decimal.div(tmp.mc.clickables[this.id].effExp, Decimal.add(player.mc.clickables[this.id], 1).log10().plus(1).root(8)))) },
@@ -8499,7 +8499,7 @@ addLayer("ne", {
 					return a;
 				},
 				next() { return Decimal.pow(10, Decimal.pow(10, new Decimal((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0).plus(1).div(tmp.ne.challenges[11].gainMult).root(tmp.ne.buyables[11].effect).log10().root(3).times(11)).sub(1)).sub(1) },
-				rewardDescription() { return "<br>信号: <h3 style='color: #ded9ff'>"+formatWhole(player.ne.signals)+"/"+formatWhole(tmp.ne.signalLim)+"</h3> "+(tmp.nerdMode?("(获取公式: 10^((log(log(points+1)+1)/11)^3)*"+format(tmp.ne.challenges[11].gainMult)+")"):("(+"+formatWhole((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0)+"/s"+(tmp.ne.challenges[11].amt.lt(1e3)?(", 下一个获取于 "+format(tmp.ne.challenges[11].next)+" 点数)"):")")))+"<br><br><br>思考: <h3 style='color: #ffbafa'>"+formatWhole(player.ne.thoughts)+"</h3> (下一个位于 "+formatWhole(tmp.ne.signalLim)+" 信号)<br><br>效果"+(tmp.ne.thoughtPower.eq(1)?"":(" (力量: "+format(tmp.ne.thoughtPower.times(100))+"%)"))+"<br>降低子空间能量价格 "+(tmp.nerdMode?" (公式: (log(思考+1)+1)"+(hasMilestone("ne", 1)?"^2":"")+")":(format(tmp.ne.thoughtEff1)+"x"))+"<br>子空间和超级生成器基础乘以 "+(tmp.nerdMode?" (公式: (1e800^(思考^0.75))"+(hasMilestone("ne", 2)?"^2":"")+")":format(tmp.ne.thoughtEff2)+"x")+(hasMilestone("ne", 5)?("<br>能量获取乘以 "+(tmp.nerdMode?" (公式: (1.2^sqrt(思考)))":(format(tmp.ne.thoughtEff3)+"x"))):"") },
+				rewardDescription() { return "<br>信号: <h3 style='color: #ded9ff'>"+formatWhole(player.ne.signals)+"/"+formatWhole(tmp.ne.signalLim)+"</h3> "+(tmp.nerdMode?("(获取公式: 10^((log(log(points+1)+1)/11)^3)*"+format(tmp.ne.challenges[11].gainMult)+")"):("(+"+formatWhole((player.ne.activeChallenge==11||hasAchievement("a", 151))?tmp.ne.challenges[11].amt:0)+"/s"+(tmp.ne.challenges[11].amt.lt(1e3)?(", 下一个获取于 "+format(tmp.ne.challenges[11].next)+" 点数)"):")")))+"<br><br><br>思考: <h3 style='color: #ffbafa'>"+formatWhole(player.ne.thoughts)+"</h3> (下一个位于 "+formatWhole(tmp.ne.signalLim)+" 信号)<br><br>效果"+(tmp.ne.thoughtPower.eq(1)?"":(" (力量: "+format(tmp.ne.thoughtPower.times(100))+"%)"))+"<br>降低子空间能量价格 "+(tmp.nerdMode?" (公式: (log(思考+1)+1)"+(hasMilestone("ne", 1)?"^2":"")+")":(format(tmp.ne.thoughtEff1)+"x"))+"<br>子空间和超级生成器底数乘以 "+(tmp.nerdMode?" (公式: (1e800^(思考^0.75))"+(hasMilestone("ne", 2)?"^2":"")+")":format(tmp.ne.thoughtEff2)+"x")+(hasMilestone("ne", 5)?("<br>能量获取乘以 "+(tmp.nerdMode?" (公式: (1.2^sqrt(思考)))":(format(tmp.ne.thoughtEff3)+"x"))):"") },
 				style() { return {'background-color': "#484659", filter: "brightness("+(100+player.ne.signals.plus(1).log10().div(tmp.ne.signalLim.plus(1).log10()).times(50).toNumber())+"%)", color: "white", 'border-radius': "25px", height: "400px", width: "400px"}},
 				onStart(testInput=false) {
 					if (testInput && player.ne.auto) {
@@ -9490,7 +9490,7 @@ addLayer("ai", {
 			},
 			41: {
 				title: "节点 DA",
-				description: "支配加成超级能量获取。",
+				description: "专精加成超级能量获取。",
 				multiRes: [
 					{
 						cost: new Decimal(5e3),
@@ -10178,13 +10178,13 @@ addLayer("a", {
 				name: "我讨厌这个机修",
 				unlocked() { return hasAchievement("a", 111) },
 				done() { return player.ma.mastered.includes("n")||player.ma.mastered.includes("hs") },
-				tooltip: "镀金星云或超空间。\n奖励: 支配价格下降 15%。",
+				tooltip: "镀金星云或超空间。\n奖励: 专精价格下降 15%。",
 				image: "images/achs/95.png",
 			},
 			101: {
 				name: "不可能领域",
 				done() { return player.q.points.gte("e1e6") },
-				tooltip: "达到 e1,000,000 诡异。\n奖励: 诡异层价格基础降低 0.2。",
+				tooltip: "达到 e1,000,000 诡异。\n奖励: 诡异层价格底数降低 0.2。",
 				image: "images/achs/101.png",
 			},
 			102: {
@@ -10215,13 +10215,13 @@ addLayer("a", {
 			111: {
 				name: "造物之地",
 				done() { return player.ma.unlocked },
-				tooltip: '进行一次支配重置。\n奖励: 对任何重置保留帝国建筑 II，你可以大批量完成 "永恒" 和 "D 选项"，这些障碍不会随完成次数提高而变难，解锁一列新成就。',
+				tooltip: '进行一次专精重置。\n奖励: 对任何重置保留帝国建筑 II，你可以大批量完成 "永恒" 和 "D 选项"，这些障碍不会随完成次数提高而变难，解锁一列新成就。',
 				image: "images/achs/111.png",
 			},
 			112: {
 				name: "真实支配",
 				done() { return player.ma.points.gte(10) },
-				tooltip: "达到 10 支配。",
+				tooltip: "达到 10 专精。",
 				image: "images/achs/112.png",
 			},
 			113: {
@@ -10277,7 +10277,7 @@ addLayer("a", {
 			131: {
 				name: "人工无意识",
 				done() { return player.mc.unlocked },
-				tooltip: "解锁机械。\n奖励: 支配价格降低 10%。",
+				tooltip: "解锁机械。\n奖励: 专精价格降低 10%。",
 				image: "images/achs/131.png",
 			},
 			132: {
@@ -10295,7 +10295,7 @@ addLayer("a", {
 			134: {
 				name: "内心的渴望",
 				done() { return player.mc.upgrades.includes(11) },
-				tooltip() { return "解锁核心。\n奖励: 每个幽魂降价支配价格 0.0075%。 (当前降价: "+format(Decimal.sub(1, Decimal.pow(.999925, player.ps.points)).times(100))+"%)" },
+				tooltip() { return "解锁核心。\n奖励: 每个幽魂降价专精价格 0.0075%。 (当前降价: "+format(Decimal.sub(1, Decimal.pow(.999925, player.ps.points)).times(100))+"%)" },
 				image: "images/achs/134.png",
 			},
 			135: {
@@ -10382,7 +10382,7 @@ addLayer("a", {
 			163: {
 				name: "坐拥天下",
 				done() { return player.c.unlocked },
-				tooltip() { return "解锁文明。\n奖励: 想法乘以人工意识获取，这一行及以下的每个成就将支配需求除以 1.1（/"+format(Decimal.pow(1.1, player.a.achievements.filter(x => x>160).length))+"）。" },
+				tooltip() { return "解锁文明。\n奖励: 想法乘以人工意识获取，这一行及以下的每个成就将专精需求除以 1.1（/"+format(Decimal.pow(1.1, player.a.achievements.filter(x => x>160).length))+"）。" },
 				image: "images/achs/163.png",
 			},
 			164: {
