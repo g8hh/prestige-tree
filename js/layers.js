@@ -10312,9 +10312,9 @@ addLayer("a", {
 				image: "images/achs/141.png",
 			},
 			142: {
-				name: "Failed Error",
+				name: "失败",
 				done() { return player.en.sw.gte(104) },
-				tooltip: "Reach 104 Super Watts.",
+				tooltip: "达到 104 超级能量。",
 				image: "images/achs/142.png",
 			},
 			143: {
