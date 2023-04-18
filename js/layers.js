@@ -753,7 +753,7 @@ addLayer("g", {
 			1: {
 				requirementDescription: "10 生成器",
 				done() { return player.g.best.gte(10) || hasAchievement("a", 71) },
-				effectDescription: "每秒获得 100% 的威望。",
+				effectDescription: "每秒获得重置时能获得的 100% 的声望。",
 			},
 			2: {
 				requirementDescription: "15 生成器",
